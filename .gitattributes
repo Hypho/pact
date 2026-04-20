@@ -1,0 +1,8 @@
+# 默认按系统自动转换
+* text=auto
+
+# Shell 脚本必须保持 LF（否则在 Unix 上无法执行）
+*.sh text eol=lf
+
+# Markdown 使用 LF，保证跨平台渲染一致
+*.md text eol=lf
