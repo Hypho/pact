@@ -5,11 +5,33 @@
 STATE=".pact/state.md"
 [ ! -f "$STATE" ] && exit 0
 
-# 提取当前功能名和阶段
-FEATURE=$(grep -m1 "^功能：" "$STATE" | sed 's/功能：\([^|]*\).*/\1/' | tr -d ' ')
-PHASE=$(grep -m1 "阶段：" "$STATE" | sed 's/.*阶段：\([^ ]*\).*/\1/')
+# 归一化：全角冒号→半角、移除 Markdown 加粗标记 ** 和行首 # 标题前缀
+# 目的：容忍模型将 "功能：X" 改写为 "功能:X" / "**功能**：X" / "## 功能：X"
+STATE_NORM=$(sed -e 's/：/:/g' -e 's/\*\*//g' "$STATE")
 
-# 无活跃功能，跳过检查
+# 提取功能名：定位含"功能:"的行，剥除前缀，截断到首个 | 或行尾
+FEATURE=$(echo "$STATE_NORM" | awk '
+  /功能[[:space:]]*:/ {
+    sub(/^.*功能[[:space:]]*:[[:space:]]*/, "")
+    sub(/[[:space:]]*\|.*$/, "")
+    sub(/[[:space:]]+$/, "")
+    print
+    exit
+  }
+')
+
+# 提取阶段：定位含"阶段:"的行，仅取合法阶段字符（字母和连字符）
+PHASE=$(echo "$STATE_NORM" | awk '
+  /阶段[[:space:]]*:/ {
+    sub(/^.*阶段[[:space:]]*:[[:space:]]*/, "")
+    if (match($0, /[A-Za-z-]+/)) {
+      print substr($0, RSTART, RLENGTH)
+    }
+    exit
+  }
+')
+
+# 无活跃功能或仍是模板占位符，跳过检查
 [ -z "$FEATURE" ] || [ "$FEATURE" = "[名称]" ] && exit 0
 
 # pid 阶段：pid-card 文件必须存在

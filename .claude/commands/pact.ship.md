@@ -86,10 +86,14 @@ L1 失败未修复时跳过。
 - 记录遇到的 AI 幻觉到 `knowledge/errors/`（如有）
 - Git commit：`feat([功能名]): [一句话描述]` + `docs: update pact`
 
-更新 state.md 已完成表（填写所有 5 列）：
+更新 state.md 已完成表（填写所有 6 列）：
 ```
-| [功能名] | [YYYY-MM-DD] | [N] 条 | [N/N] | PASS / manual |
+| [功能名] | [开始 YYYY-MM-DD] | [完成 YYYY-MM-DD] | [N] 条 | [N/N] | PASS / manual |
 ```
+- 开始列取自 state.md "当前"块中的开始时间（只保留日期部分）
+- 完成列写入归档当日
+- 同步更新 constitution.md 已完成功能表（同样 6 列），并刷新总计数
+
 清空"当前"，填写下一个队列功能。
 
 ---

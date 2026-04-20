@@ -99,42 +99,12 @@ pid-card 文件   → .pact/specs/[功能名]-pid.md
 在项目根目录创建检查脚本，并在 `.claude/settings.json` 注册为 SessionStart Hook：
 
 **`.pact/hooks/check-state.sh`**（SessionStart 时运行，校验 state.md 一致性）
-```bash
-#!/bin/bash
-STATE=".pact/state.md"
-[ ! -f "$STATE" ] && exit 0
 
-# 提取当前功能名和阶段
-FEATURE=$(grep -m1 "^功能：" "$STATE" | sed 's/功能：\([^|]*\).*/\1/' | tr -d ' ')
-PHASE=$(grep -m1 "阶段：" "$STATE" | sed 's/.*阶段：\([^ ]*\).*/\1/')
+完整脚本见仓库 `.pact/hooks/check-state.sh`。关键实现要点：
 
-[ -z "$FEATURE" ] || [ "$FEATURE" = "[名称]" ] && exit 0
-
-# pid 阶段：pid-card 文件必须存在
-if [[ "$PHASE" == "pid" ]]; then
-  if [ ! -f ".pact/specs/${FEATURE}-pid.md" ]; then
-    echo "❌ PACT 状态不一致：state.md 声明 pid，但 specs/${FEATURE}-pid.md 不存在"
-    exit 1
-  fi
-fi
-
-# contract / build-complete 阶段：contract 文件必须存在
-if [[ "$PHASE" == "contract" || "$PHASE" == "build-complete" ]]; then
-  if [ ! -f ".pact/contracts/${FEATURE}.md" ]; then
-    echo "❌ PACT 状态不一致：state.md 声明 ${PHASE}，但 contracts/${FEATURE}.md 不存在"
-    exit 1
-  fi
-fi
-
-# verify-pass 阶段：verify 文件必须存在且含 PASS
-if [[ "$PHASE" == "verify-pass" ]]; then
-  VERIFY=".pact/knowledge/${FEATURE}-verify.md"
-  if [ ! -f "$VERIFY" ] || ! grep -q "verdict = PASS\|MANUAL OVERRIDE" "$VERIFY"; then
-    echo "❌ PACT 状态不一致：state.md 声明 verify-pass，但凭证缺失或不合法"
-    exit 1
-  fi
-fi
-```
+- 解析前先归一化：全角冒号 `：` → 半角 `:`、剥除 Markdown 加粗 `**`，容忍模型的轻微格式改动
+- 使用 `awk` 而非 `grep + sed` 链式处理，避免复杂正则在不同 sed 实现下的行为差异
+- 阶段字段限定为 `[A-Za-z-]+`，即使周围有额外文本也能稳定提取
 
 **`.claude/settings.json`** 中注册：
 ```json
@@ -233,6 +203,6 @@ state.md 已完成队列超过 10 条时：
 
 > 总计：0 个功能
 
-| 功能 | 日期 | 契约 | 测试 | Verify |
-|------|------|------|------|--------|
-| （暂无） | | | | |
+| 功能 | 开始 | 完成 | 契约 | 测试 | Verify |
+|------|------|------|------|------|--------|
+| （暂无） | | | | | |
