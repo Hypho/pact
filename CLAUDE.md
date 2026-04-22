@@ -1,5 +1,5 @@
 # [项目名] — PACT 工作空间
-> Product-Aware Contract Toolkit v1.0.0
+> Product-Aware Contract Toolkit v1.1.0
 
 ---
 
