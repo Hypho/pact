@@ -1,14 +1,39 @@
 # PACT — Product-Aware Contract Toolkit
-> AI-assisted development framework for product-minded developers | v1.2.0
+> A lightweight protocol framework for auditable human-AI software development | v1.2.1
 > 中文: [README.zh.md](./README.zh.md)
+
+[![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
 
 ---
 
 ## What is it
 
-PACT is a development framework running on Claude Code that uses Markdown files to constrain AI behavior boundaries, enabling developers with product backgrounds to reliably build software — instead of constantly firefighting AI hallucinations.
+PACT is a lightweight protocol framework for building software with AI while keeping product intent, implementation scope, and verification evidence explicit.
 
-Core idea: **Define behavior before implementation. Use contract-driven development, not prompt-based guessing.**
+It turns AI-assisted development from an open-ended chat into a staged workflow: define intent, write a behavior contract, implement against that contract, verify with real outputs, then archive what changed.
+
+PACT is designed for product-minded builders, solo developers, and small teams who want AI to move faster without losing control of scope, state, and quality.
+
+It is not a code generator, an agent scheduler, or a replacement for CI/CD. It is the protocol layer that keeps human decisions and AI execution aligned.
+
+Core idea: **Define behavior before implementation. Verify behavior before shipping.**
+
+---
+
+## When to use PACT
+
+Use PACT when:
+
+- You are building a product with AI assistance and need the work to remain auditable.
+- You want clear handoffs between product intent, implementation, verification, and release.
+- You are a solo developer, product-minded builder, or small team working feature by feature.
+- You prefer explicit contracts and checkpoints over relying on long prompts.
+
+Avoid PACT when:
+
+- You need a general-purpose task manager or multi-agent scheduler.
+- You need deployment, monitoring, incident response, or CI/CD orchestration.
+- You are solving high-risk security, financial, concurrency, or performance problems without specialist review.
 
 ---
 
@@ -47,6 +72,9 @@ cp -r pact/.pact     your-project/
 # In Claude Code, run:
 /pact.init    # Project initialization (one-time)
 /pact.scope   # Scope adaptation assessment (required after init)
+
+# Optional repository self-check
+bash .pact/bin/pact-check.sh
 ```
 
 ---
@@ -169,6 +197,7 @@ Semantic versioning: `MAJOR.MINOR.PATCH`
 
 | Version | Date | Core changes |
 |---------|------|--------------|
+| v1.2.1 | 2026-04-26 | Refines README positioning, adds CI status badge, clarifies when to use or avoid PACT, and documents the repository self-check command |
 | v1.2.0 | 2026-04-26 | Adds repository self-check script and GitHub Actions workflow for version consistency, internal-roadmap leakage prevention, and state consistency; adds open-source maintenance and release rules |
 | v1.1.0 | 2026-04-20 | Time triples (state.md adds started_at; completed table extended with start/completed columns); check-state.sh parsing hardened (colon normalization, awk replaces grep+sed); README adds "Scope" section with English version |
 | v1.0.0 | 2026-04-20 | First public release. Contract-driven framework for product-minded developers: 8 command protocols + 3-layer context loading + risk boundary detection + adversarial verification + shell-hook safety net |
