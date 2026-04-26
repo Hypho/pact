@@ -199,6 +199,32 @@ state.md 已完成队列超过 10 条时：
 
 ---
 
+## 12. 开源发布规则（硬约束）
+
+```
+公开仓库只发布已经落地或正在本版本落地的能力。
+长期路线、未验证设计、内部判断默认保存在 *.local.md，不推送。
+
+公开规划方式：
+  - 短期可执行事项 → GitHub Issues
+  - 同一版本目标 → GitHub Milestones
+  - 已发布能力 → README / CHANGELOG / Release Notes
+
+版本判断：
+  PATCH：不改变协议契约的修整
+  MINOR：向后兼容的能力增强
+  MAJOR：不兼容协议或状态机变更
+
+发布前检查：
+  1. README.md、README.zh.md、CLAUDE.md 版本号一致
+  2. README 版本历史包含本次版本
+  3. git tag 不与既有版本冲突
+  4. 本地 *.local.md 和未公开路线草案未进入提交
+  5. 维护者已明确确认发布
+```
+
+---
+
 ## 已完成功能
 
 > 总计：0 个功能

@@ -1,5 +1,5 @@
 # [项目名] — PACT 工作空间
-> Product-Aware Contract Toolkit v1.1.0
+> Product-Aware Contract Toolkit v1.2.0
 
 ---
 
@@ -113,7 +113,21 @@ CLAUDE.md              — 当前文件
 
 ---
 
-## 6. 框架边界（不覆盖）
+## 6. 开源维护规则
+
+本仓库作为公开开源项目维护时，遵守以下规则：
+
+- 本地规划、未验证路线、长期构想默认写入 `*.local.md`，不进入公开仓库。
+- 公开路线使用 GitHub Issues / Milestones 表达，不用提前承诺式 roadmap 文档。
+- 版本发布前必须检查 README、README.zh、CLAUDE.md、版本历史与 git tag 的版本号一致。
+- `PATCH` 只用于文档修正、错别字、版本同步等不改变协议契约的修整。
+- `MINOR` 用于向后兼容的能力增强，例如 Hook、CI、lint、模板或可选检查。
+- `MAJOR` 用于状态机、目录结构、命令协议等不兼容变更。
+- 创建 tag、GitHub Release、推送公开发布动作前，必须等待维护者明确确认。
+
+---
+
+## 7. 框架边界（不覆盖）
 
 - 代码性能质量（高并发、慢查询）
 - 安全漏洞（鉴权遗漏、注入攻击）

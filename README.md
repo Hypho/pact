@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> AI-assisted development framework for product-minded developers | v1.1.0
+> AI-assisted development framework for product-minded developers | v1.2.0
 > 中文: [README.zh.md](./README.zh.md)
 
 ---
@@ -169,5 +169,6 @@ Semantic versioning: `MAJOR.MINOR.PATCH`
 
 | Version | Date | Core changes |
 |---------|------|--------------|
-| v1.0.0 | 2026-04-20 | First public release. Contract-driven framework for product-minded developers: 8 command protocols + 3-layer context loading + risk boundary detection + adversarial verification + shell-hook safety net |
+| v1.2.0 | 2026-04-26 | Adds repository self-check script and GitHub Actions workflow for version consistency, internal-roadmap leakage prevention, and state consistency; adds open-source maintenance and release rules |
 | v1.1.0 | 2026-04-20 | Time triples (state.md adds started_at; completed table extended with start/completed columns); check-state.sh parsing hardened (colon normalization, awk replaces grep+sed); README adds "Scope" section with English version |
+| v1.0.0 | 2026-04-20 | First public release. Contract-driven framework for product-minded developers: 8 command protocols + 3-layer context loading + risk boundary detection + adversarial verification + shell-hook safety net |
