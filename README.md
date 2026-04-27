@@ -63,11 +63,11 @@ Before adopting, check whether your project falls within PACT's applicable scope
 
 ## Quick Start
 
+Full usage guide: [USAGE.md](./USAGE.md)
+
 ```bash
 # Copy the framework into your project root
-cp -r pact/CLAUDE.md your-project/
-cp -r pact/.claude   your-project/
-cp -r pact/.pact     your-project/
+cp -r pact/CLAUDE.md pact/.claude pact/.pact pact/AGENTS.md pact/.cursor your-project/
 
 # In Claude Code, run:
 /pact.init    # Project initialization (one-time)
@@ -79,6 +79,20 @@ bash .pact/bin/pact-check.sh
 # Optional git-aware release check
 bash .pact/bin/pact-release-check.sh
 ```
+
+---
+
+## Tool Support
+
+PACT is tool-agnostic at the protocol layer, with first-class Claude Code support and adapter files for Codex and Cursor.
+
+| Tool | Support | Entry point |
+|------|---------|-------------|
+| Claude Code | First-class | [docs/adapters/claude-code.md](./docs/adapters/claude-code.md) |
+| Codex | Compatible | [docs/adapters/codex.md](./docs/adapters/codex.md) |
+| Cursor | Compatible | [docs/adapters/cursor.md](./docs/adapters/cursor.md) |
+
+Claude Code plugin marketplace installation is planned, not the current primary installation path.
 
 ---
 

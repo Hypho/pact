@@ -1,0 +1,71 @@
+---
+description: Follow the PACT workflow for AI-assisted software development.
+alwaysApply: true
+---
+
+# PACT Cursor Rule
+
+This project uses PACT, the Product-Aware Contract Toolkit.
+
+PACT is a protocol layer, not a code generator. Keep product intent, behavior contracts, implementation scope, and verification evidence explicit.
+
+## Workflow
+
+Use this feature flow:
+
+```text
+pid -> contract -> build -> verify -> ship
+```
+
+For each feature:
+- create or update `.pact/specs/[feature]-pid.md`
+- create `.pact/contracts/[feature].md` before implementation
+- build against the contract
+- verify with real command output
+- write `.pact/knowledge/[feature]-verify.md`
+- ship only after `verdict = PASS` or documented manual override
+
+## State
+
+Read `.pact/state.md` before feature work.
+
+Use the feature name in `state.md` exactly when deriving PACT file paths.
+
+## Guards and Checks
+
+When entering a main stage, run the matching guard when possible:
+
+```bash
+bash .pact/bin/pact-guard.sh pid
+bash .pact/bin/pact-guard.sh contract
+bash .pact/bin/pact-guard.sh build
+bash .pact/bin/pact-guard.sh verify
+bash .pact/bin/pact-guard.sh ship
+```
+
+After changing PACT files, run:
+
+```bash
+bash .pact/bin/pact-check.sh
+```
+
+## Verification
+
+Do not use inferred or speculative language as verification evidence.
+
+Verify records must contain exactly one:
+
+```text
+verdict = PASS
+verdict = FAIL
+verdict = INCONCLUSIVE
+```
+
+For `PASS`, include runtime evidence.
+
+## Releases
+
+Small edits do not require a version bump.
+
+Do not create tags or GitHub Releases without explicit maintainer confirmation.
+

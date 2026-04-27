@@ -1,0 +1,176 @@
+# Using PACT
+
+PACT is a protocol layer for AI-assisted software development. It does not replace your editor, agent, tests, git workflow, deployment pipeline, or product judgment.
+
+Use it to keep feature work explicit:
+
+```text
+intent -> contract -> build -> verify -> ship
+```
+
+For Chinese, see [USAGE.zh.md](./USAGE.zh.md).
+
+---
+
+## 1. Choose Your Adapter
+
+PACT is tool-agnostic at the protocol layer, but different AI tools load project instructions differently.
+
+| Tool | Recommended adapter | Support level |
+|------|---------------------|---------------|
+| Claude Code | `.claude/commands/*.md` slash commands | First-class |
+| Codex | `AGENTS.md` + `.pact/` scripts and templates | Compatible |
+| Cursor | `.cursor/rules/pact.mdc` + `.pact/` scripts and templates | Compatible |
+
+Details:
+- [Claude Code adapter](./docs/adapters/claude-code.md)
+- [Codex adapter](./docs/adapters/codex.md)
+- [Cursor adapter](./docs/adapters/cursor.md)
+
+---
+
+## 2. Install Into a Project
+
+Copy the PACT framework files into your project root:
+
+```bash
+cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
+```
+
+Minimum portable set:
+
+```text
+.pact/
+AGENTS.md
+```
+
+Claude Code first-class set:
+
+```text
+CLAUDE.md
+.claude/commands/
+.pact/
+```
+
+Cursor set:
+
+```text
+.cursor/rules/pact.mdc
+.pact/
+AGENTS.md
+```
+
+---
+
+## 3. Initialize the Project
+
+In Claude Code:
+
+```text
+/pact.init
+/pact.scope
+```
+
+In Codex or Cursor, ask the agent to perform the same PACT stages:
+
+```text
+Initialize this project using PACT. Create or update constitution, PAD, and state.
+Then run the PACT scope assessment before the first feature.
+```
+
+What happens:
+- `/pact.init` creates project-level facts: constitution, PAD draft, and state.
+- `/pact.scope` assesses whether PACT is appropriate and identifies risk boundaries.
+- Scope is strongly recommended before the first feature, but it is not a state-machine phase.
+
+---
+
+## 4. Develop One Feature
+
+Run one feature through the main flow:
+
+```text
+/pact.pid
+/pact.contract
+/pact.build
+/pact.verify
+/pact.ship
+```
+
+If your tool does not support slash commands, use natural-language equivalents:
+
+```text
+Create the PACT PID Card for [feature].
+Generate the behavior contract from the PID Card.
+Build against the contract.
+Verify the feature with real command output.
+Ship and archive the feature after PASS.
+```
+
+Expected artifacts:
+
+| Stage | Output |
+|-------|--------|
+| `pid` | `.pact/specs/[feature]-pid.md` |
+| `contract` | `.pact/contracts/[feature].md` |
+| `build` | Code changes + `state.md` moves to `build-complete` |
+| `verify` | `.pact/knowledge/[feature]-verify.md` |
+| `ship` | Archived contract + updated state |
+
+---
+
+## 5. When PACT Stops
+
+PACT should stop instead of guessing when:
+
+- a high-risk boundary is detected
+- a required PID Card, contract, or verify record is missing
+- contract lint or verify lint fails
+- verify is `FAIL` or `INCONCLUSIVE`
+- manual acceptance is required
+- a large feature needs an execution plan
+
+Use the stop as a decision point. Do not treat it as an error to bypass.
+
+---
+
+## 6. Maintain the Project
+
+Every 3-5 shipped features, run:
+
+```text
+/pact.retro
+```
+
+For Codex or Cursor:
+
+```text
+Run a PACT retro over the last 3-5 shipped features.
+Check intent drift, contract quality, verification quality, and active technical debt.
+```
+
+Before publishing or sharing framework changes:
+
+```bash
+bash .pact/bin/pact-check.sh
+```
+
+If the project uses git:
+
+```bash
+bash .pact/bin/pact-release-check.sh
+```
+
+---
+
+## 7. Release Discipline
+
+PACT does not require a version bump for every documentation or rule edit.
+
+Use releases only when the change set has clear release value:
+- `PATCH`: refinements to existing behavior, docs, templates, or checks
+- `MINOR`: a complete new capability
+- `MAJOR`: incompatible protocol or state-machine changes
+
+Release notes come from `CHANGELOG.md`.
+

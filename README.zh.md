@@ -63,11 +63,11 @@ PACT 适合产品型开发者、独立开发者和小团队：既希望借助 AI
 
 ## 快速开始
 
+完整使用指南：[USAGE.zh.md](./USAGE.zh.md)
+
 ```bash
 # 复制框架到项目根目录
-cp -r pact/CLAUDE.md your-project/
-cp -r pact/.claude   your-project/
-cp -r pact/.pact     your-project/
+cp -r pact/CLAUDE.md pact/.claude pact/.pact pact/AGENTS.md pact/.cursor your-project/
 
 # 在 Claude Code 中执行
 /pact.init    # 项目初始化（一次性）
@@ -79,6 +79,20 @@ bash .pact/bin/pact-check.sh
 # 可选：git-aware 发布检查
 bash .pact/bin/pact-release-check.sh
 ```
+
+---
+
+## 工具支持
+
+PACT 的协议层不绑定具体工具；当前对 Claude Code 一等支持，并为 Codex 和 Cursor 提供适配文件。
+
+| 工具 | 支持程度 | 入口 |
+|------|---------|------|
+| Claude Code | 一等支持 | [docs/adapters/claude-code.md](./docs/adapters/claude-code.md) |
+| Codex | 兼容 | [docs/adapters/codex.md](./docs/adapters/codex.md) |
+| Cursor | 兼容 | [docs/adapters/cursor.md](./docs/adapters/cursor.md) |
+
+Claude Code plugin marketplace 安装方式可作为后续计划，不是当前主要安装路径。
 
 ---
 
