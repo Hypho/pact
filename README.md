@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> A lightweight protocol framework for auditable human-AI software development | v1.5.0
+> A lightweight protocol framework for auditable human-AI software development | v1.6.0
 > 中文: [README.zh.md](./README.zh.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -182,6 +182,19 @@ PACT checks that behavior contracts and verification records are structurally va
 - verify records reject speculative language such as "should", "expected", and "theoretically"
 - PASS verify records must include a runtime evidence marker such as `output:` or `command:`
 
+### Command Guard
+PACT includes a command guard that checks whether a `/pact.*` command is allowed to start based on `state.md` and required artifacts.
+
+```bash
+bash .pact/bin/pact-guard.sh pid
+bash .pact/bin/pact-guard.sh contract
+bash .pact/bin/pact-guard.sh build
+bash .pact/bin/pact-guard.sh verify
+bash .pact/bin/pact-guard.sh ship
+```
+
+The guard does not execute commands, generate files, or modify state. It only reports whether the command may start.
+
 ### Boundary Detection
 `/pact.pid` scans the current feature against boundaries.md:
 
@@ -219,6 +232,7 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 
 | Version | Date | Core changes |
 |---------|------|--------------|
+| v1.6.0 | 2026-04-27 | Adds command guard for pid / contract / build / verify / ship entry checks and integrates guard fixtures into self-check |
 | v1.5.0 | 2026-04-27 | Adds contract and verify lint scripts, fixtures, and self-check integration for behavior contract and verification record structure |
 | v1.4.0 | 2026-04-27 | Adds VERSION as the file-only version source, documents layered release workflows, and adds optional git-aware release checks |
 | v1.3.3 | 2026-04-27 | Adds CHANGELOG.md as canonical release history and requires changelog coverage in repository self-checks |

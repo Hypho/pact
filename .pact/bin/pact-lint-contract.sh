@@ -4,7 +4,8 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-cd "$ROOT"
+PACT_ROOT="${PACT_ROOT:-$ROOT}"
+cd "$PACT_ROOT"
 
 fail_file() {
   local file="$1"

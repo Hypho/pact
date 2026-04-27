@@ -201,7 +201,42 @@ v1.x 阶段：
 
 ---
 
-## 12. 外部 Skills 注册区
+## 12. Command Guard 规则
+
+```
+pact-guard.sh 只判断命令是否允许进入，不执行命令，不写文件，不修改 state。
+
+支持入口：
+  pact-guard.sh pid
+  pact-guard.sh contract
+  pact-guard.sh build
+  pact-guard.sh verify
+  pact-guard.sh ship
+
+进入 /pact.contract 前必须满足：
+  当前阶段 = pid
+  .pact/specs/[功能名]-pid.md 存在
+
+进入 /pact.build 前必须满足：
+  当前阶段 = contract
+  .pact/contracts/[功能名].md 存在
+  contract lint 通过
+
+进入 /pact.verify 前必须满足：
+  当前阶段 = build-complete
+  .pact/contracts/[功能名].md 存在
+  contract lint 通过
+
+进入 /pact.ship 前必须满足：
+  当前阶段 = verify-pass
+  .pact/knowledge/[功能名]-verify.md 存在
+  verify lint 通过
+  verify 文件包含 verdict = PASS 或 MANUAL OVERRIDE
+```
+
+---
+
+## 13. 外部 Skills 注册区
 
 > 项目配置：记录各 Skill 的挂载点和安装状态。
 > 到达挂载点时，检查安装状态。未安装则先安装，再触发，不跳过。
@@ -222,7 +257,7 @@ v1.x 阶段：
 
 ---
 
-## 13. 归档触发规则
+## 14. 归档触发规则
 
 ```
 已完成功能表超过 10 条时：
@@ -236,7 +271,7 @@ state.md 已完成队列超过 10 条时：
 
 ---
 
-## 14. 开源发布规则（硬约束）
+## 15. 开源发布规则（硬约束）
 
 ```
 VERSION 是唯一可编辑版本真相源。

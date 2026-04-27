@@ -6,6 +6,19 @@ PACT follows semantic versioning: `MAJOR.MINOR.PATCH`.
 
 ---
 
+## v1.6.0 — 2026-04-27
+
+### Added
+- Added `.pact/bin/pact-guard.sh` for side-effect-free command entry checks.
+- Added guard support for `pid`, `contract`, `build`, `verify`, and `ship`.
+- Added guard fixture tests through `pact-guard.sh --fixtures`.
+
+### Changed
+- `pact-check.sh` now runs guard fixture checks.
+- README and constitution now document Command Guard rules.
+
+---
+
 ## v1.5.0 — 2026-04-27
 
 ### Added

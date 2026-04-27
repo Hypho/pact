@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> 面向人机协作开发的轻量协议框架 | v1.5.0
+> 面向人机协作开发的轻量协议框架 | v1.6.0
 > English: [README.md](./README.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -182,6 +182,19 @@ PACT 会检查行为契约和验证记录的基础结构：
 - verify 禁止使用“应该 / 预期 / 理论上”等推理性语言替代真实输出
 - PASS 类型 verify 必须包含 `output:` 或 `command:` 等运行证据标记
 
+### Command Guard
+PACT 提供命令入口检查，用于根据 `state.md` 和必要产物判断某个 `/pact.*` 命令是否允许开始。
+
+```bash
+bash .pact/bin/pact-guard.sh pid
+bash .pact/bin/pact-guard.sh contract
+bash .pact/bin/pact-guard.sh build
+bash .pact/bin/pact-guard.sh verify
+bash .pact/bin/pact-guard.sh ship
+```
+
+guard 不执行命令，不生成文件，不修改 state，只报告当前命令是否允许进入。
+
 ### 边界检测
 `/pact.pid` 阶段对照 boundaries.md 执行边界检测：
 
@@ -219,6 +232,7 @@ PACT 会检查行为契约和验证记录的基础结构：
 
 | 版本 | 日期 | 核心变更 |
 |------|------|---------|
+| v1.6.0 | 2026-04-27 | 新增 pid / contract / build / verify / ship 命令入口 guard，并将 guard fixtures 接入自检 |
 | v1.5.0 | 2026-04-27 | 新增 contract 和 verify lint 脚本、fixtures，并接入自检，用于检查行为契约和验证记录的基础结构 |
 | v1.4.0 | 2026-04-27 | 新增 VERSION 作为 file-only 版本真相源，文档化分层发布流程，并新增可选 git-aware 发布检查 |
 | v1.3.3 | 2026-04-27 | 新增 CHANGELOG.md 作为正式发布历史，并在仓库自检中要求 changelog 覆盖当前版本 |
