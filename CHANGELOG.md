@@ -6,6 +6,17 @@ PACT follows semantic versioning: `MAJOR.MINOR.PATCH`.
 
 ---
 
+## v1.6.1 — 2026-04-27
+
+### Changed
+- Narrowed `/pact.scope` to PACT applicability and risk-boundary assessment.
+- Replaced high/medium/low scope scoring with usage modes: `PACT-only`, `PACT + specialist review`, and `Do not use PACT alone`.
+- Made FDG generation an optional planning artifact instead of a core scope output.
+- Updated `fitness.md`, FDG template notes, README, and CLAUDE command descriptions to reflect the narrowed scope role.
+- Clarified release cadence rules: accumulate small changes locally or in normal commits, and publish only when the change set has clear release value.
+
+---
+
 ## v1.6.0 — 2026-04-27
 
 ### Added

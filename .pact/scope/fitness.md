@@ -1,8 +1,33 @@
-# 范围适配评估
+# PACT Scope Assessment
 > 由 /pact.scope 生成。最后更新：[日期]
 
-## 结论
-**适配度：未评估** — 请执行 /pact.scope
+## Verdict
+
+**未评估** — 建议在首次功能开发前执行 `/pact.scope`。
+
+可选结论：
+- `PACT-only`
+- `PACT + specialist review`
+- `Do not use PACT alone`
+
+## Risk Boundaries
+
+| ID | Level | Applies? | Reason | Required action |
+|----|-------|----------|--------|-----------------|
+| （未评估） | | | | |
+
+## Blind Spots
+
+- （未评估）
+
+## Recommended Usage Mode
+
+- （未评估）
+
+## Optional Planning Artifacts
+
+- FDG: Not evaluated
 
 ---
-*评估完成后此文件记录：适配度评分、风险档案、使用建议。*
+
+> FDG 是可选规划附件，不是 scope 评估的核心产物。

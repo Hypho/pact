@@ -94,9 +94,17 @@ Use semantic versioning.
 
 | Type | Use for |
 |------|---------|
-| PATCH | Documentation fixes, wording changes, release note corrections, non-contract script fixes |
-| MINOR | Backward-compatible framework capabilities, optional checks, new templates, new lint rules |
+| PATCH | Fixes or refinements that do not add a standalone capability: documentation fixes, release note corrections, responsibility narrowing, template alignment, small adjustments to existing checks |
+| MINOR | Standalone backward-compatible framework capabilities: new scripts, commands, check families, template groups, or complete optional sub-protocols |
 | MAJOR | Incompatible protocol, state machine, command, or directory changes |
+
+## Release Cadence
+
+- Do not publish a version for every small edit.
+- Accumulate minor documentation corrections, wording changes, and small consistency fixes until they form a coherent release note.
+- Prefer PATCH for refinements to existing capabilities.
+- Use MINOR only when the release introduces a complete new capability that users can understand and adopt independently.
+- Local planning notes and unfinished ideas stay local until converted into release-ready source changes.
 
 ---
 

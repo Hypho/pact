@@ -7,7 +7,7 @@
 | 文件 | 生成时机 | 说明 |
 |------|---------|------|
 | `PAD.md` | /pact.init Step 3 | 产品结构文档，定义核心实体和全局规则 |
-| `FDG.md` | /pact.scope Step 4 | 功能依赖图，3+ 个已知功能时生成 |
+| `FDG.md` | /pact.scope 可选步骤 | 功能依赖图，开发者明确选择时生成的可选规划附件 |
 | `[功能名]-pid.md` | /pact.pid | 各功能的 PID Card 实例 |
 
 ## templates/ vs specs/ 的区别

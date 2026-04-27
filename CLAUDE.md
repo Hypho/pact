@@ -1,5 +1,5 @@
 # [项目名] — PACT 工作空间
-> Product-Aware Contract Toolkit v1.6.0
+> Product-Aware Contract Toolkit v1.6.1
 
 ---
 
@@ -50,7 +50,7 @@ Step 4  等待人工确认后再执行
 | 命令 | 触发时机 | 协议详见 |
 |------|---------|---------|
 | `/pact.init` | 项目开始（一次性） | pact.init.md |
-| `/pact.scope` | init 后必须执行；功能增至 3+ 时可重新执行 | pact.scope.md |
+| `/pact.scope` | 首次功能前建议执行；风险边界或产品方向变化时重新执行 | pact.scope.md |
 | `/pact.pid` | 每个功能开始 | pact.pid.md |
 | `/pact.contract` | pid 完成后 | pact.contract.md |
 | `/pact.build` | contract 完成后 | pact.build.md |
@@ -124,8 +124,9 @@ CLAUDE.md              — 当前文件
 - git-aware 发布检查只能放在可选脚本中，例如 `pact-release-check.sh`。
 - 版本发布前必须检查 VERSION、README、README.zh、CLAUDE.md、版本历史、CHANGELOG.md 一致。
 - 每次发布必须更新 `CHANGELOG.md`，README 版本历史只保留摘要。
-- `PATCH` 只用于文档修正、错别字、版本同步等不改变协议契约的修整。
-- `MINOR` 用于向后兼容的能力增强，例如 Hook、CI、lint、模板或可选检查。
+- 不足以形成独立发布价值的修改，可以暂留本地或普通提交中积累；达到明确发布价值后再统一更新版本号。
+- `PATCH` 用于不新增完整能力的修整或补强：文档修正、版本同步、职责收窄、模板一致性、已有检查规则微调。
+- `MINOR` 用于可独立说明的新能力：新增脚本、命令、检查体系、模板族或完整可选子协议。
 - `MAJOR` 用于状态机、目录结构、命令协议等不兼容变更。
 - 创建 tag、GitHub Release、推送公开发布动作前，必须等待维护者明确确认。
 
