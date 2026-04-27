@@ -124,6 +124,8 @@ CLAUDE.md              — 当前文件
 - git-aware 发布检查只能放在可选脚本中，例如 `pact-release-check.sh`。
 - 版本发布前必须检查 VERSION、README、README.zh、CLAUDE.md、版本历史、CHANGELOG.md 一致。
 - 每次发布必须更新 `CHANGELOG.md`，README 版本历史只保留摘要。
+- `CHANGELOG.md` 采用 Keep a Changelog 风格：版本倒序、`## vX.Y.Z — YYYY-MM-DD`、只写有内容的 `Added / Changed / Deprecated / Removed / Fixed / Security` 分类。
+- changelog 条目必须描述用户或维护者可感知的变化，不倾倒 commit log，不记录无意义的内部执行步骤。
 - 不足以形成独立发布价值的修改，可以暂留本地或普通提交中积累；达到明确发布价值后再统一更新版本号。
 - `PATCH` 用于不新增完整能力的修整或补强：文档修正、版本同步、职责收窄、模板一致性、已有检查规则微调。
 - `MINOR` 用于可独立说明的新能力：新增脚本、命令、检查体系、模板族或完整可选子协议。

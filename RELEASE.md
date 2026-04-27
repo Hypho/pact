@@ -108,6 +108,46 @@ Use semantic versioning.
 
 ---
 
+## Changelog Format
+
+PACT uses a Keep a Changelog style for `CHANGELOG.md`.
+
+Release entries must use this shape:
+
+```markdown
+## vX.Y.Z — YYYY-MM-DD
+
+### Added
+- User- or maintainer-visible new capability.
+
+### Changed
+- User- or maintainer-visible change to existing behavior, responsibility, documentation, or process.
+
+### Fixed
+- User- or maintainer-visible correction.
+```
+
+Allowed change groups:
+
+| Group | Use for |
+|-------|---------|
+| `Added` | New scripts, commands, templates, checks, or framework capabilities |
+| `Changed` | Changes to existing behavior, command responsibility, process rules, docs, templates, or release policy |
+| `Deprecated` | Still-supported behavior that is no longer recommended and is planned for removal |
+| `Removed` | Removed behavior, files, commands, templates, or rules |
+| `Fixed` | Bugs, inconsistencies, missing release notes, version mismatches, broken examples, or script defects |
+| `Security` | Security-related fixes, sensitive-data handling, permission boundaries, or leakage prevention |
+
+Rules:
+- Keep newest releases first.
+- Omit empty groups.
+- Do not dump commit logs.
+- Do not describe internal execution steps unless they affect users or maintainers.
+- Each bullet should be a concise, concrete change.
+- GitHub Release notes should be copied from the matching `CHANGELOG.md` version entry.
+
+---
+
 ## File-only Release Preparation
 
 1. Decide the next version.

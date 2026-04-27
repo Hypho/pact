@@ -4,6 +4,13 @@ All notable changes to PACT are documented here.
 
 PACT follows semantic versioning: `MAJOR.MINOR.PATCH`.
 
+This changelog follows a Keep a Changelog style:
+- newest releases first
+- each release uses `## vX.Y.Z — YYYY-MM-DD`
+- changes are grouped under `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, and `Security`
+- empty groups are omitted
+- entries describe user- or maintainer-visible changes, not raw commit history
+
 ---
 
 ## v1.6.1 — 2026-04-27
