@@ -2,7 +2,8 @@
 # PACT SessionStart Hook — 校验 state.md 与文件系统一致性
 # 配置方式见 .pact/core/constitution.md § 7 Hook 配置指南
 
-STATE=".pact/state.md"
+ROOT="${PACT_ROOT:-.}"
+STATE="${PACT_STATE_FILE:-$ROOT/.pact/state.md}"
 [ ! -f "$STATE" ] && exit 0
 
 # 归一化：全角冒号→半角、移除 Markdown 加粗标记 ** 和行首 # 标题前缀
@@ -36,16 +37,16 @@ PHASE=$(echo "$STATE_NORM" | awk '
 
 # pid 阶段：pid-card 文件必须存在
 if [[ "$PHASE" == "pid" ]]; then
-  if [ ! -f ".pact/specs/${FEATURE}-pid.md" ]; then
+  if [ ! -f "$ROOT/.pact/specs/${FEATURE}-pid.md" ]; then
     echo "❌ PACT 状态不一致：state.md 声明 pid，但 specs/${FEATURE}-pid.md 不存在"
     echo "   请检查文件是否被误删，或手动修正 state.md 中的阶段字段"
     exit 1
   fi
 fi
 
-# contract / build-complete 阶段：contract 文件必须存在
-if [[ "$PHASE" == "contract" || "$PHASE" == "build-complete" ]]; then
-  if [ ! -f ".pact/contracts/${FEATURE}.md" ]; then
+# contract / build / build-complete 阶段：contract 文件必须存在
+if [[ "$PHASE" == "contract" || "$PHASE" == "build" || "$PHASE" == "build-complete" ]]; then
+  if [ ! -f "$ROOT/.pact/contracts/${FEATURE}.md" ]; then
     echo "❌ PACT 状态不一致：state.md 声明 ${PHASE}，但 contracts/${FEATURE}.md 不存在"
     echo "   请检查文件是否被误删，或手动修正 state.md 中的阶段字段"
     exit 1
@@ -54,7 +55,7 @@ fi
 
 # verify-pass 阶段：verify 文件必须存在且含合法凭证
 if [[ "$PHASE" == "verify-pass" ]]; then
-  VERIFY=".pact/knowledge/${FEATURE}-verify.md"
+  VERIFY="$ROOT/.pact/knowledge/${FEATURE}-verify.md"
   if [ ! -f "$VERIFY" ]; then
     echo "❌ PACT 状态不一致：state.md 声明 verify-pass，但 ${VERIFY} 不存在"
     exit 1

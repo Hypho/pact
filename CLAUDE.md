@@ -1,5 +1,5 @@
 # [项目名] — PACT 工作空间
-> Product-Aware Contract Toolkit v1.2.1
+> Product-Aware Contract Toolkit v1.3.2
 
 ---
 
@@ -18,7 +18,7 @@ Step 1  读取 state.md，获取当前功能名和阶段
 
 Step 2  文件存在性校验（根据阶段）：
           阶段 = pid                      → 检查 .pact/specs/[功能名]-pid.md 是否存在
-          阶段 = contract / build-complete → 检查 .pact/contracts/[功能名].md 是否存在
+          阶段 = contract / build / build-complete → 检查 .pact/contracts/[功能名].md 是否存在
           阶段 = verify-pass              → 检查 .pact/knowledge/[功能名]-verify.md 是否存在
                                             且内容包含 "verdict = PASS" 或 "MANUAL OVERRIDE"
         校验失败：输出 "⚠️ 状态不一致：state.md 声明 [阶段] 但对应文件缺失或不匹配"

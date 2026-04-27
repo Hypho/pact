@@ -16,6 +16,64 @@ info() {
   echo "✅ $1"
 }
 
+lint_state_file() {
+  local file="$1"
+  local norm
+  norm="$(sed -e 's/：/:/g' -e 's/\*\*//g' "$file")"
+
+  for field in "功能" "阶段" "开始时间" "正在做" "阻塞"; do
+    if ! echo "$norm" | grep -q "${field}[[:space:]]*:"; then
+      echo "${file} 缺少 state 字段：${field}"
+      return 1
+    fi
+  done
+
+  local phase_line phase
+  phase_line="$(echo "$norm" | awk '/阶段[[:space:]]*:/ { print; exit }')"
+  if echo "$phase_line" | grep -q '\['; then
+    return 0
+  fi
+
+  phase="$(echo "$phase_line" | awk '
+    {
+      sub(/^.*阶段[[:space:]]*:[[:space:]]*/, "")
+      if (match($0, /[A-Za-z-]+|待开始/)) {
+        print substr($0, RSTART, RLENGTH)
+      }
+    }
+  ')"
+
+  case "$phase" in
+    "待开始"|"pid"|"contract"|"build"|"build-complete"|"verify-pass"|"shipped") ;;
+    *)
+      echo "${file} 包含非法阶段：${phase:-空}"
+      return 1
+      ;;
+  esac
+}
+
+expect_success() {
+  local label="$1"
+  shift
+  set +e
+  "$@" >/dev/null 2>&1
+  local code=$?
+  set -e
+  [ "$code" -eq 0 ] || fail "fixture 应通过但失败：${label}"
+}
+
+expect_failure() {
+  local label="$1"
+  shift
+  set +e
+  "$@" >/dev/null 2>&1
+  local code=$?
+  set -e
+  if [ "$code" -eq 0 ]; then
+    fail "fixture 应失败但通过：${label}"
+  fi
+}
+
 extract_version() {
   local file="$1"
   grep -m1 -Eo 'v[0-9]+\.[0-9]+\.[0-9]+' "$file" \
@@ -50,6 +108,26 @@ if grep -R "ENFORCEMENT_ROADMAP" README.md README.zh.md CLAUDE.md .pact/core/con
   fail "公开文档仍引用 ENFORCEMENT_ROADMAP"
 fi
 
+lint_state_file ".pact/state.md" || fail ".pact/state.md 结构检查失败"
 bash .pact/hooks/check-state.sh
 
-info "PACT 自检通过：版本一致、公开文档无内部路线引用、state 检查通过"
+expect_success "idle state lint" lint_state_file ".pact/tests/fixtures/state/idle.md"
+expect_success "idle state check" env PACT_STATE_FILE=".pact/tests/fixtures/state/idle.md" bash .pact/hooks/check-state.sh
+
+expect_success "pid missing fixture lint" lint_state_file ".pact/tests/fixtures/state/pid-missing-pid-card.md"
+expect_failure "pid missing pid-card" env PACT_STATE_FILE=".pact/tests/fixtures/state/pid-missing-pid-card.md" bash .pact/hooks/check-state.sh
+
+expect_success "contract missing fixture lint" lint_state_file ".pact/tests/fixtures/state/contract-missing-contract.md"
+expect_failure "contract missing contract" env PACT_STATE_FILE=".pact/tests/fixtures/state/contract-missing-contract.md" bash .pact/hooks/check-state.sh
+
+expect_failure "invalid phase lint" lint_state_file ".pact/tests/fixtures/state/invalid-phase.md"
+expect_failure "verify missing file" env PACT_STATE_FILE=".pact/tests/fixtures/state/verify-pass-missing-verify.md" bash .pact/hooks/check-state.sh
+
+TMP_ROOT="$(mktemp -d)"
+trap 'rm -rf "$TMP_ROOT"' EXIT
+mkdir -p "$TMP_ROOT/.pact/knowledge"
+cp ".pact/tests/fixtures/state/verify-pass-missing-verdict.md" "$TMP_ROOT/.pact/state.md"
+echo "verdict = FAIL" > "$TMP_ROOT/.pact/knowledge/fixture-verify-missing-verdict-verify.md"
+expect_failure "verify missing PASS verdict" env PACT_ROOT="$TMP_ROOT" bash .pact/hooks/check-state.sh
+
+info "PACT 自检通过：版本一致、公开文档无内部路线引用、state lint 与 fixture 检查通过"

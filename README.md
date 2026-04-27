@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> A lightweight protocol framework for auditable human-AI software development | v1.2.1
+> A lightweight protocol framework for auditable human-AI software development | v1.3.2
 > 中文: [README.zh.md](./README.zh.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -123,6 +123,8 @@ your-project/
     ├── core/
     │   ├── constitution.md          ← Warm layer: project charter, hard constraints + file-naming rules
     │   └── architecture.md          ← Cold layer: load on demand
+    ├── schemas/
+    │   └── state.schema.json        ← Draft structured state schema for future migration
     ├── scope/
     │   ├── boundaries.md            ← Boundary checklist (B-H / B-M risk rules)
     │   └── fitness.md               ← Adaptation assessment output (/pact.scope)
@@ -163,6 +165,11 @@ your-project/
 ### File Naming Convention
 All contract / verify / exec-plan / pid-card paths are derived from the feature-name field in state.md, following rules defined in constitution.md. The startup check compares the phase declared in state.md against the corresponding files; mismatch halts execution.
 
+### State Source
+In v1.x, `.pact/state.md` remains the human-readable source of truth. PACT also includes a draft `.pact/schemas/state.schema.json` to define the future structured state shape, but it does not change the current runtime behavior.
+
+`pact-check.sh` now validates the basic `state.md` structure and runs fixture checks for common invalid states before release.
+
 ### Boundary Detection
 `/pact.pid` scans the current feature against boundaries.md:
 
@@ -197,6 +204,7 @@ Semantic versioning: `MAJOR.MINOR.PATCH`
 
 | Version | Date | Core changes |
 |---------|------|--------------|
+| v1.3.2 | 2026-04-27 | Adds draft state schema, state fixtures, stricter state.md lint, fixture-based check-state coverage, and build-phase state validation |
 | v1.2.1 | 2026-04-26 | Refines README positioning, adds CI status badge, clarifies when to use or avoid PACT, and documents the repository self-check command |
 | v1.2.0 | 2026-04-26 | Adds repository self-check script and GitHub Actions workflow for version consistency, internal-roadmap leakage prevention, and state consistency; adds open-source maintenance and release rules |
 | v1.1.0 | 2026-04-20 | Time triples (state.md adds started_at; completed table extended with start/completed columns); check-state.sh parsing hardened (colon normalization, awk replaces grep+sed); README adds "Scope" section with English version |

@@ -164,7 +164,25 @@ INCONCLUSIVE — 无法在当前环境实际运行（见 pact.verify.md 中 INCO
 
 ---
 
-## 10. 外部 Skills 注册区
+## 10. State 源规则
+
+```
+v1.x 阶段：
+  .pact/state.md 是状态真相源。
+  .pact/schemas/state.schema.json 仅作为未来结构化迁移草案。
+  pact-check.sh 必须检查 state.md 的基础字段和阶段枚举。
+  check-state.sh 必须通过 fixture 覆盖常见非法状态。
+
+未来 v2.0 候选：
+  只有当 state.md 解析脆弱性形成真实维护成本时，才迁移到 state.json。
+  迁移后 state.md 应由结构化状态渲染生成，不再手动维护。
+
+不得提前将 PID Card / Contract / Verify 全部结构化。
+```
+
+---
+
+## 11. 外部 Skills 注册区
 
 > 项目配置：记录各 Skill 的挂载点和安装状态。
 > 到达挂载点时，检查安装状态。未安装则先安装，再触发，不跳过。
@@ -185,7 +203,7 @@ INCONCLUSIVE — 无法在当前环境实际运行（见 pact.verify.md 中 INCO
 
 ---
 
-## 11. 归档触发规则
+## 12. 归档触发规则
 
 ```
 已完成功能表超过 10 条时：
@@ -199,7 +217,7 @@ state.md 已完成队列超过 10 条时：
 
 ---
 
-## 12. 开源发布规则（硬约束）
+## 13. 开源发布规则（硬约束）
 
 ```
 公开仓库只发布已经落地或正在本版本落地的能力。

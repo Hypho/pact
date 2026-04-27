@@ -1,6 +1,5 @@
 # PACT State
-> 运行时状态数据。状态机规则与文件校验见 CLAUDE.md § 1。
-> 最后更新：[时间]
+> Fixture: idle state should pass.
 
 ---
 

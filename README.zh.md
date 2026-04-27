@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> 面向人机协作开发的轻量协议框架 | v1.2.1
+> 面向人机协作开发的轻量协议框架 | v1.3.2
 > English: [README.md](./README.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -123,6 +123,8 @@ your-project/
     ├── core/
     │   ├── constitution.md          ← 温层：项目宪法，硬约束 + 文件命名规范
     │   └── architecture.md          ← 冷层：按需加载
+    ├── schemas/
+    │   └── state.schema.json        ← 未来结构化状态源的草案 schema
     ├── scope/
     │   ├── boundaries.md            ← 边界特征清单（B-H / B-M 风险规则）
     │   └── fitness.md               ← 适配评估结果（/pact.scope 生成）
@@ -163,6 +165,11 @@ your-project/
 ### 文件命名规范
 所有 contract / verify / exec-plan / pid-card 文件路径都基于 state.md 的功能名字段生成，命名规则在 constitution.md 中定义。启动校验会对比 state.md 声明的阶段与对应文件是否存在，不一致时停止执行。
 
+### 状态源
+在 v1.x 阶段，`.pact/state.md` 仍然是人类可读的状态真相源。PACT 同时提供 `.pact/schemas/state.schema.json` 草案，用于定义未来结构化 state 的形状，但它不会改变当前运行方式。
+
+`pact-check.sh` 现在会检查 `state.md` 的基础结构，并通过 fixture 覆盖常见非法状态。
+
 ### 边界检测
 `/pact.pid` 阶段对照 boundaries.md 执行边界检测：
 
@@ -197,6 +204,7 @@ your-project/
 
 | 版本 | 日期 | 核心变更 |
 |------|------|---------|
+| v1.3.2 | 2026-04-27 | 新增 state schema 草案、state fixture、state.md 结构 lint、check-state fixture 覆盖，并补强 build 阶段状态校验 |
 | v1.2.1 | 2026-04-26 | 优化 README 产品定位，新增 CI 状态徽章，明确适合/不适合使用 PACT 的场景，并补充仓库自检命令 |
 | v1.2.0 | 2026-04-26 | 新增仓库自检脚本与 GitHub Actions 工作流，检查版本一致性、内部路线草案误公开、state 一致性；新增开源维护与发布规则 |
 | v1.1.0 | 2026-04-20 | 时间三元组（state.md 新增开始时间字段，已完成表扩展双时间列）；check-state.sh 解析稳健化（归一化冒号、awk 替代 grep+sed）；README 增加「适用边界」段落并提供英文版本 |
