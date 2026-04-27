@@ -236,9 +236,10 @@ state.md 已完成队列超过 10 条时：
 发布前检查：
   1. README.md、README.zh.md、CLAUDE.md 版本号一致
   2. README 版本历史包含本次版本
-  3. git tag 不与既有版本冲突
-  4. 本地 *.local.md 和未公开路线草案未进入提交
-  5. 维护者已明确确认发布
+  3. CHANGELOG.md 包含本次版本
+  4. git tag 不与既有版本冲突
+  5. 本地 *.local.md 和未公开路线草案未进入提交
+  6. 维护者已明确确认发布
 ```
 
 ---

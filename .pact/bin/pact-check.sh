@@ -100,6 +100,14 @@ if ! grep -q "| v${README_VERSION} |" README.zh.md; then
   fail "README.zh.md 版本历史缺少 v${README_VERSION}"
 fi
 
+if [ ! -f CHANGELOG.md ]; then
+  fail "CHANGELOG.md 不存在"
+fi
+
+if ! grep -q "## v${README_VERSION} " CHANGELOG.md; then
+  fail "CHANGELOG.md 缺少 v${README_VERSION}"
+fi
+
 if [ -f ENFORCEMENT_ROADMAP.zh.md ]; then
   fail "ENFORCEMENT_ROADMAP.zh.md 是内部路线草案，不应进入公开仓库"
 fi
