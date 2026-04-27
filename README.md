@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> A lightweight protocol framework for auditable human-AI software development | v1.3.3
+> A lightweight protocol framework for auditable human-AI software development | v1.4.0
 > 中文: [README.zh.md](./README.zh.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -75,6 +75,9 @@ cp -r pact/.pact     your-project/
 
 # Optional repository self-check
 bash .pact/bin/pact-check.sh
+
+# Optional git-aware release check
+bash .pact/bin/pact-release-check.sh
 ```
 
 ---
@@ -203,9 +206,11 @@ Semantic versioning: `MAJOR.MINOR.PATCH`
 ## Version History
 
 Detailed release notes are maintained in [CHANGELOG.md](./CHANGELOG.md).
+Release process details are documented in [RELEASE.md](./RELEASE.md).
 
 | Version | Date | Core changes |
 |---------|------|--------------|
+| v1.4.0 | 2026-04-27 | Adds VERSION as the file-only version source, documents layered release workflows, and adds optional git-aware release checks |
 | v1.3.3 | 2026-04-27 | Adds CHANGELOG.md as canonical release history and requires changelog coverage in repository self-checks |
 | v1.3.2 | 2026-04-27 | Adds draft state schema, state fixtures, stricter state.md lint, fixture-based check-state coverage, and build-phase state validation |
 | v1.2.1 | 2026-04-26 | Refines README positioning, adds CI status badge, clarifies when to use or avoid PACT, and documents the repository self-check command |

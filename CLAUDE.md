@@ -1,5 +1,5 @@
 # [项目名] — PACT 工作空间
-> Product-Aware Contract Toolkit v1.3.3
+> Product-Aware Contract Toolkit v1.4.0
 
 ---
 
@@ -119,7 +119,10 @@ CLAUDE.md              — 当前文件
 
 - 本地规划、未验证路线、长期构想默认写入 `*.local.md`，不进入公开仓库。
 - 公开路线使用 GitHub Issues / Milestones 表达，不用提前承诺式 roadmap 文档。
-- 版本发布前必须检查 README、README.zh、CLAUDE.md、版本历史与 git tag 的版本号一致。
+- `VERSION` 是唯一可编辑版本真相源。
+- `pact-check.sh` 必须保持 file-only，不依赖 git、GitHub、网络或 `gh`。
+- git-aware 发布检查只能放在可选脚本中，例如 `pact-release-check.sh`。
+- 版本发布前必须检查 VERSION、README、README.zh、CLAUDE.md、版本历史、CHANGELOG.md 一致。
 - 每次发布必须更新 `CHANGELOG.md`，README 版本历史只保留摘要。
 - `PATCH` 只用于文档修正、错别字、版本同步等不改变协议契约的修整。
 - `MINOR` 用于向后兼容的能力增强，例如 Hook、CI、lint、模板或可选检查。

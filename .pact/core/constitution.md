@@ -220,6 +220,11 @@ state.md 已完成队列超过 10 条时：
 ## 13. 开源发布规则（硬约束）
 
 ```
+VERSION 是唯一可编辑版本真相源。
+PACT 默认自检必须保持 file-only，不依赖 git / GitHub / 网络。
+git-aware 检查是可选能力，只用于采用 git 协作的项目。
+GitHub-aware 发布只适用于使用 GitHub Release 的仓库维护流程。
+
 公开仓库只发布已经落地或正在本版本落地的能力。
 长期路线、未验证设计、内部判断默认保存在 *.local.md，不推送。
 
@@ -234,12 +239,13 @@ state.md 已完成队列超过 10 条时：
   MAJOR：不兼容协议或状态机变更
 
 发布前检查：
-  1. README.md、README.zh.md、CLAUDE.md 版本号一致
-  2. README 版本历史包含本次版本
-  3. CHANGELOG.md 包含本次版本
-  4. git tag 不与既有版本冲突
+  1. VERSION 存在，且格式为 MAJOR.MINOR.PATCH
+  2. README.md、README.zh.md、CLAUDE.md 版本号与 VERSION 一致
+  3. README 版本历史包含本次版本
+  4. CHANGELOG.md 包含本次版本
   5. 本地 *.local.md 和未公开路线草案未进入提交
-  6. 维护者已明确确认发布
+  6. 若项目采用 git，运行可选 git-aware 发布检查
+  7. 若发布到 GitHub，维护者已明确确认 tag / Release 动作
 ```
 
 ---

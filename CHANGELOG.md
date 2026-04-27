@@ -6,6 +6,20 @@ PACT follows semantic versioning: `MAJOR.MINOR.PATCH`.
 
 ---
 
+## v1.4.0 — 2026-04-27
+
+### Added
+- Added `VERSION` as the single editable version source.
+- Added `RELEASE.md` with file-only, git-aware, and GitHub-aware release layers.
+- Added optional `.pact/bin/pact-release-check.sh` for local git-based release readiness checks.
+
+### Changed
+- `pact-check.sh` now reads version from `VERSION` and remains file-only.
+- Release rules now distinguish PACT internal checks from optional repository publishing workflows.
+- README / README.zh link to `RELEASE.md` for release process details.
+
+---
+
 ## v1.3.3 — 2026-04-27
 
 ### Added

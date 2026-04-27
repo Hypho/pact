@@ -80,6 +80,13 @@ extract_version() {
     | sed -E 's/^v//'
 }
 
+[ -f VERSION ] || fail "VERSION 不存在"
+VERSION_VALUE="$(tr -d '[:space:]' < VERSION)"
+
+if ! echo "$VERSION_VALUE" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+  fail "VERSION 格式非法：$VERSION_VALUE"
+fi
+
 README_VERSION="$(extract_version README.md)"
 README_ZH_VERSION="$(extract_version README.zh.md)"
 CLAUDE_VERSION="$(extract_version CLAUDE.md)"
@@ -88,24 +95,24 @@ CLAUDE_VERSION="$(extract_version CLAUDE.md)"
 [ -n "$README_ZH_VERSION" ] || fail "README.zh.md 缺少版本号"
 [ -n "$CLAUDE_VERSION" ] || fail "CLAUDE.md 缺少版本号"
 
-if [ "$README_VERSION" != "$README_ZH_VERSION" ] || [ "$README_VERSION" != "$CLAUDE_VERSION" ]; then
-  fail "版本号不一致：README.md=$README_VERSION README.zh.md=$README_ZH_VERSION CLAUDE.md=$CLAUDE_VERSION"
+if [ "$README_VERSION" != "$VERSION_VALUE" ] || [ "$README_ZH_VERSION" != "$VERSION_VALUE" ] || [ "$CLAUDE_VERSION" != "$VERSION_VALUE" ]; then
+  fail "版本号不一致：VERSION=$VERSION_VALUE README.md=$README_VERSION README.zh.md=$README_ZH_VERSION CLAUDE.md=$CLAUDE_VERSION"
 fi
 
-if ! grep -q "| v${README_VERSION} |" README.md; then
-  fail "README.md 版本历史缺少 v${README_VERSION}"
+if ! grep -q "| v${VERSION_VALUE} |" README.md; then
+  fail "README.md 版本历史缺少 v${VERSION_VALUE}"
 fi
 
-if ! grep -q "| v${README_VERSION} |" README.zh.md; then
-  fail "README.zh.md 版本历史缺少 v${README_VERSION}"
+if ! grep -q "| v${VERSION_VALUE} |" README.zh.md; then
+  fail "README.zh.md 版本历史缺少 v${VERSION_VALUE}"
 fi
 
 if [ ! -f CHANGELOG.md ]; then
   fail "CHANGELOG.md 不存在"
 fi
 
-if ! grep -q "## v${README_VERSION} " CHANGELOG.md; then
-  fail "CHANGELOG.md 缺少 v${README_VERSION}"
+if ! grep -q "## v${VERSION_VALUE} " CHANGELOG.md; then
+  fail "CHANGELOG.md 缺少 v${VERSION_VALUE}"
 fi
 
 if [ -f ENFORCEMENT_ROADMAP.zh.md ]; then
@@ -138,4 +145,4 @@ cp ".pact/tests/fixtures/state/verify-pass-missing-verdict.md" "$TMP_ROOT/.pact/
 echo "verdict = FAIL" > "$TMP_ROOT/.pact/knowledge/fixture-verify-missing-verdict-verify.md"
 expect_failure "verify missing PASS verdict" env PACT_ROOT="$TMP_ROOT" bash .pact/hooks/check-state.sh
 
-info "PACT 自检通过：版本一致、公开文档无内部路线引用、state lint 与 fixture 检查通过"
+info "PACT 自检通过：VERSION 一致、公开文档无内部路线引用、state lint 与 fixture 检查通过"

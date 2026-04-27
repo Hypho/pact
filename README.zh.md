@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> 面向人机协作开发的轻量协议框架 | v1.3.3
+> 面向人机协作开发的轻量协议框架 | v1.4.0
 > English: [README.md](./README.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -75,6 +75,9 @@ cp -r pact/.pact     your-project/
 
 # 可选：仓库自检
 bash .pact/bin/pact-check.sh
+
+# 可选：git-aware 发布检查
+bash .pact/bin/pact-release-check.sh
 ```
 
 ---
@@ -203,9 +206,11 @@ your-project/
 ## 版本历史
 
 详细发布记录维护在 [CHANGELOG.md](./CHANGELOG.md)。
+发布流程说明见 [RELEASE.md](./RELEASE.md)。
 
 | 版本 | 日期 | 核心变更 |
 |------|------|---------|
+| v1.4.0 | 2026-04-27 | 新增 VERSION 作为 file-only 版本真相源，文档化分层发布流程，并新增可选 git-aware 发布检查 |
 | v1.3.3 | 2026-04-27 | 新增 CHANGELOG.md 作为正式发布历史，并在仓库自检中要求 changelog 覆盖当前版本 |
 | v1.3.2 | 2026-04-27 | 新增 state schema 草案、state fixture、state.md 结构 lint、check-state fixture 覆盖，并补强 build 阶段状态校验 |
 | v1.2.1 | 2026-04-26 | 优化 README 产品定位，新增 CI 状态徽章，明确适合/不适合使用 PACT 的场景，并补充仓库自检命令 |
