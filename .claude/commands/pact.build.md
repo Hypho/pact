@@ -6,6 +6,14 @@
 
 ## 入口检查
 
+进入前先运行：
+
+```bash
+bash .pact/bin/pact-guard.sh build
+```
+
+guard 失败则停止，不继续 build。
+
 `.pact/contracts/[功能名].md` 必须存在。不存在则停止，提示先执行 /pact.contract。
 
 ---

@@ -6,6 +6,14 @@
 
 ## 入口检查
 
+进入前先运行：
+
+```bash
+bash .pact/bin/pact-guard.sh ship
+```
+
+guard 失败则停止，不继续 ship。
+
 `.pact/knowledge/[功能名]-verify.md` 必须存在，且包含 `verdict = PASS` 或 `MANUAL OVERRIDE` 记录。
 不满足则停止，提示先执行 /pact.verify 或完成人工签字。
 

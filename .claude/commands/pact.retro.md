@@ -44,11 +44,10 @@
 
 是否有需要新登记或调整优先级的技术债？
 
-## Step 4  代码简化扫描
+## Step 4  可选代码简化扫描
 
-检查 constitution.md Skills 注册区中 code-simplifier 状态：
-- `[x]` → 对本轮改动文件运行简化扫描
-- `[ ]` → 执行 `claude plugin install code-simplifier`，标记 `[x]`，再运行
+如项目已安装 code-simplifier，或开发者明确要求，可对本轮改动文件运行简化扫描。
+未安装时不自动安装，不阻断 retro 主流程。
 
 ## Step 5  范围适配复查
 

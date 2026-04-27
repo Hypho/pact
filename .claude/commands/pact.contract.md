@@ -8,9 +8,17 @@
 
 ## 入口检查
 
+进入前先运行：
+
+```bash
+bash .pact/bin/pact-guard.sh contract
+```
+
+guard 失败则停止，不继续生成 contract。
+
 ### 检查 1 — PID Card 存在性
 
-.pact/specs/[功能名]-pid.md 必须存在（或 PID Card 已在本会话确认）。
+.pact/specs/[功能名]-pid.md 必须存在。
 不存在则停止，提示先执行 /pact.pid。
 
 ### 检查 2 — PAD 占位符警告

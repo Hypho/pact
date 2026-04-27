@@ -8,6 +8,14 @@
 
 ## Step 1  边界检测
 
+进入前先运行：
+
+```bash
+bash .pact/bin/pact-guard.sh pid
+```
+
+guard 失败则停止，不继续生成 PID Card。
+
 读取 `.pact/scope/boundaries.md`，对照当前功能描述逐条检查：
 
 **高风险边界（B-H）— 命中则强制暂停：**

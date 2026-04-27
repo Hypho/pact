@@ -96,7 +96,9 @@ pid-card 文件   → .pact/specs/[功能名]-pid.md
 
 ### Hook 配置指南
 
-在项目根目录创建检查脚本，并在 `.claude/settings.json` 注册为 SessionStart Hook：
+本仓库提供检查脚本。是否注册为 Claude Code SessionStart Hook，由项目维护者按环境选择。
+
+如需启用自动兜底，在项目根目录创建 `.claude/settings.json` 并注册：
 
 **`.pact/hooks/check-state.sh`**（SessionStart 时运行，校验 state.md 一致性）
 
@@ -121,6 +123,7 @@ pid-card 文件   → .pact/specs/[功能名]-pid.md
 
 > Hook 脚本以非零退出码阻断会话继续；零退出码表示检查通过。
 > 脚本需要 `chmod +x` 可执行权限。
+> 未注册 settings 时，`check-state.sh` 仍可由 `pact-check.sh` 和人工命令调用，但不会自动拦截会话启动。
 
 ---
 
@@ -236,11 +239,11 @@ pact-guard.sh 只判断命令是否允许进入，不执行命令，不写文件
 
 ---
 
-## 13. 外部 Skills 注册区
+## 13. 外部 Skills（可选增强）
 
-> 项目配置：记录各 Skill 的挂载点和安装状态。
-> 到达挂载点时，检查安装状态。未安装则先安装，再触发，不跳过。
-> 安装失败则写入 `.pact/knowledge/errors/`，跳过该 Skill，流程继续。
+> 外部 Skills 不是 PACT 主流程的必需依赖。
+> 到达挂载点时，仅在开发者明确要求或项目已安装时触发。
+> 未安装或安装失败时，写入 `.pact/knowledge/errors/` 或在当前输出中说明，跳过该 Skill，流程继续。
 
 | Skill | 挂载点 | 触发时机 | 安装命令 | 状态 |
 |-------|--------|---------|---------|------|
@@ -251,7 +254,7 @@ pact-guard.sh 只判断命令是否允许进入，不执行命令，不写文件
 **触发逻辑：**
 ```
 [x] → 直接触发
-[ ] → 执行安装命令 → 标记 [x] → 触发
+[ ] → 不自动安装；仅在开发者确认后安装并标记 [x]
 安装失败 → 写入 errors/ → 跳过，流程继续
 ```
 

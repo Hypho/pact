@@ -8,6 +8,14 @@
 
 ## Step 1  列出 FC 关键路径
 
+进入前先运行：
+
+```bash
+bash .pact/bin/pact-guard.sh verify
+```
+
+guard 失败则停止，不继续 verify。
+
 读取 contract，逐条列出所有 FC 关键路径条目。
 
 ## Step 2  边界输入测试
@@ -59,7 +67,7 @@ verdict = INCONCLUSIVE
 → 开发者在 verify.md 末尾手动追加：
   `MANUAL OVERRIDE — [日期] — [签字人] — [确认理由]`
   追加后 state.md 阶段更新至 verify-pass，流程继续
-  constitution.md 已完成功能表 Verify 列标注 "manual"
+  state.md 已完成表 Verify 列标注 "manual"；ship 阶段同步写入 constitution.md 已完成功能表。
 
 **[C] 暂停当前功能**
 → state.md 阻塞字段填写原因，功能保留在队列，不推进
@@ -67,4 +75,4 @@ verdict = INCONCLUSIVE
 ---
 
 > code-review Skill 为可选补充，在 PASS 后按需触发，不是主验证手段。
-> 安装：`claude plugin install code-review`（见 constitution.md Skills 注册区）
+> 未安装或不可用时，记录说明后跳过，不阻断主流程。
