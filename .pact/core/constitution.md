@@ -182,7 +182,26 @@ v1.x 阶段：
 
 ---
 
-## 11. 外部 Skills 注册区
+## 11. Contract / Verify Lint 规则
+
+```
+/pact.contract 产物必须通过 contract lint：
+  1. 文件存在且非空
+  2. 至少包含一个 FC 条目（FC-01 / FC-1）
+  3. 包含“明确不做”或 “Out of Scope”
+  4. 不保留明显模板占位符（[请补充] / [功能名] / [待填写] / TODO）
+
+/pact.verify 产物必须通过 verify lint：
+  1. 文件存在且非空
+  2. verdict 行严格为 verdict = PASS / FAIL / INCONCLUSIVE
+  3. verdict 只能出现一次
+  4. 禁止使用“应该 / 预期 / 理论上 / should / expected / theoretically”
+  5. verdict = PASS 时，必须包含运行证据标记（output / 输出 / command / 命令 / result / 结果）
+```
+
+---
+
+## 12. 外部 Skills 注册区
 
 > 项目配置：记录各 Skill 的挂载点和安装状态。
 > 到达挂载点时，检查安装状态。未安装则先安装，再触发，不跳过。
@@ -203,7 +222,7 @@ v1.x 阶段：
 
 ---
 
-## 12. 归档触发规则
+## 13. 归档触发规则
 
 ```
 已完成功能表超过 10 条时：
@@ -217,7 +236,7 @@ state.md 已完成队列超过 10 条时：
 
 ---
 
-## 13. 开源发布规则（硬约束）
+## 14. 开源发布规则（硬约束）
 
 ```
 VERSION 是唯一可编辑版本真相源。

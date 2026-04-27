@@ -6,6 +6,22 @@ PACT follows semantic versioning: `MAJOR.MINOR.PATCH`.
 
 ---
 
+## v1.5.0 — 2026-04-27
+
+### Added
+- Added `.pact/bin/pact-lint-contract.sh` for behavior contract structure checks.
+- Added `.pact/bin/pact-lint-verify.sh` for verification record structure checks.
+- Added contract lint fixtures for valid contract, missing FC, missing out-of-scope, and template placeholder cases.
+- Added verify lint fixtures for valid PASS, missing verdict, duplicate verdict, speculative language, and PASS without runtime evidence cases.
+
+### Changed
+- `pact-check.sh` now runs contract and verify lint fixtures.
+- `pact-check.sh` now lints active and archived contract files when present.
+- `pact-check.sh` now lints verify records when present.
+- README and constitution now document Contract / Verify lint rules.
+
+---
+
 ## v1.4.0 — 2026-04-27
 
 ### Added

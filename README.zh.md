@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> 面向人机协作开发的轻量协议框架 | v1.4.0
+> 面向人机协作开发的轻量协议框架 | v1.5.0
 > English: [README.md](./README.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -173,6 +173,15 @@ your-project/
 
 `pact-check.sh` 现在会检查 `state.md` 的基础结构，并通过 fixture 覆盖常见非法状态。
 
+### Contract / Verify Lint
+PACT 会检查行为契约和验证记录的基础结构：
+
+- contract 必须包含 FC 条目和明确不做范围
+- contract 不能保留明显模板占位符
+- verify 必须包含且只包含一个严格的 `verdict = PASS|FAIL|INCONCLUSIVE` 行
+- verify 禁止使用“应该 / 预期 / 理论上”等推理性语言替代真实输出
+- PASS 类型 verify 必须包含 `output:` 或 `command:` 等运行证据标记
+
 ### 边界检测
 `/pact.pid` 阶段对照 boundaries.md 执行边界检测：
 
@@ -210,6 +219,7 @@ your-project/
 
 | 版本 | 日期 | 核心变更 |
 |------|------|---------|
+| v1.5.0 | 2026-04-27 | 新增 contract 和 verify lint 脚本、fixtures，并接入自检，用于检查行为契约和验证记录的基础结构 |
 | v1.4.0 | 2026-04-27 | 新增 VERSION 作为 file-only 版本真相源，文档化分层发布流程，并新增可选 git-aware 发布检查 |
 | v1.3.3 | 2026-04-27 | 新增 CHANGELOG.md 作为正式发布历史，并在仓库自检中要求 changelog 覆盖当前版本 |
 | v1.3.2 | 2026-04-27 | 新增 state schema 草案、state fixture、state.md 结构 lint、check-state fixture 覆盖，并补强 build 阶段状态校验 |

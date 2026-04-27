@@ -145,4 +145,9 @@ cp ".pact/tests/fixtures/state/verify-pass-missing-verdict.md" "$TMP_ROOT/.pact/
 echo "verdict = FAIL" > "$TMP_ROOT/.pact/knowledge/fixture-verify-missing-verdict-verify.md"
 expect_failure "verify missing PASS verdict" env PACT_ROOT="$TMP_ROOT" bash .pact/hooks/check-state.sh
 
-info "PACT 自检通过：VERSION 一致、公开文档无内部路线引用、state lint 与 fixture 检查通过"
+bash .pact/bin/pact-lint-contract.sh --fixtures
+bash .pact/bin/pact-lint-verify.sh --fixtures
+bash .pact/bin/pact-lint-contract.sh --all
+bash .pact/bin/pact-lint-verify.sh --all
+
+info "PACT 自检通过：VERSION 一致、公开文档无内部路线引用、state / contract / verify 检查通过"

@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> A lightweight protocol framework for auditable human-AI software development | v1.4.0
+> A lightweight protocol framework for auditable human-AI software development | v1.5.0
 > 中文: [README.zh.md](./README.zh.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -173,6 +173,15 @@ In v1.x, `.pact/state.md` remains the human-readable source of truth. PACT also 
 
 `pact-check.sh` now validates the basic `state.md` structure and runs fixture checks for common invalid states before release.
 
+### Contract / Verify Lint
+PACT checks that behavior contracts and verification records are structurally valid:
+
+- contracts must include FC entries and explicit out-of-scope boundaries
+- contracts must not contain obvious template placeholders
+- verify records must include exactly one strict `verdict = PASS|FAIL|INCONCLUSIVE` line
+- verify records reject speculative language such as "should", "expected", and "theoretically"
+- PASS verify records must include a runtime evidence marker such as `output:` or `command:`
+
 ### Boundary Detection
 `/pact.pid` scans the current feature against boundaries.md:
 
@@ -210,6 +219,7 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 
 | Version | Date | Core changes |
 |---------|------|--------------|
+| v1.5.0 | 2026-04-27 | Adds contract and verify lint scripts, fixtures, and self-check integration for behavior contract and verification record structure |
 | v1.4.0 | 2026-04-27 | Adds VERSION as the file-only version source, documents layered release workflows, and adds optional git-aware release checks |
 | v1.3.3 | 2026-04-27 | Adds CHANGELOG.md as canonical release history and requires changelog coverage in repository self-checks |
 | v1.3.2 | 2026-04-27 | Adds draft state schema, state fixtures, stricter state.md lint, fixture-based check-state coverage, and build-phase state validation |
