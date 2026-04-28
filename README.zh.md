@@ -63,6 +63,7 @@ PACT 适合产品型开发者、独立开发者和小团队：既希望借助 AI
 
 ## 快速开始
 
+安装说明：[INSTALL.zh.md](./INSTALL.zh.md)
 完整使用指南：[USAGE.zh.md](./USAGE.zh.md)
 
 ```bash
@@ -71,12 +72,6 @@ curl -fsSL https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-fro
 
 # Windows PowerShell：安装到当前目录
 powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1 | iex"
-
-# Windows PowerShell：指定目标目录
-$installer = Join-Path $env:TEMP "install-from-github.ps1"
-Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1" -OutFile $installer
-powershell -ExecutionPolicy Bypass -File $installer -Target your-project -Mode auto
-Remove-Item $installer
 
 # 从已克隆的 PACT 仓库安装
 bash scripts/install-pact.sh --target your-project --mode auto

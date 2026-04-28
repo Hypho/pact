@@ -31,25 +31,18 @@ Details:
 
 ## 2. Install Into a Project
 
+Detailed installation options: [INSTALL.md](./INSTALL.md)
+
 Recommended remote installer:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.sh | bash -s -- --target . --mode auto
 ```
 
-Windows PowerShell, current directory:
+Windows PowerShell:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1 | iex"
-```
-
-Windows PowerShell, explicit target or fixed ref:
-
-```powershell
-$installer = Join-Path $env:TEMP "install-from-github.ps1"
-Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1" -OutFile $installer
-powershell -ExecutionPolicy Bypass -File $installer -Target your-project -Mode auto -Ref main
-Remove-Item $installer
 ```
 
 This directly installs PACT files into the target project.

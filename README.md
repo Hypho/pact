@@ -63,6 +63,7 @@ Before adopting, check whether your project falls within PACT's applicable scope
 
 ## Quick Start
 
+Install details: [INSTALL.md](./INSTALL.md)
 Full usage guide: [USAGE.md](./USAGE.md)
 
 ```bash
@@ -71,12 +72,6 @@ curl -fsSL https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-fro
 
 # Windows PowerShell: install into the current directory
 powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1 | iex"
-
-# Windows PowerShell: specify a target
-$installer = Join-Path $env:TEMP "install-from-github.ps1"
-Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1" -OutFile $installer
-powershell -ExecutionPolicy Bypass -File $installer -Target your-project -Mode auto
-Remove-Item $installer
 
 # From a cloned PACT repository
 bash scripts/install-pact.sh --target your-project --mode auto

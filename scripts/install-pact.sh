@@ -201,5 +201,7 @@ cat <<EOF
 Next:
 - Claude Code: run /pact.init, then /pact.scope before the first feature.
 - Codex/Cursor: ask the agent to initialize the project using PACT.
-- Self-check in installed projects: bash .pact/bin/pact.sh check --project
+- Self-check:
+    cd "$TARGET_ABS"
+    bash .pact/bin/pact.sh check --project
 EOF
