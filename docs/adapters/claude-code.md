@@ -17,12 +17,18 @@ PACT uses Claude Code project slash commands:
 
 ## Install
 
-Copy these into your project root:
+From the PACT repository root, copy these into your project root:
 
 ```text
 CLAUDE.md
 .claude/commands/
 .pact/
+```
+
+Example:
+
+```bash
+cp -r CLAUDE.md .claude .pact your-project/
 ```
 
 Then start Claude Code from the project root.
@@ -73,4 +79,3 @@ Claude Code supports plugin marketplaces hosted from GitHub repositories. PACT m
 ```
 
 That is planned, not the current primary installation path.
-

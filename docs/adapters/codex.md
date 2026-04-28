@@ -13,11 +13,17 @@ AGENTS.md
 
 ## Install
 
-Copy these into your project root:
+From the PACT repository root, copy these into your project root:
 
 ```text
 AGENTS.md
 .pact/
+```
+
+Example:
+
+```bash
+cp -r AGENTS.md .pact your-project/
 ```
 
 Optional but useful for documentation parity:
@@ -73,4 +79,3 @@ bash .pact/bin/pact-release-check.sh
 ## Limitations
 
 Codex will not automatically expose `/pact.*` commands from `.claude/commands`. Treat those files as Claude Code-specific command definitions.
-

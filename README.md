@@ -66,8 +66,8 @@ Before adopting, check whether your project falls within PACT's applicable scope
 Full usage guide: [USAGE.md](./USAGE.md)
 
 ```bash
-# Copy the framework into your project root
-cp -r pact/CLAUDE.md pact/.claude pact/.pact pact/AGENTS.md pact/.cursor your-project/
+# From the PACT repository root, copy the framework into your project root
+cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
 
 # In Claude Code, run:
 /pact.init    # Project initialization (one-time)

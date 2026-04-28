@@ -14,12 +14,18 @@ The Cursor rule gives the agent persistent project instructions. `.pact/` contai
 
 ## Install
 
-Copy these into your project root:
+From the PACT repository root, copy these into your project root:
 
 ```text
 .cursor/rules/pact.mdc
 AGENTS.md
 .pact/
+```
+
+Example:
+
+```bash
+cp -r .cursor AGENTS.md .pact your-project/
 ```
 
 ## Use
@@ -65,4 +71,3 @@ bash .pact/bin/pact-check.sh
 ```
 
 Cursor may not automatically run this check unless you ask it to.
-

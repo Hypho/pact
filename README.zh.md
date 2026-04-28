@@ -66,8 +66,8 @@ PACT 适合产品型开发者、独立开发者和小团队：既希望借助 AI
 完整使用指南：[USAGE.zh.md](./USAGE.zh.md)
 
 ```bash
-# 复制框架到项目根目录
-cp -r pact/CLAUDE.md pact/.claude pact/.pact pact/AGENTS.md pact/.cursor your-project/
+# 从 PACT 仓库根目录复制框架到目标项目根目录
+cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
 
 # 在 Claude Code 中执行
 /pact.init    # 项目初始化（一次性）

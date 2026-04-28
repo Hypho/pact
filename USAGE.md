@@ -31,20 +31,28 @@ Details:
 
 ## 2. Install Into a Project
 
-Copy the PACT framework files into your project root:
+Run the copy command from the PACT repository root:
 
 ```bash
 cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
 ```
 
-Minimum portable set:
+If you are copying from a parent directory that contains the cloned `pact/` folder, prefix the source paths:
+
+```bash
+cp -r pact/CLAUDE.md pact/.claude pact/.pact pact/AGENTS.md pact/.cursor your-project/
+```
+
+Choose the file set that matches your tool.
+
+### Minimum Portable Set
 
 ```text
 .pact/
 AGENTS.md
 ```
 
-Claude Code first-class set:
+### Claude Code First-Class Set
 
 ```text
 CLAUDE.md
@@ -52,7 +60,14 @@ CLAUDE.md
 .pact/
 ```
 
-Cursor set:
+### Codex Set
+
+```text
+AGENTS.md
+.pact/
+```
+
+### Cursor Set
 
 ```text
 .cursor/rules/pact.mdc
@@ -173,4 +188,3 @@ Use releases only when the change set has clear release value:
 - `MAJOR`: incompatible protocol or state-machine changes
 
 Release notes come from `CHANGELOG.md`.
-
