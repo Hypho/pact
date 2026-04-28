@@ -13,25 +13,11 @@ This changelog follows a Keep a Changelog style:
 
 ---
 
-## Unreleased
+## v1.7.0 — 2026-04-28
 
 ### Added
 - Added GitHub remote installers for direct project installation from repository archives.
 - Added `auto` mode support to shell and PowerShell source installers.
-
-### Changed
-- Changed the primary installation path to GitHub remote installers that write PACT files directly into the target project.
-
-### Removed
-- Removed the package source tree from the main branch.
-- Removed package publishing workflows from the main branch.
-- Yanked the withdrawn package artifact and removed it from the maintained installation path.
-
----
-
-## v1.7.0 — 2026-04-28
-
-### Added
 - Added unified installer scripts for source-based installation, including shell and PowerShell variants.
 - Added Codex and Cursor adapter files and expanded adapter documentation for Claude Code, Codex, and Cursor.
 - Added reusable non-Claude prompt templates for tools that do not support Claude Code slash commands.
@@ -39,10 +25,16 @@ This changelog follows a Keep a Changelog style:
 - Added the `.pact/bin/pact.sh` unified command wrapper for project and repository checks.
 
 ### Changed
+- Changed the primary installation path to GitHub remote installers that write PACT files directly into the target project.
 - Updated installed-project self-check guidance to use the unified project check entry.
 - Clarified tool support boundaries for Claude Code, Codex, and Cursor.
 - Strengthened first-use guidance so new users can install, inspect, and verify PACT with fewer manual steps.
 - Aligned `AGENTS.md`, Cursor rules, adapter docs, and usage docs around the same installed-project workflow.
+
+### Removed
+- Removed the package source tree from the main branch.
+- Removed package publishing workflows from the main branch.
+- Yanked the withdrawn package artifact and removed it from the maintained installation path.
 
 ---
 
