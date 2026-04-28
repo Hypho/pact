@@ -25,6 +25,7 @@ This changelog follows a Keep a Changelog style:
 ### Removed
 - Removed the package source tree from the main branch.
 - Removed package publishing workflows from the main branch.
+- Yanked the withdrawn package artifact and removed it from the maintained installation path.
 
 ---
 
