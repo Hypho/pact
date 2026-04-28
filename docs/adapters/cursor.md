@@ -14,6 +14,15 @@ The Cursor rule gives the agent persistent project instructions. `.pact/` contai
 
 ## Install
 
+Recommended:
+
+```bash
+python -m pip install .
+pact install --target your-project --mode cursor
+```
+
+After PyPI publication, use `pip install pact-toolkit`.
+
 From the PACT repository root, copy these into your project root:
 
 ```text
@@ -69,7 +78,7 @@ It should be version-controlled with the project.
 Run:
 
 ```bash
-bash .pact/bin/pact.sh check --project
+pact check --project
 ```
 
 Cursor may not automatically run this check unless you ask it to.

@@ -5,6 +5,10 @@
 node_modules/
 dist/
 build/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.tmp-pact-*/
 *.log
 
 # 环境与密钥

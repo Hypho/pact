@@ -31,7 +31,18 @@ Details:
 
 ## 2. Install Into a Project
 
-Run the copy command from the PACT repository root:
+Recommended universal installer:
+
+```bash
+python -m pip install .
+pact install --target your-project --mode all
+```
+
+After PyPI publication, replace `python -m pip install .` with `pip install pact-toolkit`.
+
+The Python installer copies the framework files directly. Commands such as `pact check`, `pact guard`, and `pact lint-*` wrap PACT shell scripts and require `bash` at runtime.
+
+If you are working from the PACT source repository, you can also run the copy command from the repository root:
 
 ```bash
 cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
@@ -185,7 +196,7 @@ bash .pact/bin/pact-check.sh
 Inside an installed project:
 
 ```bash
-bash .pact/bin/pact.sh check --project
+pact check --project
 ```
 
 If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`:

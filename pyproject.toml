@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pact-toolkit"
+version = "1.6.1"
+description = "Product-Aware Contract Toolkit for auditable human-AI software development"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [
+  { name = "PACT maintainers" }
+]
+keywords = ["ai", "agents", "software-development", "workflow", "contracts"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Software Development",
+  "Topic :: Software Development :: Quality Assurance"
+]
+
+[project.urls]
+Homepage = "https://github.com/Hypho/pact"
+Repository = "https://github.com/Hypho/pact"
+Issues = "https://github.com/Hypho/pact/issues"
+
+[project.scripts]
+pact = "pact_toolkit.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+pact_toolkit = ["assets/**/*"]
+

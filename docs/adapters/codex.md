@@ -13,6 +13,15 @@ AGENTS.md
 
 ## Install
 
+Recommended:
+
+```bash
+python -m pip install .
+pact install --target your-project --mode codex
+```
+
+After PyPI publication, use `pip install pact-toolkit`.
+
 From the PACT repository root, copy these into your project root:
 
 ```text
@@ -69,7 +78,7 @@ For a complete prompt set, see [prompts.md](./prompts.md).
 Run:
 
 ```bash
-bash .pact/bin/pact.sh check --project
+pact check --project
 ```
 
 If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`:

@@ -66,6 +66,13 @@ PACT 适合产品型开发者、独立开发者和小团队：既希望借助 AI
 完整使用指南：[USAGE.zh.md](./USAGE.zh.md)
 
 ```bash
+# 推荐：从当前仓库安装通用 pip 安装器
+python -m pip install .
+pact install --target your-project --mode all
+
+# 发布到 PyPI 后可使用：
+# pip install pact-toolkit
+
 # 从 PACT 仓库根目录复制框架到目标项目根目录
 cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
 
@@ -77,10 +84,12 @@ bash scripts/install-pact.sh --target your-project --mode all
 /pact.scope   # 适用性与风险边界评估（首次功能前建议执行）
 
 # 可选：已安装项目自检
-bash .pact/bin/pact.sh check --project
+pact check --project --cwd your-project
 
 # 框架维护者：发布检查见 RELEASE.md
 ```
+
+Python 安装器只负责复制框架文件。`pact check`、`pact guard`、`pact lint-*` 等命令会调用 PACT shell 脚本，因此运行时仍需要 `bash` 环境。
 
 ---
 

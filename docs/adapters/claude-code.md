@@ -17,6 +17,15 @@ PACT uses Claude Code project slash commands:
 
 ## Install
 
+Recommended:
+
+```bash
+python -m pip install .
+pact install --target your-project --mode claude
+```
+
+After PyPI publication, use `pip install pact-toolkit`.
+
 From the PACT repository root, copy these into your project root:
 
 ```text

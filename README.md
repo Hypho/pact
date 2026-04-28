@@ -66,6 +66,13 @@ Before adopting, check whether your project falls within PACT's applicable scope
 Full usage guide: [USAGE.md](./USAGE.md)
 
 ```bash
+# Recommended universal installer from this repository
+python -m pip install .
+pact install --target your-project --mode all
+
+# After PyPI publication, use:
+# pip install pact-toolkit
+
 # From the PACT repository root, copy the framework into your project root
 cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
 
@@ -77,10 +84,12 @@ bash scripts/install-pact.sh --target your-project --mode all
 /pact.scope   # Scope and risk-boundary assessment (recommended before first feature)
 
 # Optional installed-project self-check
-bash .pact/bin/pact.sh check --project
+pact check --project --cwd your-project
 
 # Framework maintainers: see RELEASE.md for release checks
 ```
+
+The Python installer copies the framework files directly. Commands such as `pact check`, `pact guard`, and `pact lint-*` wrap PACT shell scripts and require `bash` at runtime.
 
 ---
 

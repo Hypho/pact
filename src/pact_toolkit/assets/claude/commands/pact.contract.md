@@ -1,0 +1,49 @@
+# /pact.contract — 行为契约生成
+
+依据当前功能的 PID Card，生成行为契约文件。
+
+> 文件读取见 CLAUDE.md § 4。契约生成的依据是 `specs/[功能名]-pid.md`（实例），不是 `templates/pid-card.md`（空白模板）。
+
+---
+
+## 入口检查
+
+进入前先运行：
+
+```bash
+bash .pact/bin/pact-guard.sh contract
+```
+
+guard 失败则停止，不继续生成 contract。
+
+### 检查 1 — PID Card 存在性
+
+.pact/specs/[功能名]-pid.md 必须存在。
+不存在则停止，提示先执行 /pact.pid。
+
+### 检查 2 — PAD 占位符警告
+
+若 specs/PAD.md 存在，读取并检测以下占位符标记：
+  `[请补充`  `[实体名]`  `[角色]`  `[产品边界]`
+
+发现任意一个时，输出：
+```
+⚠️ PAD.md 存在未填写字段：[列出具体字段名]
+这些字段可能影响 FC 边界条件的准确性。
+[A] 继续（接受 PAD 当前状态）
+[B] 暂停，先完善 PAD.md
+```
+等待开发者选择，不自动继续。
+
+---
+
+## 契约生成
+
+参照 .pact/templates/contract.md 结构，根据 PID Card 内容逐条生成：
+- **FC（功能契约）条目**：核心路径 + 边界条件
+- **NF（非功能）条目**：性能、错误提示、交互反馈等
+- **明确不做**：在 PID Card 中标注的范围外功能
+
+输出路径：`.pact/contracts/[功能名].md`（严格遵守文件命名规范）
+
+完成后更新 state.md：阶段字段写入 `contract`
