@@ -4,11 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pact-toolkit"
-version = "1.6.1"
+version = "1.7.0"
 description = "Product-Aware Contract Toolkit for auditable human-AI software development"
 readme = "README.md"
 requires-python = ">=3.9"
-license = { file = "LICENSE" }
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
   { name = "PACT maintainers" }
 ]
@@ -17,7 +18,6 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Environment :: Console",
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
   "Topic :: Software Development",
@@ -41,4 +41,3 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 pact_toolkit = ["assets/**/*"]
-

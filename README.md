@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> A lightweight protocol framework for auditable human-AI software development | v1.6.1
+> A lightweight protocol framework for auditable human-AI software development | v1.7.0
 > 中文: [README.zh.md](./README.zh.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -66,12 +66,13 @@ Before adopting, check whether your project falls within PACT's applicable scope
 Full usage guide: [USAGE.md](./USAGE.md)
 
 ```bash
-# Recommended universal installer from this repository
-python -m pip install .
-pact install --target your-project --mode all
+# Recommended after PyPI publication
+pip install pact-toolkit
+pact install --target your-project --mode auto
+pact doctor --cwd your-project
 
-# After PyPI publication, use:
-# pip install pact-toolkit
+# From the PACT source repository before PyPI publication
+python -m pip install .
 
 # From the PACT repository root, copy the framework into your project root
 cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
@@ -278,6 +279,7 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 
 | Version | Date | Core changes |
 |---------|------|--------------|
+| v1.7.0 | 2026-04-28 | Adds Python package publishing support, `pact doctor`, automatic install mode detection, and PyPI release automation |
 | v1.6.1 | 2026-04-27 | Narrows `/pact.scope` to applicability and risk-boundary assessment; makes FDG optional; clarifies lower-frequency release rules |
 | v1.6.0 | 2026-04-27 | Adds command guard for pid / contract / build / verify / ship entry checks and integrates guard fixtures into self-check |
 | v1.5.0 | 2026-04-27 | Adds contract and verify lint scripts, fixtures, and self-check integration for behavior contract and verification record structure |

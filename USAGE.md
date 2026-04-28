@@ -34,11 +34,12 @@ Details:
 Recommended universal installer:
 
 ```bash
-python -m pip install .
-pact install --target your-project --mode all
+pip install pact-toolkit
+pact install --target your-project --mode auto
+pact doctor --cwd your-project
 ```
 
-After PyPI publication, replace `python -m pip install .` with `pip install pact-toolkit`.
+Before PyPI publication, run `python -m pip install .` from the PACT source repository.
 
 The Python installer copies the framework files directly. Commands such as `pact check`, `pact guard`, and `pact lint-*` wrap PACT shell scripts and require `bash` at runtime.
 

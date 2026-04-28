@@ -13,6 +13,21 @@ This changelog follows a Keep a Changelog style:
 
 ---
 
+## v1.7.0 — 2026-04-28
+
+### Added
+- Added Python packaging metadata for publishing PACT as `pact-toolkit`.
+- Added the `pact` CLI as the primary pip-installed command entry.
+- Added `pact doctor` for local environment detection and install-mode guidance.
+- Added `pact install --mode auto` to select an adapter mode from existing project files.
+- Added GitHub Actions workflows for Python package build checks and PyPI Trusted Publishing.
+
+### Changed
+- Updated installation documentation to use `pip install pact-toolkit` after PyPI publication.
+- Documented that PIP handles framework installation while runtime checks still require `bash`.
+
+---
+
 ## v1.6.1 — 2026-04-27
 
 ### Changed
