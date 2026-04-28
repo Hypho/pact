@@ -19,18 +19,24 @@ Does not require:
 - GitHub
 - network access
 
-Checks:
+Installed project checks:
+- `state.md` structure is valid
+- state fixtures pass expected checks
+- contract / verify / guard fixture checks pass
+
+Framework repository checks also include:
 - `VERSION` exists and uses `MAJOR.MINOR.PATCH`
 - README / README.zh / CLAUDE versions match `VERSION`
 - README version histories contain `v$VERSION`
 - `CHANGELOG.md` contains `v$VERSION`
 - public docs do not reference internal roadmap drafts
-- `state.md` structure is valid
-- state fixtures pass expected checks
 
 Command:
 
 ```bash
+bash .pact/bin/pact-check.sh --project
+
+# In the PACT framework repository:
 bash .pact/bin/pact-check.sh
 ```
 

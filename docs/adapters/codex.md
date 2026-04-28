@@ -62,15 +62,17 @@ Verify the current feature using real command output and write the PACT verify r
 Ship the current PACT feature after PASS and archive the contract.
 ```
 
+For a complete prompt set, see [prompts.md](./prompts.md).
+
 ## Checks
 
 Run:
 
 ```bash
-bash .pact/bin/pact-check.sh
+bash .pact/bin/pact-check.sh --project
 ```
 
-If the project uses git:
+If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`:
 
 ```bash
 bash .pact/bin/pact-release-check.sh

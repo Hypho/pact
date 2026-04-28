@@ -37,6 +37,18 @@ Run the copy command from the PACT repository root:
 cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
 ```
 
+Or use the installer:
+
+```bash
+bash scripts/install-pact.sh --target your-project --mode all
+```
+
+On Windows PowerShell:
+
+```powershell
+.\scripts\install-pact.ps1 -Target your-project -Mode all
+```
+
 If you are copying from a parent directory that contains the cloned `pact/` folder, prefix the source paths:
 
 ```bash
@@ -170,7 +182,13 @@ Before publishing or sharing framework changes:
 bash .pact/bin/pact-check.sh
 ```
 
-If the project uses git:
+Inside an installed project:
+
+```bash
+bash .pact/bin/pact-check.sh --project
+```
+
+If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`:
 
 ```bash
 bash .pact/bin/pact-release-check.sh
@@ -188,3 +206,10 @@ Use releases only when the change set has clear release value:
 - `MAJOR`: incompatible protocol or state-machine changes
 
 Release notes come from `CHANGELOG.md`.
+
+---
+
+## 8. Further References
+
+- For Codex, Cursor, or other tools without slash commands, use [prompt templates](./docs/adapters/prompts.md).
+- For a complete sample flow, see [examples/todo-feature](./examples/todo-feature/).

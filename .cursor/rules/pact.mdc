@@ -46,7 +46,7 @@ bash .pact/bin/pact-guard.sh ship
 After changing PACT files, run:
 
 ```bash
-bash .pact/bin/pact-check.sh
+bash .pact/bin/pact-check.sh --project
 ```
 
 ## Verification
@@ -68,4 +68,3 @@ For `PASS`, include runtime evidence.
 Small edits do not require a version bump.
 
 Do not create tags or GitHub Releases without explicit maintainer confirmation.
-

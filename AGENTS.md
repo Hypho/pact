@@ -49,10 +49,10 @@ Completed contracts move to:
 Run this after changing PACT files:
 
 ```bash
-bash .pact/bin/pact-check.sh
+bash .pact/bin/pact-check.sh --project
 ```
 
-If the project uses git and the task is release-related:
+If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`, and the task is release-related:
 
 ```bash
 bash .pact/bin/pact-release-check.sh
@@ -99,4 +99,3 @@ Do not create tags, push releases, or modify GitHub Releases without explicit ma
 Claude Code users can use `.claude/commands/*.md` slash commands.
 
 Codex and Cursor should follow these instructions through `AGENTS.md` and `.pact/` files rather than assuming `/pact.*` slash commands exist.
-

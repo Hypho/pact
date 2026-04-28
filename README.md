@@ -69,15 +69,17 @@ Full usage guide: [USAGE.md](./USAGE.md)
 # From the PACT repository root, copy the framework into your project root
 cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
 
+# Or use the installer
+bash scripts/install-pact.sh --target your-project --mode all
+
 # In Claude Code, run:
 /pact.init    # Project initialization (one-time)
 /pact.scope   # Scope and risk-boundary assessment (recommended before first feature)
 
-# Optional repository self-check
-bash .pact/bin/pact-check.sh
+# Optional installed-project self-check
+bash .pact/bin/pact-check.sh --project
 
-# Optional git-aware release check
-bash .pact/bin/pact-release-check.sh
+# Framework maintainers: see RELEASE.md for release checks
 ```
 
 ---
@@ -92,7 +94,15 @@ PACT is tool-agnostic at the protocol layer, with first-class Claude Code suppor
 | Codex | Compatible | [docs/adapters/codex.md](./docs/adapters/codex.md) |
 | Cursor | Compatible | [docs/adapters/cursor.md](./docs/adapters/cursor.md) |
 
+For non-Claude tools, use [docs/adapters/prompts.md](./docs/adapters/prompts.md).
+
 Claude Code plugin marketplace installation is planned, not the current primary installation path.
+
+---
+
+## Example
+
+See [examples/todo-feature](./examples/todo-feature/) for a completed feature flow with PID, archived contract, verify record, and shipped state.
 
 ---
 

@@ -52,6 +52,8 @@ Use PACT to build and verify the current feature.
 Use PACT to ship the feature after PASS.
 ```
 
+For a complete prompt set, see [prompts.md](./prompts.md).
+
 ## Rule Scope
 
 The rule file is stored at:
@@ -67,7 +69,7 @@ It should be version-controlled with the project.
 Run:
 
 ```bash
-bash .pact/bin/pact-check.sh
+bash .pact/bin/pact-check.sh --project
 ```
 
 Cursor may not automatically run this check unless you ask it to.

@@ -7,6 +7,22 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 
+MODE="${1:---repo}"
+
+case "$MODE" in
+  --repo|--project) ;;
+  -h|--help)
+    echo "Usage: bash .pact/bin/pact-check.sh [--repo|--project]"
+    echo "  --repo     Check the PACT framework repository (default)"
+    echo "  --project  Check an installed PACT project without requiring PACT release docs"
+    exit 0
+    ;;
+  *)
+    echo "Usage: bash .pact/bin/pact-check.sh [--repo|--project]"
+    exit 2
+    ;;
+esac
+
 fail() {
   echo "❌ $1"
   exit 1
@@ -80,47 +96,49 @@ extract_version() {
     | sed -E 's/^v//'
 }
 
-[ -f VERSION ] || fail "VERSION 不存在"
-VERSION_VALUE="$(tr -d '[:space:]' < VERSION)"
+if [ "$MODE" = "--repo" ]; then
+  [ -f VERSION ] || fail "VERSION 不存在"
+  VERSION_VALUE="$(tr -d '[:space:]' < VERSION)"
 
-if ! echo "$VERSION_VALUE" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
-  fail "VERSION 格式非法：$VERSION_VALUE"
-fi
+  if ! echo "$VERSION_VALUE" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+    fail "VERSION 格式非法：$VERSION_VALUE"
+  fi
 
-README_VERSION="$(extract_version README.md)"
-README_ZH_VERSION="$(extract_version README.zh.md)"
-CLAUDE_VERSION="$(extract_version CLAUDE.md)"
+  README_VERSION="$(extract_version README.md)"
+  README_ZH_VERSION="$(extract_version README.zh.md)"
+  CLAUDE_VERSION="$(extract_version CLAUDE.md)"
 
-[ -n "$README_VERSION" ] || fail "README.md 缺少版本号"
-[ -n "$README_ZH_VERSION" ] || fail "README.zh.md 缺少版本号"
-[ -n "$CLAUDE_VERSION" ] || fail "CLAUDE.md 缺少版本号"
+  [ -n "$README_VERSION" ] || fail "README.md 缺少版本号"
+  [ -n "$README_ZH_VERSION" ] || fail "README.zh.md 缺少版本号"
+  [ -n "$CLAUDE_VERSION" ] || fail "CLAUDE.md 缺少版本号"
 
-if [ "$README_VERSION" != "$VERSION_VALUE" ] || [ "$README_ZH_VERSION" != "$VERSION_VALUE" ] || [ "$CLAUDE_VERSION" != "$VERSION_VALUE" ]; then
-  fail "版本号不一致：VERSION=$VERSION_VALUE README.md=$README_VERSION README.zh.md=$README_ZH_VERSION CLAUDE.md=$CLAUDE_VERSION"
-fi
+  if [ "$README_VERSION" != "$VERSION_VALUE" ] || [ "$README_ZH_VERSION" != "$VERSION_VALUE" ] || [ "$CLAUDE_VERSION" != "$VERSION_VALUE" ]; then
+    fail "版本号不一致：VERSION=$VERSION_VALUE README.md=$README_VERSION README.zh.md=$README_ZH_VERSION CLAUDE.md=$CLAUDE_VERSION"
+  fi
 
-if ! grep -q "| v${VERSION_VALUE} |" README.md; then
-  fail "README.md 版本历史缺少 v${VERSION_VALUE}"
-fi
+  if ! grep -q "| v${VERSION_VALUE} |" README.md; then
+    fail "README.md 版本历史缺少 v${VERSION_VALUE}"
+  fi
 
-if ! grep -q "| v${VERSION_VALUE} |" README.zh.md; then
-  fail "README.zh.md 版本历史缺少 v${VERSION_VALUE}"
-fi
+  if ! grep -q "| v${VERSION_VALUE} |" README.zh.md; then
+    fail "README.zh.md 版本历史缺少 v${VERSION_VALUE}"
+  fi
 
-if [ ! -f CHANGELOG.md ]; then
-  fail "CHANGELOG.md 不存在"
-fi
+  if [ ! -f CHANGELOG.md ]; then
+    fail "CHANGELOG.md 不存在"
+  fi
 
-if ! grep -q "## v${VERSION_VALUE} " CHANGELOG.md; then
-  fail "CHANGELOG.md 缺少 v${VERSION_VALUE}"
-fi
+  if ! grep -q "## v${VERSION_VALUE} " CHANGELOG.md; then
+    fail "CHANGELOG.md 缺少 v${VERSION_VALUE}"
+  fi
 
-if [ -f ENFORCEMENT_ROADMAP.zh.md ]; then
-  fail "ENFORCEMENT_ROADMAP.zh.md 是内部路线草案，不应进入公开仓库"
-fi
+  if [ -f ENFORCEMENT_ROADMAP.zh.md ]; then
+    fail "ENFORCEMENT_ROADMAP.zh.md 是内部路线草案，不应进入公开仓库"
+  fi
 
-if grep -R "ENFORCEMENT_ROADMAP" README.md README.zh.md CLAUDE.md .pact/core/constitution.md >/dev/null; then
-  fail "公开文档仍引用 ENFORCEMENT_ROADMAP"
+  if grep -R "ENFORCEMENT_ROADMAP" README.md README.zh.md CLAUDE.md .pact/core/constitution.md >/dev/null; then
+    fail "公开文档仍引用 ENFORCEMENT_ROADMAP"
+  fi
 fi
 
 lint_state_file ".pact/state.md" || fail ".pact/state.md 结构检查失败"
@@ -151,4 +169,8 @@ bash .pact/bin/pact-guard.sh --fixtures
 bash .pact/bin/pact-lint-contract.sh --all
 bash .pact/bin/pact-lint-verify.sh --all
 
-info "PACT 自检通过：VERSION 一致、公开文档无内部路线引用、state / contract / verify / guard 检查通过"
+if [ "$MODE" = "--repo" ]; then
+  info "PACT 仓库自检通过：VERSION 一致、公开文档无内部路线引用、state / contract / verify / guard 检查通过"
+else
+  info "PACT 项目自检通过：state / contract / verify / guard 检查通过"
+fi
