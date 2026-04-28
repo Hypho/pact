@@ -185,7 +185,7 @@ bash .pact/bin/pact-check.sh
 Inside an installed project:
 
 ```bash
-bash .pact/bin/pact-check.sh --project
+bash .pact/bin/pact.sh check --project
 ```
 
 If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`:
@@ -212,4 +212,5 @@ Release notes come from `CHANGELOG.md`.
 ## 8. Further References
 
 - For Codex, Cursor, or other tools without slash commands, use [prompt templates](./docs/adapters/prompts.md).
-- For a complete sample flow, see [examples/todo-feature](./examples/todo-feature/).
+- For a runnable sample flow, see [examples/todo-feature](./examples/todo-feature/).
+- For the core workflow reference, see [.pact/core/workflow.md](./.pact/core/workflow.md).

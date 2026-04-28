@@ -17,6 +17,8 @@ Use this feature flow:
 pid -> contract -> build -> verify -> ship
 ```
 
+For the full workflow reference, read `.pact/core/workflow.md`.
+
 For each feature:
 - create or update `.pact/specs/[feature]-pid.md`
 - create `.pact/contracts/[feature].md` before implementation
@@ -36,17 +38,17 @@ Use the feature name in `state.md` exactly when deriving PACT file paths.
 When entering a main stage, run the matching guard when possible:
 
 ```bash
-bash .pact/bin/pact-guard.sh pid
-bash .pact/bin/pact-guard.sh contract
-bash .pact/bin/pact-guard.sh build
-bash .pact/bin/pact-guard.sh verify
-bash .pact/bin/pact-guard.sh ship
+bash .pact/bin/pact.sh guard pid
+bash .pact/bin/pact.sh guard contract
+bash .pact/bin/pact.sh guard build
+bash .pact/bin/pact.sh guard verify
+bash .pact/bin/pact.sh guard ship
 ```
 
 After changing PACT files, run:
 
 ```bash
-bash .pact/bin/pact-check.sh --project
+bash .pact/bin/pact.sh check --project
 ```
 
 ## Verification

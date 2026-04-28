@@ -69,7 +69,7 @@ It should be version-controlled with the project.
 Run:
 
 ```bash
-bash .pact/bin/pact-check.sh --project
+bash .pact/bin/pact.sh check --project
 ```
 
 Cursor may not automatically run this check unless you ask it to.

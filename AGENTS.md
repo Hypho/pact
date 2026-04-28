@@ -12,6 +12,8 @@ Use the PACT feature flow:
 pid -> contract -> build -> verify -> ship
 ```
 
+For the full workflow reference, read `.pact/core/workflow.md`.
+
 For each feature:
 - define intent before implementation
 - write behavior contracts before code changes
@@ -49,7 +51,7 @@ Completed contracts move to:
 Run this after changing PACT files:
 
 ```bash
-bash .pact/bin/pact-check.sh --project
+bash .pact/bin/pact.sh check --project
 ```
 
 If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`, and the task is release-related:
@@ -63,11 +65,11 @@ bash .pact/bin/pact-release-check.sh
 When entering a main PACT stage, use:
 
 ```bash
-bash .pact/bin/pact-guard.sh pid
-bash .pact/bin/pact-guard.sh contract
-bash .pact/bin/pact-guard.sh build
-bash .pact/bin/pact-guard.sh verify
-bash .pact/bin/pact-guard.sh ship
+bash .pact/bin/pact.sh guard pid
+bash .pact/bin/pact.sh guard contract
+bash .pact/bin/pact.sh guard build
+bash .pact/bin/pact.sh guard verify
+bash .pact/bin/pact.sh guard ship
 ```
 
 If a guard fails, stop and report the reason instead of bypassing it.

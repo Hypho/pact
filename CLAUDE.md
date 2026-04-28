@@ -43,6 +43,8 @@ Step 4  等待人工确认后再执行
 每 3-5 个功能：/pact.retro
 ```
 
+> 流程定义源见 `.pact/core/workflow.md`。本文件只保留热层摘要，避免多处定义漂移。
+
 ---
 
 ## 3. 命令清单
@@ -97,6 +99,7 @@ CLAUDE.md              — 当前文件
 **按需层**（有明确需要时才读，不默认加载）
 ```
 .pact/core/architecture.md       — 涉及新模块或新依赖时
+.pact/core/workflow.md           — 需要核对完整流程、阶段输入输出或停止条件时
 .pact/knowledge/decisions/       — 遇到历史决策冲突时
 .pact/knowledge/errors/          — 调查重复失败模式时
 .pact/exec-plans/active/         — 跨会话大功能时

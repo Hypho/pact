@@ -77,7 +77,7 @@ bash scripts/install-pact.sh --target your-project --mode all
 /pact.scope   # Scope and risk-boundary assessment (recommended before first feature)
 
 # Optional installed-project self-check
-bash .pact/bin/pact-check.sh --project
+bash .pact/bin/pact.sh check --project
 
 # Framework maintainers: see RELEASE.md for release checks
 ```
@@ -102,7 +102,7 @@ Claude Code plugin marketplace installation is planned, not the current primary 
 
 ## Example
 
-See [examples/todo-feature](./examples/todo-feature/) for a completed feature flow with PID, archived contract, verify record, and shipped state.
+See [examples/todo-feature](./examples/todo-feature/) for a runnable completed feature flow with PID, archived contract, verify record, shipped state, and a small test.
 
 ---
 

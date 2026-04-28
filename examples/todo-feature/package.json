@@ -1,0 +1,8 @@
+{
+  "name": "pact-example-todo-feature",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node test/add-todo.test.js"
+  }
+}

@@ -14,8 +14,8 @@
 ## 测试报告
 
 ```
-command: npm test -- add-todo
-output: 3 passed
+command: node test/add-todo.test.js
+output: 4 passed
 
 result: PASS
 ```
@@ -23,4 +23,3 @@ result: PASS
 ## Verdict
 
 verdict = PASS
-

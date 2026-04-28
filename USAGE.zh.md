@@ -185,7 +185,7 @@ bash .pact/bin/pact-check.sh
 在已安装 PACT 的业务项目中：
 
 ```bash
-bash .pact/bin/pact-check.sh --project
+bash .pact/bin/pact.sh check --project
 ```
 
 如果项目采用 PACT 的 release 层，并维护 `VERSION` 与 `CHANGELOG.md`：
@@ -212,4 +212,5 @@ PACT 不要求每次文档或规则编辑都更新版本。
 ## 8. 进一步参考
 
 - Codex、Cursor 或其他不支持 slash commands 的工具，可使用 [prompt 模板](./docs/adapters/prompts.zh.md)。
-- 完整示例流程见 [examples/todo-feature](./examples/todo-feature/)。
+- 可运行示例流程见 [examples/todo-feature](./examples/todo-feature/)。
+- 核心流程参考见 [.pact/core/workflow.md](./.pact/core/workflow.md)。

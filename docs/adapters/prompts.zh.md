@@ -64,7 +64,7 @@ Cursor 还应包含：
 
 写入前：
 - 读取 .pact/state.md
-- 运行或等价执行：bash .pact/bin/pact-guard.sh pid
+- 运行或等价执行：bash .pact/bin/pact.sh guard pid
 - 检查 .pact/scope/boundaries.md
 - 仅当 .pact/specs/FDG.md 存在时读取它
 
@@ -87,7 +87,7 @@ Cursor 还应包含：
 
 写入前：
 - 读取 .pact/state.md
-- 运行或等价执行：bash .pact/bin/pact-guard.sh contract
+- 运行或等价执行：bash .pact/bin/pact.sh guard contract
 - 读取 .pact/specs/[当前功能]-pid.md
 - 如果 .pact/specs/PAD.md 存在，则读取它
 
@@ -112,7 +112,7 @@ Cursor 还应包含：
 
 实现前：
 - 读取 .pact/state.md
-- 运行或等价执行：bash .pact/bin/pact-guard.sh build
+- 运行或等价执行：bash .pact/bin/pact.sh guard build
 - 读取 .pact/contracts/[当前功能].md
 - 读取 .pact/specs/[当前功能]-pid.md
 - 读取 .pact/core/constitution.md
@@ -137,7 +137,7 @@ Cursor 还应包含：
 
 验证前：
 - 读取 .pact/state.md
-- 运行或等价执行：bash .pact/bin/pact-guard.sh verify
+- 运行或等价执行：bash .pact/bin/pact.sh guard verify
 - 读取 .pact/contracts/[当前功能].md
 
 针对每条 FC：
@@ -166,7 +166,7 @@ PASS 必须包含 command/output/result 等运行证据标记。
 
 发布前：
 - 读取 .pact/state.md
-- 运行或等价执行：bash .pact/bin/pact-guard.sh ship
+- 运行或等价执行：bash .pact/bin/pact.sh guard ship
 - 读取 .pact/knowledge/[当前功能]-verify.md
 - 确认其中包含 verdict = PASS 或 MANUAL OVERRIDE
 
@@ -205,4 +205,3 @@ PASS 必须包含 command/output/result 等运行证据标记。
 写入：
 - .pact/knowledge/decisions/[YYYY-MM-DD]-retro.md
 ```
-

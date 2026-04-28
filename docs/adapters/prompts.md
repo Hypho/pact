@@ -64,7 +64,7 @@ Create a PACT PID Card for the feature: [feature name].
 
 Before writing:
 - read .pact/state.md
-- run or apply the equivalent of: bash .pact/bin/pact-guard.sh pid
+- run or apply the equivalent of: bash .pact/bin/pact.sh guard pid
 - check .pact/scope/boundaries.md
 - read .pact/specs/FDG.md only if it exists
 
@@ -87,7 +87,7 @@ Generate the PACT behavior contract for the current feature.
 
 Before writing:
 - read .pact/state.md
-- run or apply the equivalent of: bash .pact/bin/pact-guard.sh contract
+- run or apply the equivalent of: bash .pact/bin/pact.sh guard contract
 - read .pact/specs/[current-feature]-pid.md
 - read .pact/specs/PAD.md if it exists
 
@@ -112,7 +112,7 @@ Build the current feature against the PACT contract.
 
 Before implementation:
 - read .pact/state.md
-- run or apply the equivalent of: bash .pact/bin/pact-guard.sh build
+- run or apply the equivalent of: bash .pact/bin/pact.sh guard build
 - read .pact/contracts/[current-feature].md
 - read .pact/specs/[current-feature]-pid.md
 - read .pact/core/constitution.md
@@ -137,7 +137,7 @@ Verify the current feature using PACT.
 
 Before verification:
 - read .pact/state.md
-- run or apply the equivalent of: bash .pact/bin/pact-guard.sh verify
+- run or apply the equivalent of: bash .pact/bin/pact.sh guard verify
 - read .pact/contracts/[current-feature].md
 
 For each FC entry:
@@ -166,7 +166,7 @@ Ship the current PACT feature.
 
 Before shipping:
 - read .pact/state.md
-- run or apply the equivalent of: bash .pact/bin/pact-guard.sh ship
+- run or apply the equivalent of: bash .pact/bin/pact.sh guard ship
 - read .pact/knowledge/[current-feature]-verify.md
 - confirm it contains verdict = PASS or MANUAL OVERRIDE
 
@@ -205,4 +205,3 @@ Assess:
 Write:
 - .pact/knowledge/decisions/[YYYY-MM-DD]-retro.md
 ```
-
