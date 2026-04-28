@@ -16,15 +16,33 @@ This changelog follows a Keep a Changelog style:
 ## v1.7.0 — 2026-04-28
 
 ### Added
+- Published PACT as the `pact-toolkit` Python package on PyPI.
 - Added Python packaging metadata for publishing PACT as `pact-toolkit`.
 - Added the `pact` CLI as the primary pip-installed command entry.
+- Added `pact install --target <path> --mode all|claude|codex|cursor|auto` for installing PACT into projects.
 - Added `pact doctor` for local environment detection and install-mode guidance.
+- Added `pact check`, `pact guard`, `pact lint-contract`, `pact lint-verify`, and `pact release-check` wrappers around existing PACT shell checks.
 - Added `pact install --mode auto` to select an adapter mode from existing project files.
-- Added GitHub Actions workflows for Python package build checks and PyPI Trusted Publishing.
+- Added packaged framework assets so pip installs can generate `.pact`, `.claude`, `.cursor`, `AGENTS.md`, and `CLAUDE.md` in target projects.
+- Added GitHub Actions workflows for Python package build validation and PyPI Trusted Publishing.
+- Added unified installer scripts for source-based installation, including shell and PowerShell variants.
+- Added Codex and Cursor adapter files and expanded adapter documentation for Claude Code, Codex, and Cursor.
+- Added reusable non-Claude prompt templates for tools that do not support Claude Code slash commands.
+- Added a runnable `examples/todo-feature` sample showing PID, archived contract, verification evidence, shipped state, and tests.
+- Added the `.pact/bin/pact.sh` unified command wrapper for project and repository checks.
 
 ### Changed
-- Updated installation documentation to use `pip install pact-toolkit` after PyPI publication.
-- Documented that PIP handles framework installation while runtime checks still require `bash`.
+- Updated README and usage documentation to make `pip install pact-toolkit` the primary installation path after PyPI publication.
+- Updated installed-project self-check guidance to use `pact check --project`.
+- Documented that pip installs PACT files while runtime validation still requires `bash`.
+- Clarified tool support boundaries for Claude Code, Codex, and Cursor.
+- Strengthened first-use guidance so new users can install, inspect, and verify PACT with fewer manual steps.
+- Aligned `AGENTS.md`, Cursor rules, adapter docs, and usage docs around the same installed-project workflow.
+- Expanded release process documentation with PyPI-aware publishing through Trusted Publishing.
+- Updated package metadata and license declaration for modern Python packaging behavior.
+
+### Fixed
+- Expanded the v1.7.0 release notes after publication to cover the full released change set from v1.6.1.
 
 ---
 
