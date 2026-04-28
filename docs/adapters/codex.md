@@ -77,7 +77,7 @@ For a complete prompt set, see [prompts.md](./prompts.md).
 Run:
 
 ```bash
-pact check --project
+bash .pact/bin/pact.sh check --project
 ```
 
 If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`:

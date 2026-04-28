@@ -69,8 +69,14 @@ PACT 适合产品型开发者、独立开发者和小团队：既希望借助 AI
 # 推荐：从 GitHub 直接安装到项目目录
 curl -fsSL https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.sh | bash -s -- --target your-project --mode auto
 
-# Windows PowerShell
+# Windows PowerShell：安装到当前目录
 powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1 | iex"
+
+# Windows PowerShell：指定目标目录
+$installer = Join-Path $env:TEMP "install-from-github.ps1"
+Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1" -OutFile $installer
+powershell -ExecutionPolicy Bypass -File $installer -Target your-project -Mode auto
+Remove-Item $installer
 
 # 从已克隆的 PACT 仓库安装
 bash scripts/install-pact.sh --target your-project --mode auto
@@ -80,7 +86,8 @@ bash scripts/install-pact.sh --target your-project --mode auto
 /pact.scope   # 适用性与风险边界评估（首次功能前建议执行）
 
 # 可选：已安装项目自检
-pact check --project --cwd your-project
+cd your-project
+bash .pact/bin/pact.sh check --project
 
 # 框架维护者：发布检查见 RELEASE.md
 ```

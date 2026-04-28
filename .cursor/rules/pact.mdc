@@ -48,7 +48,7 @@ bash .pact/bin/pact.sh guard ship
 After changing PACT files, run:
 
 ```bash
-pact check --project
+bash .pact/bin/pact.sh check --project
 ```
 
 ## Verification

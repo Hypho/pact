@@ -69,8 +69,14 @@ Full usage guide: [USAGE.md](./USAGE.md)
 # Recommended: install directly into a project from GitHub
 curl -fsSL https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.sh | bash -s -- --target your-project --mode auto
 
-# Windows PowerShell
+# Windows PowerShell: install into the current directory
 powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1 | iex"
+
+# Windows PowerShell: specify a target
+$installer = Join-Path $env:TEMP "install-from-github.ps1"
+Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1" -OutFile $installer
+powershell -ExecutionPolicy Bypass -File $installer -Target your-project -Mode auto
+Remove-Item $installer
 
 # From a cloned PACT repository
 bash scripts/install-pact.sh --target your-project --mode auto
@@ -80,7 +86,8 @@ bash scripts/install-pact.sh --target your-project --mode auto
 /pact.scope   # Scope and risk-boundary assessment (recommended before first feature)
 
 # Optional installed-project self-check
-pact check --project --cwd your-project
+cd your-project
+bash .pact/bin/pact.sh check --project
 
 # Framework maintainers: see RELEASE.md for release checks
 ```

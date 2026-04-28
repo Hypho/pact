@@ -51,7 +51,7 @@ Completed contracts move to:
 Run this after changing PACT files:
 
 ```bash
-pact check --project
+bash .pact/bin/pact.sh check --project
 ```
 
 If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`, and the task is release-related:
