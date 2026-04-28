@@ -13,6 +13,22 @@ This changelog follows a Keep a Changelog style:
 
 ---
 
+## Unreleased
+
+### Added
+- Added GitHub remote installers for direct project installation from repository archives.
+- Added `auto` mode support to shell and PowerShell source installers.
+
+### Changed
+- Changed the primary installation path from PyPI command wrappers to GitHub remote installers that write PACT files directly into the target project.
+- Removed PyPI from the maintained installation path because `pip install` does not directly install framework files into a project directory.
+
+### Removed
+- Removed Python package source files from the main branch.
+- Removed GitHub Actions workflows for Python package builds and PyPI publishing.
+
+---
+
 ## v1.7.0 — 2026-04-28
 
 ### Added

@@ -17,11 +17,10 @@ The Cursor rule gives the agent persistent project instructions. `.pact/` contai
 Recommended:
 
 ```bash
-pip install pact-toolkit
-pact install --target your-project --mode cursor
+curl -fsSL https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.sh | bash -s -- --target your-project --mode cursor
 ```
 
-Before PyPI publication, run `python -m pip install .` from the PACT source repository.
+Direct GitHub installation is the primary path because it writes PACT files into the target project.
 
 From the PACT repository root, copy these into your project root:
 

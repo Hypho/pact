@@ -5,9 +5,10 @@ set -euo pipefail
 
 usage() {
   cat <<'EOF'
-Usage: scripts/install-pact.sh --target <path> [--mode all|claude|codex|cursor] [--force]
+Usage: scripts/install-pact.sh --target <path> [--mode auto|all|claude|codex|cursor] [--force]
 
 Modes:
+  auto     Select mode from existing project files; defaults to all
   all      Install CLAUDE.md, .claude, .pact, AGENTS.md, and .cursor
   claude   Install CLAUDE.md, .claude, and .pact
   codex    Install AGENTS.md and .pact
@@ -22,7 +23,7 @@ On Windows, prefer scripts/install-pact.ps1 or pass a POSIX path such as /mnt/c/
 EOF
 }
 
-MODE="all"
+MODE="auto"
 TARGET=""
 FORCE="0"
 
@@ -59,7 +60,7 @@ done
 }
 
 case "$MODE" in
-  all|claude|codex|cursor) ;;
+  auto|all|claude|codex|cursor) ;;
   *)
     echo "Invalid --mode: $MODE" >&2
     usage
@@ -95,6 +96,40 @@ normalize_target() {
 
 TARGET_NORM="$(normalize_target "$TARGET")"
 TARGET_ABS="$(mkdir -p "$TARGET_NORM" && cd "$TARGET_NORM" && pwd)"
+
+detect_mode() {
+  local has_claude=0
+  local has_codex=0
+  local has_cursor=0
+
+  if [ -e "$TARGET_ABS/.claude" ] || [ -e "$TARGET_ABS/CLAUDE.md" ]; then
+    has_claude=1
+  fi
+  if [ -e "$TARGET_ABS/AGENTS.md" ]; then
+    has_codex=1
+  fi
+  if [ -e "$TARGET_ABS/.cursor" ]; then
+    has_cursor=1
+  fi
+
+  local matches=$((has_claude + has_codex + has_cursor))
+  if [ "$matches" -gt 1 ]; then
+    echo "all"
+  elif [ "$has_claude" -eq 1 ]; then
+    echo "claude"
+  elif [ "$has_cursor" -eq 1 ]; then
+    echo "cursor"
+  elif [ "$has_codex" -eq 1 ]; then
+    echo "codex"
+  else
+    echo "all"
+  fi
+}
+
+REQUESTED_MODE="$MODE"
+if [ "$MODE" = "auto" ]; then
+  MODE="$(detect_mode)"
+fi
 
 copy_item() {
   local src="$1"
@@ -155,6 +190,13 @@ PACT installed.
 
 Target: $TARGET_ABS
 Mode:   $MODE
+EOF
+
+if [ "$REQUESTED_MODE" = "auto" ]; then
+  echo "Auto:   selected from existing project files"
+fi
+
+cat <<EOF
 
 Next:
 - Claude Code: run /pact.init, then /pact.scope before the first feature.

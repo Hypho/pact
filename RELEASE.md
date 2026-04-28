@@ -78,31 +78,6 @@ Requires:
 
 This layer is intentionally documented, not built into the default PACT checks.
 
-### Level 3: PyPI-aware
-
-Optional for maintainers publishing the Python package.
-
-Requires:
-- GitHub Actions
-- PyPI project ownership for `pact-toolkit`
-- PyPI Trusted Publisher configured for this repository
-
-Does not require:
-- long-lived PyPI API tokens in GitHub Secrets
-
-PACT uses PyPI Trusted Publishing through GitHub Actions. PyPI should trust:
-
-| Field | Value |
-|-------|-------|
-| Owner | `Hypho` |
-| Repository | `pact` |
-| Workflow | `publish-pypi.yml` |
-| Environment | `pypi` |
-
-The publish workflow builds distributions, checks them, and uploads through `pypa/gh-action-pypi-publish`.
-
----
-
 ## Version Source
 
 `VERSION` is the single editable version source.
@@ -110,7 +85,7 @@ The publish workflow builds distributions, checks them, and uploads through `pyp
 Flow:
 
 ```text
-VERSION -> README / README.zh / CLAUDE / CHANGELOG -> git tag -> GitHub Release -> PyPI
+VERSION -> README / README.zh / CLAUDE / CHANGELOG -> git tag -> GitHub Release
 ```
 
 Do not derive the source version from git tags or GitHub Releases.
@@ -230,37 +205,6 @@ For the PACT public repository:
 3. Push the release tag.
 4. Create GitHub Release using the `CHANGELOG.md` entry as the source.
 5. Confirm the GitHub Release exists and is not a draft.
-
-## PyPI Publishing
-
-Before the first PyPI release:
-
-1. Create or claim the `pact-toolkit` project on PyPI.
-2. Configure Trusted Publisher for:
-   - Owner: `Hypho`
-   - Repository: `pact`
-   - Workflow: `publish-pypi.yml`
-   - Environment: `pypi`
-3. In GitHub repository settings, create the `pypi` environment.
-4. Prefer requiring manual approval on the `pypi` environment.
-
-For each PyPI release:
-
-1. Complete the normal file-only and git-aware release preparation.
-2. Push `main`.
-3. Push the release tag.
-4. Create the matching GitHub Release.
-5. Publishing the GitHub Release triggers `.github/workflows/publish-pypi.yml`.
-6. Confirm the package is available:
-
-```bash
-pip install pact-toolkit
-pact doctor
-```
-
-Do not upload packages manually unless the Trusted Publishing workflow is unavailable and the fallback is explicitly documented in the release notes.
-
----
 
 ## Freeze Rules
 

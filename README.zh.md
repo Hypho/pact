@@ -66,19 +66,14 @@ PACT 适合产品型开发者、独立开发者和小团队：既希望借助 AI
 完整使用指南：[USAGE.zh.md](./USAGE.zh.md)
 
 ```bash
-# PyPI 发布后推荐使用
-pip install pact-toolkit
-pact install --target your-project --mode auto
-pact doctor --cwd your-project
+# 推荐：从 GitHub 直接安装到项目目录
+curl -fsSL https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.sh | bash -s -- --target your-project --mode auto
 
-# PyPI 发布前，可从 PACT 源码仓库安装
-python -m pip install .
+# Windows PowerShell
+powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1 | iex"
 
-# 从 PACT 仓库根目录复制框架到目标项目根目录
-cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
-
-# 或使用安装脚本
-bash scripts/install-pact.sh --target your-project --mode all
+# 从已克隆的 PACT 仓库安装
+bash scripts/install-pact.sh --target your-project --mode auto
 
 # 在 Claude Code 中执行
 /pact.init    # 项目初始化（一次性）
@@ -90,7 +85,7 @@ pact check --project --cwd your-project
 # 框架维护者：发布检查见 RELEASE.md
 ```
 
-Python 安装器只负责复制框架文件。`pact check`、`pact guard`、`pact lint-*` 等命令会调用 PACT shell 脚本，因此运行时仍需要 `bash` 环境。
+远程安装器会直接把 PACT 文件复制到目标项目目录。PyPI 包不再作为主要安装路径，因为 `pip install` 并不适合默认把框架文件写入当前项目目录。运行时检查仍需要 `bash` 环境。
 
 ---
 

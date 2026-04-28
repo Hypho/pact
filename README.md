@@ -66,19 +66,14 @@ Before adopting, check whether your project falls within PACT's applicable scope
 Full usage guide: [USAGE.md](./USAGE.md)
 
 ```bash
-# Recommended after PyPI publication
-pip install pact-toolkit
-pact install --target your-project --mode auto
-pact doctor --cwd your-project
+# Recommended: install directly into a project from GitHub
+curl -fsSL https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.sh | bash -s -- --target your-project --mode auto
 
-# From the PACT source repository before PyPI publication
-python -m pip install .
+# Windows PowerShell
+powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1 | iex"
 
-# From the PACT repository root, copy the framework into your project root
-cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
-
-# Or use the installer
-bash scripts/install-pact.sh --target your-project --mode all
+# From a cloned PACT repository
+bash scripts/install-pact.sh --target your-project --mode auto
 
 # In Claude Code, run:
 /pact.init    # Project initialization (one-time)
@@ -90,7 +85,7 @@ pact check --project --cwd your-project
 # Framework maintainers: see RELEASE.md for release checks
 ```
 
-The Python installer copies the framework files directly. Commands such as `pact check`, `pact guard`, and `pact lint-*` wrap PACT shell scripts and require `bash` at runtime.
+The remote installer copies PACT files directly into the target project. The PyPI package is no longer the primary installation path because `pip install` does not naturally install framework files into the current project directory. Runtime checks still require `bash`.
 
 ---
 

@@ -2,8 +2,8 @@ param(
   [Parameter(Mandatory = $true)]
   [string]$Target,
 
-  [ValidateSet("all", "claude", "codex", "cursor")]
-  [string]$Mode = "all",
+  [ValidateSet("auto", "all", "claude", "codex", "cursor")]
+  [string]$Mode = "auto",
 
   [switch]$Force
 )
@@ -13,6 +13,24 @@ $ErrorActionPreference = "Stop"
 $Root = Resolve-Path (Join-Path $PSScriptRoot "..")
 $TargetPath = New-Item -ItemType Directory -Force -Path $Target
 $TargetFullPath = (Resolve-Path $TargetPath.FullName).Path
+
+function Get-PactInstallMode {
+  $hasClaude = (Test-Path (Join-Path $TargetFullPath ".claude")) -or (Test-Path (Join-Path $TargetFullPath "CLAUDE.md"))
+  $hasCodex = Test-Path (Join-Path $TargetFullPath "AGENTS.md")
+  $hasCursor = Test-Path (Join-Path $TargetFullPath ".cursor")
+  $matches = @($hasClaude, $hasCodex, $hasCursor) | Where-Object { $_ }
+
+  if ($matches.Count -gt 1) { return "all" }
+  if ($hasClaude) { return "claude" }
+  if ($hasCursor) { return "cursor" }
+  if ($hasCodex) { return "codex" }
+  return "all"
+}
+
+$RequestedMode = $Mode
+if ($Mode -eq "auto") {
+  $Mode = Get-PactInstallMode
+}
 
 function Copy-PactItem {
   param(
@@ -71,6 +89,9 @@ Write-Host "PACT installed."
 Write-Host ""
 Write-Host "Target: $TargetFullPath"
 Write-Host "Mode:   $Mode"
+if ($RequestedMode -eq "auto") {
+  Write-Host "Auto:   selected from existing project files"
+}
 Write-Host ""
 Write-Host "Next:"
 Write-Host "- Claude Code: run /pact.init, then /pact.scope before the first feature."

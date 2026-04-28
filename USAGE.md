@@ -31,17 +31,19 @@ Details:
 
 ## 2. Install Into a Project
 
-Recommended universal installer:
+Recommended remote installer:
 
 ```bash
-pip install pact-toolkit
-pact install --target your-project --mode auto
-pact doctor --cwd your-project
+curl -fsSL https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.sh | bash -s -- --target . --mode auto
 ```
 
-Before PyPI publication, run `python -m pip install .` from the PACT source repository.
+Windows PowerShell:
 
-The Python installer copies the framework files directly. Commands such as `pact check`, `pact guard`, and `pact lint-*` wrap PACT shell scripts and require `bash` at runtime.
+```powershell
+powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1 | iex"
+```
+
+This directly installs PACT files into the target project. PyPI is no longer the primary installation path because `pip install` installs Python packages and command wrappers, not project framework files.
 
 If you are working from the PACT source repository, you can also run the copy command from the repository root:
 
@@ -52,13 +54,13 @@ cp -r CLAUDE.md .claude .pact AGENTS.md .cursor your-project/
 Or use the installer:
 
 ```bash
-bash scripts/install-pact.sh --target your-project --mode all
+bash scripts/install-pact.sh --target your-project --mode auto
 ```
 
 On Windows PowerShell:
 
 ```powershell
-.\scripts\install-pact.ps1 -Target your-project -Mode all
+.\scripts\install-pact.ps1 -Target your-project -Mode auto
 ```
 
 If you are copying from a parent directory that contains the cloned `pact/` folder, prefix the source paths:
