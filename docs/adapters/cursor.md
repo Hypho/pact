@@ -38,29 +38,9 @@ cp -r .cursor AGENTS.md .pact your-project/
 
 ## Use
 
-Cursor-compatible prompts:
+Cursor should follow `.cursor/rules/pact.mdc` and the canonical workflow in `.pact/core/workflow.md`.
 
-```text
-Use PACT to initialize this project.
-```
-
-```text
-Use PACT to create the PID Card for [feature].
-```
-
-```text
-Use PACT to generate the behavior contract.
-```
-
-```text
-Use PACT to build and verify the current feature.
-```
-
-```text
-Use PACT to ship the feature after PASS.
-```
-
-For a complete prompt set, see [prompts.md](./prompts.md).
+For the maintained prompt set, see [prompts.md](./prompts.md).
 
 ## Rule Scope
 

@@ -30,15 +30,15 @@ Remove-Item $installer
 Bash / Git Bash / WSL:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Hypho/pact/v1.7.0/scripts/install-from-github.sh | bash -s -- --target . --mode auto --ref v1.7.0
+curl -fsSL https://raw.githubusercontent.com/Hypho/pact/v1.7.1/scripts/install-from-github.sh | bash -s -- --target . --mode auto --ref v1.7.1
 ```
 
 Windows PowerShell:
 
 ```powershell
 $installer = Join-Path $env:TEMP "install-from-github.ps1"
-Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/Hypho/pact/v1.7.0/scripts/install-from-github.ps1" -OutFile $installer
-powershell -ExecutionPolicy Bypass -File $installer -Target . -Mode auto -Ref v1.7.0
+Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/Hypho/pact/v1.7.1/scripts/install-from-github.ps1" -OutFile $installer
+powershell -ExecutionPolicy Bypass -File $installer -Target . -Mode auto -Ref v1.7.1
 Remove-Item $installer
 ```
 
@@ -60,3 +60,11 @@ After installation, run from the target project root:
 bash .pact/bin/pact.sh check --project
 ```
 
+On Windows PowerShell, run the check after changing into the target directory:
+
+```powershell
+Set-Location your-project
+bash .pact/bin/pact.sh check --project
+```
+
+Do not pass a Windows absolute path such as `C:\path\project\.pact\bin\pact.sh` directly to `bash`; Git Bash and WSL parse those paths differently. Enter the project directory first, or use a POSIX path such as `/mnt/c/path/project` when running from WSL.

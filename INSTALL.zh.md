@@ -30,15 +30,15 @@ Remove-Item $installer
 Bash / Git Bash / WSL：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Hypho/pact/v1.7.0/scripts/install-from-github.sh | bash -s -- --target . --mode auto --ref v1.7.0
+curl -fsSL https://raw.githubusercontent.com/Hypho/pact/v1.7.1/scripts/install-from-github.sh | bash -s -- --target . --mode auto --ref v1.7.1
 ```
 
 Windows PowerShell：
 
 ```powershell
 $installer = Join-Path $env:TEMP "install-from-github.ps1"
-Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/Hypho/pact/v1.7.0/scripts/install-from-github.ps1" -OutFile $installer
-powershell -ExecutionPolicy Bypass -File $installer -Target . -Mode auto -Ref v1.7.0
+Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/Hypho/pact/v1.7.1/scripts/install-from-github.ps1" -OutFile $installer
+powershell -ExecutionPolicy Bypass -File $installer -Target . -Mode auto -Ref v1.7.1
 Remove-Item $installer
 ```
 
@@ -60,3 +60,11 @@ Remove-Item $installer
 bash .pact/bin/pact.sh check --project
 ```
 
+Windows PowerShell 中请先进入目标目录再执行：
+
+```powershell
+Set-Location your-project
+bash .pact/bin/pact.sh check --project
+```
+
+不要把 `C:\path\project\.pact\bin\pact.sh` 这样的 Windows 绝对路径直接传给 `bash`；Git Bash 和 WSL 对路径的解析不同。先进入项目目录，或在 WSL 中使用 `/mnt/c/path/project` 这样的 POSIX 路径。

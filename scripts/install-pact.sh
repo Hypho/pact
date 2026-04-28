@@ -205,3 +205,14 @@ Next:
     cd "$TARGET_ABS"
     bash .pact/bin/pact.sh check --project
 EOF
+
+case "$(uname -s 2>/dev/null || true)" in
+  MINGW*|MSYS*|CYGWIN*)
+    cat <<'EOF'
+
+Windows note:
+- If you are in PowerShell, run scripts/install-pact.ps1 instead.
+- If you are in Git Bash, keep using POSIX-style paths for bash commands.
+EOF
+    ;;
+esac

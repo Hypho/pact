@@ -13,6 +13,22 @@ This changelog follows a Keep a Changelog style:
 
 ---
 
+## v1.7.1 — 2026-04-28
+
+### Added
+- Added `examples/secure-notes`, a more realistic completed PACT flow covering note ownership, denied cross-user access, validation, storage failure, and verification evidence.
+- Added `examples/README.md` as an index for runnable examples.
+
+### Changed
+- Updated README and usage docs to point to the examples index and canonical workflow reference.
+- Reduced workflow and prompt duplication in Codex and Cursor adapter docs by pointing to the canonical workflow reference and maintained prompt templates.
+
+### Fixed
+- Clarified Windows PowerShell self-check instructions after installation to avoid passing Windows absolute paths directly to Bash.
+- Added installer output notes for Windows path handling.
+
+---
+
 ## v1.7.0 — 2026-04-28
 
 ### Added

@@ -44,33 +44,9 @@ README.md
 
 ## Use
 
-Codex-compatible prompts:
+Codex does not read `.claude/commands` as slash commands. Use natural-language requests that map to the canonical workflow in `.pact/core/workflow.md`.
 
-```text
-Initialize this project using PACT.
-```
-
-```text
-Create the PACT PID Card for user login.
-```
-
-```text
-Generate the PACT behavior contract from the current PID Card.
-```
-
-```text
-Build the current feature against the PACT contract.
-```
-
-```text
-Verify the current feature using real command output and write the PACT verify record.
-```
-
-```text
-Ship the current PACT feature after PASS and archive the contract.
-```
-
-For a complete prompt set, see [prompts.md](./prompts.md).
+For the maintained prompt set, see [prompts.md](./prompts.md).
 
 ## Checks
 

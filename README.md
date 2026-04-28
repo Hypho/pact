@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> A lightweight protocol framework for auditable human-AI software development | v1.7.0
+> A lightweight protocol framework for auditable human-AI software development | v1.7.1
 > 中文: [README.zh.md](./README.zh.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -107,9 +107,12 @@ Claude Code plugin marketplace installation is planned, not the current primary 
 
 ---
 
-## Example
+## Examples
 
-See [examples/todo-feature](./examples/todo-feature/) for a runnable completed feature flow with PID, archived contract, verify record, shipped state, and a small test.
+See [examples](./examples/) for runnable completed feature flows:
+
+- [todo-feature](./examples/todo-feature/) shows the smallest useful flow with validation and storage failure handling.
+- [secure-notes](./examples/secure-notes/) shows a more realistic ownership boundary with denied cross-user access and verification evidence.
 
 ---
 
@@ -118,6 +121,8 @@ See [examples/todo-feature](./examples/todo-feature/) for a runnable completed f
 Per-feature flow: `pid → contract → build → verify → ship`
 
 Every 3–5 features: `retro`
+
+The canonical workflow definition is [.pact/core/workflow.md](./.pact/core/workflow.md). README, adapter files, and command files should summarize that reference instead of redefining a different flow.
 
 ---
 
@@ -276,6 +281,7 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 
 | Version | Date | Core changes |
 |---------|------|--------------|
+| v1.7.1 | 2026-04-28 | Adds a secure notes example, consolidates example and workflow references, and clarifies Windows self-check guidance |
 | v1.7.0 | 2026-04-28 | Adds GitHub remote installers, automatic install mode detection for source installers, and direct project installation guidance |
 | v1.6.1 | 2026-04-27 | Narrows `/pact.scope` to applicability and risk-boundary assessment; makes FDG optional; clarifies lower-frequency release rules |
 | v1.6.0 | 2026-04-27 | Adds command guard for pid / contract / build / verify / ship entry checks and integrates guard fixtures into self-check |
@@ -286,4 +292,3 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 | v1.2.1 | 2026-04-26 | Refines README positioning, adds CI status badge, clarifies when to use or avoid PACT, and documents the repository self-check command |
 | v1.2.0 | 2026-04-26 | Adds repository self-check script and GitHub Actions workflow for version consistency, internal-roadmap leakage prevention, and state consistency; adds open-source maintenance and release rules |
 | v1.1.0 | 2026-04-20 | Time triples (state.md adds started_at; completed table extended with start/completed columns); check-state.sh parsing hardened (colon normalization, awk replaces grep+sed); README adds "Scope" section with English version |
-| v1.0.0 | 2026-04-20 | First public release. Contract-driven framework for product-minded developers: 8 command protocols + 3-layer context loading + risk boundary detection + adversarial verification + shell-hook safety net |

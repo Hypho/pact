@@ -18,6 +18,7 @@ pid -> contract -> build -> verify -> ship
 ```
 
 For the full workflow reference, read `.pact/core/workflow.md`.
+If this rule and `.pact/core/workflow.md` differ, treat `.pact/core/workflow.md` as the source of truth.
 
 For each feature:
 - create or update `.pact/specs/[feature]-pid.md`

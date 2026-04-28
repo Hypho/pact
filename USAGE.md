@@ -228,5 +228,5 @@ Release notes come from `CHANGELOG.md`.
 ## 8. Further References
 
 - For Codex, Cursor, or other tools without slash commands, use [prompt templates](./docs/adapters/prompts.md).
-- For a runnable sample flow, see [examples/todo-feature](./examples/todo-feature/).
+- For runnable sample flows, see [examples](./examples/).
 - For the core workflow reference, see [.pact/core/workflow.md](./.pact/core/workflow.md).
