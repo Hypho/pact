@@ -43,7 +43,7 @@ Windows PowerShell：
 powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1 | iex"
 ```
 
-这种方式会直接把 PACT 文件安装到目标项目目录。PyPI 不再作为主要安装路径，因为 `pip install` 安装的是 Python 包和命令入口，不适合默认写入项目框架文件。
+这种方式会直接把 PACT 文件安装到目标项目目录。
 
 如果你正在使用 PACT 源码仓库，也可以在仓库根目录执行复制命令：
 

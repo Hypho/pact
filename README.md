@@ -85,7 +85,7 @@ pact check --project --cwd your-project
 # Framework maintainers: see RELEASE.md for release checks
 ```
 
-The remote installer copies PACT files directly into the target project. The PyPI package is no longer the primary installation path because `pip install` does not naturally install framework files into the current project directory. Runtime checks still require `bash`.
+The remote installer copies PACT files directly into the target project. Runtime checks still require `bash`.
 
 ---
 
@@ -274,7 +274,7 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 
 | Version | Date | Core changes |
 |---------|------|--------------|
-| v1.7.0 | 2026-04-28 | Adds Python package publishing support, `pact doctor`, automatic install mode detection, and PyPI release automation |
+| v1.7.0 | 2026-04-28 | Adds GitHub remote installers, automatic install mode detection for source installers, and direct project installation guidance |
 | v1.6.1 | 2026-04-27 | Narrows `/pact.scope` to applicability and risk-boundary assessment; makes FDG optional; clarifies lower-frequency release rules |
 | v1.6.0 | 2026-04-27 | Adds command guard for pid / contract / build / verify / ship entry checks and integrates guard fixtures into self-check |
 | v1.5.0 | 2026-04-27 | Adds contract and verify lint scripts, fixtures, and self-check integration for behavior contract and verification record structure |

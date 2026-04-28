@@ -43,7 +43,7 @@ Windows PowerShell:
 powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/Hypho/pact/main/scripts/install-from-github.ps1 | iex"
 ```
 
-This directly installs PACT files into the target project. PyPI is no longer the primary installation path because `pip install` installs Python packages and command wrappers, not project framework files.
+This directly installs PACT files into the target project.
 
 If you are working from the PACT source repository, you can also run the copy command from the repository root:
 
