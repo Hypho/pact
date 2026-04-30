@@ -15,6 +15,8 @@ Cursor 还应包含：
 .cursor/rules/pact.mdc
 ```
 
+如果当前目录或上级模块存在局部 `AGENTS.md`，先读取最近的局部文件，再读取根目录 `AGENTS.md` 和 `.pact/state.md`。根目录 `AGENTS.md` 是跨工具 PACT 入口；`.pact/core/workflow.md` 是流程事实源。
+
 ---
 
 ## 初始化
@@ -23,6 +25,7 @@ Cursor 还应包含：
 请按 PACT 初始化当前项目。
 
 先读取 AGENTS.md 和 .pact/state.md。
+如果当前模块存在更近的 AGENTS.md，先读取该局部文件。
 创建或更新：
 - .pact/core/constitution.md
 - .pact/specs/PAD.md
@@ -64,6 +67,7 @@ Cursor 还应包含：
 
 写入前：
 - 读取 .pact/state.md
+- 若当前模块存在局部 AGENTS.md，先读取它
 - 运行或等价执行：bash .pact/bin/pact.sh guard pid
 - 检查 .pact/scope/boundaries.md
 - 仅当 .pact/specs/FDG.md 存在时读取它
@@ -87,6 +91,7 @@ Cursor 还应包含：
 
 写入前：
 - 读取 .pact/state.md
+- 若当前模块存在局部 AGENTS.md，先读取它
 - 运行或等价执行：bash .pact/bin/pact.sh guard contract
 - 读取 .pact/specs/[当前功能]-pid.md
 - 如果 .pact/specs/PAD.md 存在，则读取它
@@ -112,6 +117,7 @@ Cursor 还应包含：
 
 实现前：
 - 读取 .pact/state.md
+- 若当前模块存在局部 AGENTS.md，先读取它
 - 运行或等价执行：bash .pact/bin/pact.sh guard build
 - 读取 .pact/contracts/[当前功能].md
 - 读取 .pact/specs/[当前功能]-pid.md
@@ -137,6 +143,7 @@ Cursor 还应包含：
 
 验证前：
 - 读取 .pact/state.md
+- 若当前模块存在局部 AGENTS.md，先读取它
 - 运行或等价执行：bash .pact/bin/pact.sh guard verify
 - 读取 .pact/contracts/[当前功能].md
 
@@ -166,6 +173,7 @@ PASS 必须包含 command/output/result 等运行证据标记。
 
 发布前：
 - 读取 .pact/state.md
+- 若当前模块存在局部 AGENTS.md，先读取它
 - 运行或等价执行：bash .pact/bin/pact.sh guard ship
 - 读取 .pact/knowledge/[当前功能]-verify.md
 - 确认其中包含 verdict = PASS 或 MANUAL OVERRIDE
@@ -189,6 +197,7 @@ PASS 必须包含 command/output/result 等运行证据标记。
 请对最近 3-5 个已发布功能执行 PACT retro。
 
 读取：
+- 受影响模块中存在的最近局部 AGENTS.md
 - .pact/specs/PAD.md
 - .pact/scope/fitness.md
 - .pact/knowledge/tech-debt.md

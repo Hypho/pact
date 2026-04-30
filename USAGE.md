@@ -103,6 +103,8 @@ AGENTS.md
 AGENTS.md
 ```
 
+`AGENTS.md` is the portable agent entry. `CLAUDE.md` is Claude Code-specific. For modules with strong local conventions, create a module-level `AGENTS.md` from `.pact/templates/module-AGENTS.md`.
+
 ---
 
 ## 3. Initialize the Project
@@ -202,6 +204,12 @@ Inside an installed project:
 
 ```bash
 bash .pact/bin/pact.sh check --project
+```
+
+To check agent entry files:
+
+```bash
+bash .pact/bin/pact.sh lint-agents --all
 ```
 
 If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`:

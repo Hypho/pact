@@ -165,12 +165,14 @@ expect_failure "verify missing PASS verdict" env PACT_ROOT="$TMP_ROOT" bash .pac
 
 bash .pact/bin/pact-lint-contract.sh --fixtures
 bash .pact/bin/pact-lint-verify.sh --fixtures
+bash .pact/bin/pact-lint-agents.sh --fixtures
 bash .pact/bin/pact-guard.sh --fixtures
 bash .pact/bin/pact-lint-contract.sh --all
 bash .pact/bin/pact-lint-verify.sh --all
+bash .pact/bin/pact-lint-agents.sh --all
 
 if [ "$MODE" = "--repo" ]; then
-  info "PACT 仓库自检通过：VERSION 一致、公开文档无内部路线引用、state / contract / verify / guard 检查通过"
+  info "PACT 仓库自检通过：VERSION 一致、公开文档无内部路线引用、state / contract / verify / agents / guard 检查通过"
 else
-  info "PACT 项目自检通过：state / contract / verify / guard 检查通过"
+  info "PACT 项目自检通过：state / contract / verify / agents / guard 检查通过"
 fi

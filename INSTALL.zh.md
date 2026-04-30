@@ -30,15 +30,15 @@ Remove-Item $installer
 Bash / Git Bash / WSL：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Hypho/pact/v1.7.1/scripts/install-from-github.sh | bash -s -- --target . --mode auto --ref v1.7.1
+curl -fsSL https://raw.githubusercontent.com/Hypho/pact/v1.8.0/scripts/install-from-github.sh | bash -s -- --target . --mode auto --ref v1.8.0
 ```
 
 Windows PowerShell：
 
 ```powershell
 $installer = Join-Path $env:TEMP "install-from-github.ps1"
-Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/Hypho/pact/v1.7.1/scripts/install-from-github.ps1" -OutFile $installer
-powershell -ExecutionPolicy Bypass -File $installer -Target . -Mode auto -Ref v1.7.1
+Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/Hypho/pact/v1.8.0/scripts/install-from-github.ps1" -OutFile $installer
+powershell -ExecutionPolicy Bypass -File $installer -Target . -Mode auto -Ref v1.8.0
 Remove-Item $installer
 ```
 

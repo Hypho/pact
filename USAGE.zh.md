@@ -103,6 +103,8 @@ AGENTS.md
 AGENTS.md
 ```
 
+`AGENTS.md` 是跨工具 agent 入口。`CLAUDE.md` 只服务 Claude Code。若某个模块有强局部约定，可从 `.pact/templates/module-AGENTS.md` 创建模块级 `AGENTS.md`。
+
 ---
 
 ## 3. 初始化项目
@@ -202,6 +204,12 @@ bash .pact/bin/pact-check.sh
 
 ```bash
 bash .pact/bin/pact.sh check --project
+```
+
+检查 agent 入口文件：
+
+```bash
+bash .pact/bin/pact.sh lint-agents --all
 ```
 
 如果项目采用 PACT 的 release 层，并维护 `VERSION` 与 `CHANGELOG.md`：

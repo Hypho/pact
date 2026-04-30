@@ -1,9 +1,13 @@
 # [项目名] — PACT 工作空间
-> Product-Aware Contract Toolkit v1.7.1
+> Product-Aware Contract Toolkit v1.8.0
 
 ---
 
 ## 1. 启动序列
+
+> 入口职责：`AGENTS.md` 是跨工具 agent 入口；`CLAUDE.md` 是 Claude Code 热层入口。
+> 若二者在流程事实上不一致，以 `.pact/core/workflow.md` 为准。
+> 若二者在硬约束上不一致，以 `.pact/core/constitution.md` 为准。
 
 每次新会话，按以下顺序执行，不跳过：
 

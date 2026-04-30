@@ -11,6 +11,8 @@ AGENTS.md
 
 `AGENTS.md` tells Codex how to follow the PACT workflow. `.pact/` contains the state file, templates, scripts, and checks.
 
+`AGENTS.md` is the portable agent entry. It should stay short, point to `.pact/core/workflow.md`, and use phase decisions plus Don't/Do guidance instead of long warning lists.
+
 ## Install
 
 Recommended:
@@ -48,12 +50,20 @@ Codex does not read `.claude/commands` as slash commands. Use natural-language r
 
 For the maintained prompt set, see [prompts.md](./prompts.md).
 
+For modules with strong local conventions, create a local `AGENTS.md` from `.pact/templates/module-AGENTS.md`.
+
 ## Checks
 
 Run:
 
 ```bash
 bash .pact/bin/pact.sh check --project
+```
+
+Agent entry lint:
+
+```bash
+bash .pact/bin/pact.sh lint-agents --all
 ```
 
 If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`:

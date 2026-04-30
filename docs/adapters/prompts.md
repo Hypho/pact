@@ -15,6 +15,8 @@ For Cursor, also use:
 .cursor/rules/pact.mdc
 ```
 
+If the current directory or a parent module contains a local `AGENTS.md`, read the nearest one first, then read the root `AGENTS.md` and `.pact/state.md`. Root `AGENTS.md` is the portable PACT entry; `.pact/core/workflow.md` is the workflow source of truth.
+
 ---
 
 ## Initialize
@@ -23,6 +25,7 @@ For Cursor, also use:
 Initialize this project using PACT.
 
 Read AGENTS.md and .pact/state.md first.
+If a nearer module-level AGENTS.md exists, read it before the root AGENTS.md.
 Create or update:
 - .pact/core/constitution.md
 - .pact/specs/PAD.md
@@ -64,6 +67,7 @@ Create a PACT PID Card for the feature: [feature name].
 
 Before writing:
 - read .pact/state.md
+- read the nearest AGENTS.md if working inside a module with local instructions
 - run or apply the equivalent of: bash .pact/bin/pact.sh guard pid
 - check .pact/scope/boundaries.md
 - read .pact/specs/FDG.md only if it exists
@@ -87,6 +91,7 @@ Generate the PACT behavior contract for the current feature.
 
 Before writing:
 - read .pact/state.md
+- read the nearest AGENTS.md if working inside a module with local instructions
 - run or apply the equivalent of: bash .pact/bin/pact.sh guard contract
 - read .pact/specs/[current-feature]-pid.md
 - read .pact/specs/PAD.md if it exists
@@ -112,6 +117,7 @@ Build the current feature against the PACT contract.
 
 Before implementation:
 - read .pact/state.md
+- read the nearest AGENTS.md if working inside a module with local instructions
 - run or apply the equivalent of: bash .pact/bin/pact.sh guard build
 - read .pact/contracts/[current-feature].md
 - read .pact/specs/[current-feature]-pid.md
@@ -137,6 +143,7 @@ Verify the current feature using PACT.
 
 Before verification:
 - read .pact/state.md
+- read the nearest AGENTS.md if working inside a module with local instructions
 - run or apply the equivalent of: bash .pact/bin/pact.sh guard verify
 - read .pact/contracts/[current-feature].md
 
@@ -166,6 +173,7 @@ Ship the current PACT feature.
 
 Before shipping:
 - read .pact/state.md
+- read the nearest AGENTS.md if working inside a module with local instructions
 - run or apply the equivalent of: bash .pact/bin/pact.sh guard ship
 - read .pact/knowledge/[current-feature]-verify.md
 - confirm it contains verdict = PASS or MANUAL OVERRIDE
@@ -189,6 +197,7 @@ Do not ship if verify is FAIL or INCONCLUSIVE without documented manual override
 Run a PACT retro over the last 3-5 shipped features.
 
 Read:
+- nearest module-level AGENTS.md files if they exist for affected modules
 - .pact/specs/PAD.md
 - .pact/scope/fitness.md
 - .pact/knowledge/tech-debt.md

@@ -71,6 +71,12 @@ Verify lint:
 bash .pact/bin/pact.sh lint-verify <file|--all|--fixtures>
 ```
 
+Agent entry lint:
+
+```bash
+bash .pact/bin/pact.sh lint-agents <file|--all|--fixtures>
+```
+
 ---
 
 ## State Rules
@@ -102,4 +108,3 @@ verdict = INCONCLUSIVE
 ```
 
 `PASS` requires runtime evidence such as `command:`, `output:`, or `result:`.
-

@@ -204,6 +204,27 @@ v1.x 阶段：
 
 ---
 
+## 11b. Agent Entry Lint 规则
+
+```
+根目录 AGENTS.md 是跨工具 agent 入口。
+CLAUDE.md 是 Claude Code 运行入口，不应与 AGENTS.md 逐字同步。
+
+pact-lint-agents.sh 检查：
+  1. AGENTS.md 存在且非空
+  2. 文件行数不超过默认阈值 150 行
+  3. 引用 .pact/core/workflow.md
+  4. 包含 guard 命令引用
+  5. 包含 check --project
+  6. Markdown 引用数量不超过默认阈值 10
+  7. 多条禁止项必须配 Don't / Do 对照
+
+模块级 AGENTS.md 可由 .pact/templates/module-AGENTS.md 复制生成。
+模块级入口只描述局部职责、局部模式和局部引用，不重写 PACT 主流程。
+```
+
+---
+
 ## 12. Command Guard 规则
 
 ```

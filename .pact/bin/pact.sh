@@ -17,6 +17,8 @@ Commands:
                                     Lint behavior contracts
   lint-verify <file|--all|--fixtures>
                                     Lint verify records
+  lint-agents <file|--all|--fixtures>
+                                    Lint agent instruction entry files
   release-check                     Run optional git-aware release check
   help                              Show this help
 
@@ -24,6 +26,7 @@ Examples:
   bash .pact/bin/pact.sh check --project
   bash .pact/bin/pact.sh guard build
   bash .pact/bin/pact.sh lint-contract --all
+  bash .pact/bin/pact.sh lint-agents --all
 EOF
 }
 
@@ -45,6 +48,9 @@ case "$cmd" in
   lint-verify)
     bash "$ROOT/.pact/bin/pact-lint-verify.sh" "$@"
     ;;
+  lint-agents)
+    bash "$ROOT/.pact/bin/pact-lint-agents.sh" "$@"
+    ;;
   release-check)
     bash "$ROOT/.pact/bin/pact-release-check.sh" "$@"
     ;;
@@ -57,4 +63,3 @@ case "$cmd" in
     exit 2
     ;;
 esac
-

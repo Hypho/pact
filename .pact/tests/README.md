@@ -22,11 +22,12 @@ features/[功能名].[扩展名]
 ### fixtures/
 **对应测试层级：L1 / L2 / L3 共用**
 
-测试数据文件，按功能或实体分组：
+测试数据文件，按功能、实体或 PACT 自检类型分组：
 ```
 fixtures/[功能名或实体名].[扩展名]
 例：fixtures/user.json
     fixtures/order-seed.sql
+    fixtures/agents/valid-agents.md
 ```
 
 ### api/

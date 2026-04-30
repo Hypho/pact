@@ -28,6 +28,17 @@ For each feature:
 - write `.pact/knowledge/[feature]-verify.md`
 - ship only after `verdict = PASS` or documented manual override
 
+## Phase Decision
+
+| Current state | Next action |
+|---------------|-------------|
+| no active unshipped feature | guard `pid`, then create PID Card |
+| phase = `pid` | guard `contract`, then create contract |
+| phase = `contract` | guard `build`, then implement |
+| phase = `build-complete` | guard `verify`, then write runtime evidence |
+| phase = `verify-pass` | guard `ship`, then archive |
+| guard fails | stop and report the exact reason |
+
 ## State
 
 Read `.pact/state.md` before feature work.
@@ -65,6 +76,14 @@ verdict = INCONCLUSIVE
 ```
 
 For `PASS`, include runtime evidence.
+
+## Don't / Do
+
+| Don't | Do |
+|-------|----|
+| Do not infer missing PACT files from chat. | Check the expected path for the current phase. |
+| Do not skip phases. | Run the matching guard. |
+| Do not verify by reasoning. | Record real command output. |
 
 ## Releases
 

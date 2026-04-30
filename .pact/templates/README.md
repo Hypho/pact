@@ -19,3 +19,4 @@
 | `verify.md` | Verify 记录结构参照 | /pact.verify |
 | `exec-plan.md` | 执行计划结构参照 | 大功能门控触发 |
 | `handover.md` | 交接文档结构参照 | 按需 |
+| `module-AGENTS.md` | 模块级 agent 入口结构参照 | 按需复制到子模块 |

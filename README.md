@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> A lightweight protocol framework for auditable human-AI software development | v1.7.1
+> A lightweight protocol framework for auditable human-AI software development | v1.8.0
 > 中文: [README.zh.md](./README.zh.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -102,6 +102,8 @@ PACT is tool-agnostic at the protocol layer, with first-class Claude Code suppor
 | Cursor | Compatible | [docs/adapters/cursor.md](./docs/adapters/cursor.md) |
 
 For non-Claude tools, use [docs/adapters/prompts.md](./docs/adapters/prompts.md).
+
+`AGENTS.md` is the portable agent entry. `CLAUDE.md` is the Claude Code runtime entry. Both summarize the same PACT protocol, but `.pact/core/workflow.md` and `.pact/core/constitution.md` remain the source files for workflow facts and hard constraints.
 
 Claude Code plugin marketplace installation is planned, not the current primary installation path.
 
@@ -231,6 +233,16 @@ bash .pact/bin/pact-guard.sh ship
 
 The guard does not execute commands, generate files, or modify state. It only reports whether the command may start.
 
+### Agent Entry Quality
+
+PACT keeps agent entry files short and operational. Root `AGENTS.md` should point to the canonical workflow, use phase decisions and Don't/Do guidance, and avoid large reference lists. Module-level agent entries can be created from `.pact/templates/module-AGENTS.md` when a submodule needs local patterns or ownership boundaries.
+
+```bash
+bash .pact/bin/pact.sh lint-agents --all
+```
+
+`pact-lint-agents.sh` checks the basic shape of agent entry files so they do not drift into long warning lists or unbounded documentation indexes.
+
 ### Scope Assessment
 
 `/pact.scope` checks whether PACT is appropriate for the project and identifies risk boundaries before feature work starts.
@@ -281,6 +293,7 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 
 | Version | Date | Core changes |
 |---------|------|--------------|
+| v1.8.0 | 2026-04-30 | Adds AGENTS entry quality linting, module-level AGENTS templates, and clearer cross-tool entry responsibilities |
 | v1.7.1 | 2026-04-28 | Adds a secure notes example, consolidates example and workflow references, and clarifies Windows self-check guidance |
 | v1.7.0 | 2026-04-28 | Adds GitHub remote installers, automatic install mode detection for source installers, and direct project installation guidance |
 | v1.6.1 | 2026-04-27 | Narrows `/pact.scope` to applicability and risk-boundary assessment; makes FDG optional; clarifies lower-frequency release rules |
@@ -290,5 +303,3 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 | v1.3.3 | 2026-04-27 | Adds CHANGELOG.md as canonical release history and requires changelog coverage in repository self-checks |
 | v1.3.2 | 2026-04-27 | Adds draft state schema, state fixtures, stricter state.md lint, fixture-based check-state coverage, and build-phase state validation |
 | v1.2.1 | 2026-04-26 | Refines README positioning, adds CI status badge, clarifies when to use or avoid PACT, and documents the repository self-check command |
-| v1.2.0 | 2026-04-26 | Adds repository self-check script and GitHub Actions workflow for version consistency, internal-roadmap leakage prevention, and state consistency; adds open-source maintenance and release rules |
-| v1.1.0 | 2026-04-20 | Time triples (state.md adds started_at; completed table extended with start/completed columns); check-state.sh parsing hardened (colon normalization, awk replaces grep+sed); README adds "Scope" section with English version |

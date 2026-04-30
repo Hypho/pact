@@ -13,6 +13,22 @@ This changelog follows a Keep a Changelog style:
 
 ---
 
+## v1.8.0 — 2026-04-30
+
+### Added
+- Added `.pact/bin/pact-lint-agents.sh` for checking AGENTS entry file quality.
+- Added `lint-agents` to the unified `.pact/bin/pact.sh` wrapper and repository self-check.
+- Added AGENTS lint fixtures covering valid entries, overlong files, missing workflow references, excessive references, and warning-only instruction files.
+- Added `.pact/templates/module-AGENTS.md` for module-level agent instruction files.
+
+### Changed
+- Updated `AGENTS.md` with a phase decision table, Don't / Do guidance, and explicit portable-entry responsibilities.
+- Clarified that `CLAUDE.md` is the Claude Code runtime entry while `AGENTS.md` remains the portable cross-tool agent entry.
+- Updated Cursor rules, adapter docs, prompt templates, README, and usage docs to describe agent entry quality and module-level AGENTS files.
+- Documented agent entry lint rules in the workflow and constitution references.
+
+---
+
 ## v1.7.1 — 2026-04-28
 
 ### Added

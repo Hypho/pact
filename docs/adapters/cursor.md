@@ -12,6 +12,8 @@ AGENTS.md
 
 The Cursor rule gives the agent persistent project instructions. `.pact/` contains the protocol files, templates, scripts, and state.
 
+`AGENTS.md` remains the portable agent entry for cross-tool compatibility. `.cursor/rules/pact.mdc` should summarize the same workflow for Cursor and defer to `.pact/core/workflow.md` for phase facts.
+
 ## Install
 
 Recommended:
@@ -42,6 +44,8 @@ Cursor should follow `.cursor/rules/pact.mdc` and the canonical workflow in `.pa
 
 For the maintained prompt set, see [prompts.md](./prompts.md).
 
+For modules with strong local conventions, create a local `AGENTS.md` from `.pact/templates/module-AGENTS.md`.
+
 ## Rule Scope
 
 The rule file is stored at:
@@ -61,3 +65,9 @@ bash .pact/bin/pact.sh check --project
 ```
 
 Cursor may not automatically run this check unless you ask it to.
+
+Agent entry lint:
+
+```bash
+bash .pact/bin/pact.sh lint-agents --all
+```
