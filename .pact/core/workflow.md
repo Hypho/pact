@@ -77,11 +77,29 @@ Agent entry lint:
 bash .pact/bin/pact.sh lint-agents <file|--all|--fixtures>
 ```
 
+State validation and controlled state updates:
+
+```bash
+bash .pact/bin/pact.sh state validate
+bash .pact/bin/pact.sh state enqueue <feature>
+bash .pact/bin/pact.sh state set-phase <phase>
+bash .pact/bin/pact.sh state complete
+bash .pact/bin/pact.sh state fail-verify
+```
+
+Stale state diagnostics:
+
+```bash
+bash .pact/bin/pact.sh check --stale
+```
+
 ---
 
 ## State Rules
 
 `.pact/state.md` is the v1.x source of truth.
+
+Agents may read `state.md` directly, but machine-critical state updates should use `pact state` commands so phase transitions, duplicate queue/completed entries, unsafe feature names, and verify evidence requirements are checked before writing.
 
 The current feature name must exactly match generated file paths:
 

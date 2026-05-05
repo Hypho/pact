@@ -206,6 +206,22 @@ Inside an installed project:
 bash .pact/bin/pact.sh check --project
 ```
 
+To validate or update PACT state through the controlled entry:
+
+```bash
+bash .pact/bin/pact.sh state validate
+bash .pact/bin/pact.sh state enqueue <feature>
+bash .pact/bin/pact.sh state set-phase <phase>
+bash .pact/bin/pact.sh state complete
+bash .pact/bin/pact.sh state fail-verify
+```
+
+To diagnose stale state without changing files:
+
+```bash
+bash .pact/bin/pact.sh check --stale
+```
+
 To check agent entry files:
 
 ```bash

@@ -206,6 +206,22 @@ bash .pact/bin/pact-check.sh
 bash .pact/bin/pact.sh check --project
 ```
 
+通过受控入口校验或更新 PACT 状态：
+
+```bash
+bash .pact/bin/pact.sh state validate
+bash .pact/bin/pact.sh state enqueue <feature>
+bash .pact/bin/pact.sh state set-phase <phase>
+bash .pact/bin/pact.sh state complete
+bash .pact/bin/pact.sh state fail-verify
+```
+
+诊断长期停滞状态，且不修改文件：
+
+```bash
+bash .pact/bin/pact.sh check --stale
+```
+
 检查 agent 入口文件：
 
 ```bash

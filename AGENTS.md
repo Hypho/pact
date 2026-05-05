@@ -45,6 +45,16 @@ Before changing feature work:
 - preserve the feature name exactly when generating file paths
 - follow the phase sequence unless the user explicitly instructs otherwise
 
+For machine-critical state updates, prefer:
+
+```bash
+bash .pact/bin/pact.sh state validate
+bash .pact/bin/pact.sh state enqueue <feature>
+bash .pact/bin/pact.sh state set-phase <phase>
+bash .pact/bin/pact.sh state complete
+bash .pact/bin/pact.sh state fail-verify
+```
+
 ## Files
 
 Expected generated files:
@@ -67,6 +77,12 @@ Run this after changing PACT files:
 
 ```bash
 bash .pact/bin/pact.sh check --project
+```
+
+For stale or repeated-failure diagnostics:
+
+```bash
+bash .pact/bin/pact.sh check --stale
 ```
 
 For agent entry files, run:

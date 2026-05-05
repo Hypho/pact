@@ -10,15 +10,16 @@ cd "$ROOT"
 MODE="${1:---repo}"
 
 case "$MODE" in
-  --repo|--project) ;;
+  --repo|--project|--stale) ;;
   -h|--help)
-    echo "Usage: bash .pact/bin/pact-check.sh [--repo|--project]"
+    echo "Usage: bash .pact/bin/pact-check.sh [--repo|--project|--stale]"
     echo "  --repo     Check the PACT framework repository (default)"
     echo "  --project  Check an installed PACT project without requiring PACT release docs"
+    echo "  --stale    Report stale or unhealthy state signals without changing files"
     exit 0
     ;;
   *)
-    echo "Usage: bash .pact/bin/pact-check.sh [--repo|--project]"
+    echo "Usage: bash .pact/bin/pact-check.sh [--repo|--project|--stale]"
     exit 2
     ;;
 esac
@@ -90,6 +91,97 @@ expect_failure() {
   fi
 }
 
+run_stale_check() {
+  local state="${PACT_STATE_FILE:-.pact/state.md}"
+  [ -f "$state" ] || fail "state.md 不存在：$state"
+
+  local norm feature phase started queue_count fail_count now_epoch started_epoch age_hours
+  norm="$(sed -e 's/：/:/g' -e 's/\*\*//g' "$state")"
+  feature="$(echo "$norm" | awk '
+    /功能[[:space:]]*:/ {
+      sub(/^.*功能[[:space:]]*:[[:space:]]*/, "")
+      sub(/[[:space:]]*\|.*$/, "")
+      sub(/[[:space:]]+$/, "")
+      print
+      exit
+    }
+  ')"
+  phase="$(echo "$norm" | awk '
+    /阶段[[:space:]]*:/ {
+      sub(/^.*阶段[[:space:]]*:[[:space:]]*/, "")
+      if (index($0, "[") > 0 && index($0, "待开始") > 0) {
+        print "待开始"
+        exit
+      }
+      if (match($0, /待开始|[A-Za-z-]+/)) {
+        print substr($0, RSTART, RLENGTH)
+      }
+      exit
+    }
+  ')"
+  started="$(echo "$norm" | awk '
+    /开始时间[[:space:]]*:/ {
+      sub(/^.*开始时间[[:space:]]*:[[:space:]]*/, "")
+      sub(/[[:space:]]+$/, "")
+      print
+      exit
+    }
+  ')"
+  queue_count="$(awk '
+    /^## 队列/ { in_queue=1; next }
+    /^## / && in_queue { in_queue=0 }
+    in_queue && /^[[:space:]]*-[[:space:]]+\[[ xX]\][[:space:]]+/ {
+      line=$0
+      sub(/^[[:space:]]*-[[:space:]]+\[[ xX]\][[:space:]]+/, "", line)
+      sub(/[[:space:]]+$/, "", line)
+      if (line != "" && line != "[下一个功能]") count++
+    }
+    END { print count+0 }
+  ' "$state")"
+  fail_count=0
+  if [ -n "$feature" ] && [ "$feature" != "[名称]" ]; then
+    fail_count="$(find .pact/knowledge/errors -maxdepth 1 -type f -name "${feature}-*.md" 2>/dev/null | wc -l | tr -d '[:space:]')"
+  fi
+
+  echo "PACT stale diagnostics:"
+  echo "- current: ${feature:-unknown} / ${phase:-unknown}"
+
+  if [ -n "$started" ] && echo "$started" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}$'; then
+    now_epoch="$(date +%s)"
+    started_epoch="$(date -d "$started" +%s 2>/dev/null || echo "")"
+    if [ -n "$started_epoch" ]; then
+      age_hours="$(( (now_epoch - started_epoch) / 3600 ))"
+      echo "- current feature age: ${age_hours}h"
+      if [ "$age_hours" -ge "${PACT_STALE_HOURS:-72}" ]; then
+        echo "⚠️ current feature has been active for at least ${PACT_STALE_HOURS:-72}h"
+      fi
+      if [ "$phase" = "build" ] && [ "$age_hours" -ge "${PACT_STALE_BUILD_HOURS:-24}" ]; then
+        echo "⚠️ build phase has been active for at least ${PACT_STALE_BUILD_HOURS:-24}h"
+      fi
+    fi
+  fi
+
+  if [ "$fail_count" -ge "${PACT_STALE_FAILS:-3}" ]; then
+    echo "⚠️ repeated verify failures: $fail_count"
+  else
+    echo "- verify failure records: $fail_count"
+  fi
+
+  if [ "$queue_count" -eq 0 ] && [ -n "$feature" ] && [ "$feature" != "[名称]" ] && [ "$phase" != "shipped" ]; then
+    echo "⚠️ queue is empty while current feature is still active"
+  else
+    echo "- queue items: $queue_count"
+  fi
+
+  info "PACT stale diagnostics completed"
+}
+
+if [ "$MODE" = "--stale" ]; then
+  bash .pact/bin/pact-state.sh validate >/dev/null
+  run_stale_check
+  exit 0
+fi
+
 extract_version() {
   local file="$1"
   grep -m1 -Eo 'v[0-9]+\.[0-9]+\.[0-9]+' "$file" \
@@ -143,6 +235,7 @@ fi
 
 lint_state_file ".pact/state.md" || fail ".pact/state.md 结构检查失败"
 bash .pact/hooks/check-state.sh
+bash .pact/bin/pact-state.sh validate >/dev/null
 
 expect_success "idle state lint" lint_state_file ".pact/tests/fixtures/state/idle.md"
 expect_success "idle state check" env PACT_STATE_FILE=".pact/tests/fixtures/state/idle.md" bash .pact/hooks/check-state.sh
@@ -155,6 +248,11 @@ expect_failure "contract missing contract" env PACT_STATE_FILE=".pact/tests/fixt
 
 expect_failure "invalid phase lint" lint_state_file ".pact/tests/fixtures/state/invalid-phase.md"
 expect_failure "verify missing file" env PACT_STATE_FILE=".pact/tests/fixtures/state/verify-pass-missing-verify.md" bash .pact/hooks/check-state.sh
+expect_failure "current in queue" env PACT_STATE_FILE=".pact/tests/fixtures/state/current-in-queue.md" bash .pact/bin/pact-state.sh validate
+expect_failure "current in completed" env PACT_STATE_FILE=".pact/tests/fixtures/state/current-in-completed.md" bash .pact/bin/pact-state.sh validate
+expect_failure "duplicate queue" env PACT_STATE_FILE=".pact/tests/fixtures/state/duplicate-queue.md" bash .pact/bin/pact-state.sh validate
+expect_failure "duplicate completed" env PACT_STATE_FILE=".pact/tests/fixtures/state/duplicate-completed.md" bash .pact/bin/pact-state.sh validate
+expect_failure "unsafe feature name" env PACT_STATE_FILE=".pact/tests/fixtures/state/unsafe-feature-name.md" bash .pact/bin/pact-state.sh validate
 
 TMP_ROOT="$(mktemp -d)"
 trap 'rm -rf "$TMP_ROOT"' EXIT
@@ -167,6 +265,7 @@ bash .pact/bin/pact-lint-contract.sh --fixtures
 bash .pact/bin/pact-lint-verify.sh --fixtures
 bash .pact/bin/pact-lint-agents.sh --fixtures
 bash .pact/bin/pact-guard.sh --fixtures
+bash .pact/bin/pact-state.sh --fixtures
 bash .pact/bin/pact-lint-contract.sh --all
 bash .pact/bin/pact-lint-verify.sh --all
 bash .pact/bin/pact-lint-agents.sh --all

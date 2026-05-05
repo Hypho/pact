@@ -11,6 +11,8 @@ Usage: bash .pact/bin/pact.sh <command> [args]
 
 Commands:
   check [--repo|--project]          Run PACT checks
+  state <validate|set-phase|enqueue|complete|fail-verify>
+                                    Validate or update PACT state
   guard <pid|contract|build|verify|ship>
                                     Check whether a PACT stage may start
   lint-contract <file|--all|--fixtures>
@@ -24,6 +26,7 @@ Commands:
 
 Examples:
   bash .pact/bin/pact.sh check --project
+  bash .pact/bin/pact.sh state validate
   bash .pact/bin/pact.sh guard build
   bash .pact/bin/pact.sh lint-contract --all
   bash .pact/bin/pact.sh lint-agents --all
@@ -38,6 +41,9 @@ fi
 case "$cmd" in
   check)
     bash "$ROOT/.pact/bin/pact-check.sh" "$@"
+    ;;
+  state)
+    bash "$ROOT/.pact/bin/pact-state.sh" "$@"
     ;;
   guard)
     bash "$ROOT/.pact/bin/pact-guard.sh" "$@"

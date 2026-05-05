@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> A lightweight protocol framework for auditable human-AI software development | v1.8.0
+> A lightweight protocol framework for auditable human-AI software development | v1.9.0
 > 中文: [README.zh.md](./README.zh.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -209,7 +209,23 @@ All contract / verify / exec-plan / pid-card paths are derived from the feature-
 ### State Source
 In v1.x, `.pact/state.md` remains the human-readable source of truth. PACT also includes a draft `.pact/schemas/state.schema.json` to define the future structured state shape, but it does not change the current runtime behavior.
 
-`pact-check.sh` now validates the basic `state.md` structure and runs fixture checks for common invalid states before release.
+State changes that tools need to perform should go through the controlled state entry:
+
+```bash
+bash .pact/bin/pact.sh state validate
+bash .pact/bin/pact.sh state enqueue <feature>
+bash .pact/bin/pact.sh state set-phase <phase>
+bash .pact/bin/pact.sh state complete
+bash .pact/bin/pact.sh state fail-verify
+```
+
+`pact-check.sh` validates the basic `state.md` structure, runs logical consistency checks, and covers common invalid states with fixtures.
+
+For time-based health diagnostics, run:
+
+```bash
+bash .pact/bin/pact.sh check --stale
+```
 
 ### Contract / Verify Lint
 PACT checks that behavior contracts and verification records are structurally valid:
@@ -293,6 +309,7 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 
 | Version | Date | Core changes |
 |---------|------|--------------|
+| v1.9.0 | 2026-05-05 | Adds controlled state operations, logical state consistency checks, verify failure recovery, and stale diagnostics |
 | v1.8.0 | 2026-04-30 | Adds AGENTS entry quality linting, module-level AGENTS templates, and clearer cross-tool entry responsibilities |
 | v1.7.1 | 2026-04-28 | Adds a secure notes example, consolidates example and workflow references, and clarifies Windows self-check guidance |
 | v1.7.0 | 2026-04-28 | Adds GitHub remote installers, automatic install mode detection for source installers, and direct project installation guidance |

@@ -13,6 +13,22 @@ This changelog follows a Keep a Changelog style:
 
 ---
 
+## v1.9.0 — 2026-05-05
+
+### Added
+- Added `.pact/bin/pact-state.sh` with controlled state operations: `validate`, `enqueue`, `set-phase`, `complete`, and `fail-verify`.
+- Added `state` to the unified `.pact/bin/pact.sh` wrapper.
+- Added logical state consistency checks for current / queue / completed conflicts, duplicate queue and completed entries, unsafe feature names, and phase-to-artifact consistency.
+- Added verify failure recovery that records failure notes under `.pact/knowledge/errors/` and returns the active feature to `build`.
+- Added `check --stale` diagnostics for long-running active work, repeated verify failures, and empty queue anomalies.
+- Added state command fixtures and invalid-state fixtures for the new consistency checks.
+
+### Changed
+- `pact-check.sh` now calls the controlled state validator as part of project and repository self-check.
+- Documented `pact state` as the recommended v1.x state mutation entry while keeping `.pact/state.md` as the source of truth.
+
+---
+
 ## v1.8.0 — 2026-04-30
 
 ### Added
