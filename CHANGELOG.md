@@ -13,6 +13,21 @@ This changelog follows a Keep a Changelog style:
 
 ---
 
+## v1.10.0 — 2026-05-06
+
+### Added
+- Added feature sizing rules to keep each feature within one `contract -> build -> verify -> ship` loop.
+- Added oversized contract linting for contracts with more than 7 FC entries, including fixture coverage.
+- Added `.pact/knowledge/patterns.md` for durable cross-feature engineering patterns.
+- Added reusable pattern candidate fields to verify and handover templates.
+- Added draft structured queue schema and examples: `.pact/schemas/queue.schema.json`, `.pact/queue.example.json`, and `.pact/state.example.json`.
+
+### Changed
+- `/pact.build`, `/pact.ship`, and `/pact.retro` now route reusable discoveries through the patterns knowledge layer.
+- Documented feature sizing, reusable patterns, and draft structured state / queue files in README and usage docs.
+- Clarified that the release layer is optional for projects that adopt `VERSION` and `CHANGELOG.md`.
+- Repository self-check now requires the structured state / queue draft files and patterns knowledge file.
+
 ## v1.9.0 — 2026-05-05
 
 ### Added
