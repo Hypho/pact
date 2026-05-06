@@ -281,6 +281,12 @@ FDG generation is optional. It should only be generated when the developer expli
 
 Large-feature gating (spans 3+ modules / schema changes / needs 2+ sessions / depends on 3+ unfinished features) → mandatory execution plan, requires human confirmation.
 
+### Feature Sizing
+PACT now treats feature size as a protocol concern. A feature should fit one complete `contract -> build -> verify -> ship` loop. `/pact.pid` flags broad work early, and contract lint rejects contracts with more than 7 FC entries so oversized work is split or planned before build.
+
+### Reusable Patterns
+Durable cross-feature engineering knowledge belongs in `.pact/knowledge/patterns.md`. `/pact.ship` may promote stable learnings into this file, and `/pact.retro` cleans stale or story-specific entries. It is not a progress log or a replacement for AGENTS/module handover files.
+
 ### Verify Mechanism
 Not code review, but active falsification. For each FC entry, construct edge inputs, run them for real, capture real output; inferential language is prohibited. Three possible verdicts: `PASS` / `FAIL` (roll back to build) / `INCONCLUSIVE` (triaged via a three-option protocol).
 
@@ -319,4 +325,3 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 | v1.4.0 | 2026-04-27 | Adds VERSION as the file-only version source, documents layered release workflows, and adds optional git-aware release checks |
 | v1.3.3 | 2026-04-27 | Adds CHANGELOG.md as canonical release history and requires changelog coverage in repository self-checks |
 | v1.3.2 | 2026-04-27 | Adds draft state schema, state fixtures, stricter state.md lint, fixture-based check-state coverage, and build-phase state validation |
-| v1.2.1 | 2026-04-26 | Refines README positioning, adds CI status badge, clarifies when to use or avoid PACT, and documents the repository self-check command |

@@ -194,6 +194,15 @@ Run a PACT retro over the last 3-5 shipped features.
 Check intent drift, contract quality, verification quality, and active technical debt.
 ```
 
+Use `.pact/knowledge/patterns.md` for reusable engineering knowledge that remains useful across features and sessions:
+
+- module conventions
+- non-obvious dependencies
+- testing approaches
+- recurring gotchas
+
+Promote stable learnings during `/pact.ship` and clean stale entries during `/pact.retro`. Do not use `patterns.md` as a progress log, debug scratchpad, or replacement for `AGENTS.md`, `constitution.md`, or module handover files.
+
 Before publishing or sharing framework changes:
 
 ```bash

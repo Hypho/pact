@@ -194,6 +194,15 @@ PACT 在以下情况应该暂停，而不是继续猜：
 检查意图漂移、契约质量、验证质量和活跃技术债。
 ```
 
+`.pact/knowledge/patterns.md` 用来记录跨功能、跨会话仍然有效的工程知识：
+
+- 模块约定
+- 非显然依赖
+- 测试方式
+- 常见陷阱
+
+稳定经验可在 `/pact.ship` 时沉淀，过时内容在 `/pact.retro` 中清理。不要把 `patterns.md` 当作进度日志、debug 草稿，或替代 `AGENTS.md`、`constitution.md`、模块 handover。
+
 发布或共享框架变更前：
 
 ```bash
