@@ -234,6 +234,10 @@ if [ "$MODE" = "--repo" ]; then
 fi
 
 lint_state_file ".pact/state.md" || fail ".pact/state.md 结构检查失败"
+[ -f ".pact/schemas/state.schema.json" ] || fail ".pact/schemas/state.schema.json 不存在"
+[ -f ".pact/state.example.json" ] || fail ".pact/state.example.json 不存在"
+[ -f ".pact/schemas/queue.schema.json" ] || fail ".pact/schemas/queue.schema.json 不存在"
+[ -f ".pact/queue.example.json" ] || fail ".pact/queue.example.json 不存在"
 [ -f ".pact/knowledge/patterns.md" ] || fail ".pact/knowledge/patterns.md 不存在"
 if ! grep -q "## 稳定模式" ".pact/knowledge/patterns.md"; then
   fail ".pact/knowledge/patterns.md 缺少稳定模式章节"

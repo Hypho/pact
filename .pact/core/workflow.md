@@ -101,6 +101,17 @@ bash .pact/bin/pact.sh check --stale
 
 Agents may read `state.md` directly, but machine-critical state updates should use `pact state` commands so phase transitions, duplicate queue/completed entries, unsafe feature names, and verify evidence requirements are checked before writing.
 
+Structured state and queue files are draft-only in v1.x:
+
+```text
+.pact/schemas/state.schema.json
+.pact/state.example.json
+.pact/schemas/queue.schema.json
+.pact/queue.example.json
+```
+
+Do not create `.pact/state.json` or `.pact/queue.json` as active truth sources unless a future incompatible protocol version explicitly enables them.
+
 The current feature name must exactly match generated file paths:
 
 ```text

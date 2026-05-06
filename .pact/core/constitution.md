@@ -173,6 +173,8 @@ INCONCLUSIVE — 无法在当前环境实际运行（见 pact.verify.md 中 INCO
 v1.x 阶段：
   .pact/state.md 是状态真相源。
   .pact/schemas/state.schema.json 仅作为未来结构化迁移草案。
+  .pact/state.example.json 仅作为 state schema 示例，不参与运行时读取。
+  .pact/schemas/queue.schema.json 与 .pact/queue.example.json 仅作为未来结构化队列草案。
   pact-check.sh 必须检查 state.md 的基础字段和阶段枚举。
   check-state.sh 必须通过 fixture 覆盖常见非法状态。
 
@@ -181,6 +183,7 @@ v1.x 阶段：
   迁移后 state.md 应由结构化状态渲染生成，不再手动维护。
 
 不得提前将 PID Card / Contract / Verify 全部结构化。
+不得在 v1.x 将 state.json 或 queue.json 作为运行时真相源。
 ```
 
 ---

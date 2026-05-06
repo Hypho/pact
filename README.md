@@ -165,7 +165,10 @@ your-project/
     │   ├── constitution.md          ← Warm layer: project charter, hard constraints + file-naming rules
     │   └── architecture.md          ← Cold layer: load on demand
     ├── schemas/
-    │   └── state.schema.json        ← Draft structured state schema for future migration
+    │   ├── state.schema.json        ← Draft structured state schema for future migration
+    │   └── queue.schema.json        ← Draft structured queue schema, not active in v1.x
+    ├── state.example.json           ← Example only, not a runtime source
+    ├── queue.example.json           ← Example only, not a runtime source
     ├── scope/
     │   ├── boundaries.md            ← Boundary checklist (B-H / B-M risk rules)
     │   └── fitness.md               ← Adaptation assessment output (/pact.scope)
@@ -208,6 +211,8 @@ All contract / verify / exec-plan / pid-card paths are derived from the feature-
 
 ### State Source
 In v1.x, `.pact/state.md` remains the human-readable source of truth. PACT also includes a draft `.pact/schemas/state.schema.json` to define the future structured state shape, but it does not change the current runtime behavior.
+
+PACT also includes draft-only structured examples for future migration: `.pact/state.example.json`, `.pact/schemas/queue.schema.json`, and `.pact/queue.example.json`. These are not runtime truth sources in v1.x.
 
 State changes that tools need to perform should go through the controlled state entry:
 

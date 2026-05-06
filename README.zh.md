@@ -165,7 +165,10 @@ your-project/
     │   ├── constitution.md          ← 温层：项目宪法，硬约束 + 文件命名规范
     │   └── architecture.md          ← 冷层：按需加载
     ├── schemas/
-    │   └── state.schema.json        ← 未来结构化状态源的草案 schema
+    │   ├── state.schema.json        ← 未来结构化状态源的草案 schema
+    │   └── queue.schema.json        ← 未来结构化队列草案，v1.x 不启用
+    ├── state.example.json           ← 示例文件，不作为运行时状态源
+    ├── queue.example.json           ← 示例文件，不作为运行时状态源
     ├── scope/
     │   ├── boundaries.md            ← 边界特征清单（B-H / B-M 风险规则）
     │   └── fitness.md               ← 适配评估结果（/pact.scope 生成）
@@ -208,6 +211,8 @@ your-project/
 
 ### 状态源
 在 v1.x 阶段，`.pact/state.md` 仍然是人类可读的状态真相源。PACT 同时提供 `.pact/schemas/state.schema.json` 草案，用于定义未来结构化 state 的形状，但它不会改变当前运行方式。
+
+PACT 还提供仅用于预研的结构化示例：`.pact/state.example.json`、`.pact/schemas/queue.schema.json` 与 `.pact/queue.example.json`。这些文件在 v1.x 不作为运行时真相源。
 
 工具需要执行的状态变更应通过受控状态入口完成：
 
