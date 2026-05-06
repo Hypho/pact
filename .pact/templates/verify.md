@@ -20,6 +20,12 @@ L2 结果：[X passed / Y failed]
 [无 / 粘贴失败用例的完整输出]
 ```
 
+## 可复用经验候选
+
+- [无 / 可沉淀到 knowledge/patterns.md 的跨功能模式或陷阱]
+
+> 只记录跨功能仍然有效的工程模式。单个功能流水账、临时 debug 信息、已存在于 README / AGENTS.md / constitution.md 的内容不要写入 patterns。
+
 ## Verdict
 
 > ⚠️ 此行格式固定，启动校验依赖精确匹配，不得修改键名或格式。

@@ -82,8 +82,11 @@ L1 失败未修复时跳过。
 - PAD 实体定义是否变更？→ 检查已完成功能的相关契约
 - 共享契约（FDG）是否受影响？→ 更新 FDG.md
 - 是否有新的全局技术约束？→ 补充 constitution.md
+- 是否发现跨功能可复用工程模式？→ 补充 `knowledge/patterns.md`
 - Schema 是否变更？→ 确认 migration 已创建
 - 是否需要更新 handover 文档？→ 更新 `knowledge/handover/[模块].md`
+
+`knowledge/patterns.md` 只记录跨功能、跨会话仍然有效的模式或陷阱。不要记录本功能流水账、临时 debug 信息、已存在于 README / AGENTS.md / constitution.md 的内容。
 
 ## Step 5  归档
 

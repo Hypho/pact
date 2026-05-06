@@ -193,6 +193,7 @@ v1.x 阶段：
   2. 至少包含一个 FC 条目（FC-01 / FC-1）
   3. 包含“明确不做”或 “Out of Scope”
   4. 不保留明显模板占位符（[请补充] / [功能名] / [待填写] / TODO）
+  5. FC 条目数不得超过默认阈值 7；超过时必须拆分功能或生成 exec-plan
 
 /pact.verify 产物必须通过 verify lint：
   1. 文件存在且非空
@@ -200,6 +201,30 @@ v1.x 阶段：
   3. verdict 只能出现一次
   4. 禁止使用“应该 / 预期 / 理论上 / should / expected / theoretically”
   5. verdict = PASS 时，必须包含运行证据标记（output / 输出 / command / 命令 / result / 结果）
+```
+
+---
+
+## 11a. 功能粒度与可复用经验规则
+
+```
+一个功能应能完成一次完整的 contract -> build -> verify -> ship 闭环。
+
+命中以下任一信号时，必须拆分功能或生成 exec-plan：
+  1. 跨 3+ 模块
+  2. 涉及 Schema 变更且同时包含多类实现工作
+  3. 预计需要 2+ 个会话
+  4. 依赖 3+ 个尚未完成的功能
+  5. 无法用 2-3 句话描述单一用户价值
+  6. 无法独立验证核心 FC 条目
+
+.pact/knowledge/patterns.md 只记录跨功能、跨会话仍有效的工程模式：
+  - 模块约定
+  - 非显然依赖
+  - 测试方式
+  - 常见陷阱
+
+不得记录单个功能流水账、临时 debug 信息、主观偏好，或 README / AGENTS.md / constitution.md 已有内容。
 ```
 
 ---

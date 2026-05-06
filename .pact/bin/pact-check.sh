@@ -234,6 +234,10 @@ if [ "$MODE" = "--repo" ]; then
 fi
 
 lint_state_file ".pact/state.md" || fail ".pact/state.md 结构检查失败"
+[ -f ".pact/knowledge/patterns.md" ] || fail ".pact/knowledge/patterns.md 不存在"
+if ! grep -q "## 稳定模式" ".pact/knowledge/patterns.md"; then
+  fail ".pact/knowledge/patterns.md 缺少稳定模式章节"
+fi
 bash .pact/hooks/check-state.sh
 bash .pact/bin/pact-state.sh validate >/dev/null
 

@@ -80,6 +80,8 @@ guard 失败则停止，不继续 build。
 登记到 tech-debt.md？[A]是 [B]否
 ```
 
+发现可复用工程模式时，不直接写入 AGENTS.md。先在当前 verify / handover 候选中记录，等待 `/pact.ship` 或 `/pact.retro` 判断是否沉淀到 `knowledge/patterns.md`。
+
 检查通过时：输出单行确认，继续下一个组件。
 发现问题时：描述问题 + 对应规则 + 建议修正，等待处理后继续。
 
