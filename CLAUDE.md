@@ -122,10 +122,10 @@ CLAUDE.md              — 当前文件
 
 ## 6. 开源维护规则
 
-本仓库作为公开开源项目维护时，遵守以下规则：
+若当前项目采用 PACT release layer 维护版本与发布记录，遵守以下规则：
 
-- 本地规划、未验证路线、长期构想默认写入 `*.local.md`，不进入公开仓库。
-- 公开路线使用 GitHub Issues / Milestones 表达，不用提前承诺式 roadmap 文档。
+- 本地规划、未验证路线、长期构想默认写入 `*.local.md`，不进入公开发布内容。
+- 公开路线使用 Issues / Milestones 表达，不用提前承诺式 roadmap 文档。
 - `VERSION` 是唯一可编辑版本真相源。
 - `pact-check.sh` 必须保持 file-only，不依赖 git、GitHub、网络或 `gh`。
 - git-aware 发布检查只能放在可选脚本中，例如 `pact-release-check.sh`。

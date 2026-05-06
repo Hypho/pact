@@ -328,12 +328,12 @@ PACT 默认自检必须保持 file-only，不依赖 git / GitHub / 网络。
 git-aware 检查是可选能力，只用于采用 git 协作的项目。
 GitHub-aware 发布只适用于使用 GitHub Release 的仓库维护流程。
 
-公开仓库只发布已经落地或正在本版本落地的能力。
-长期路线、未验证设计、内部判断默认保存在 *.local.md，不推送。
+采用 release layer 的项目只发布已经落地或正在本版本落地的能力。
+长期路线、未验证设计、内部判断默认保存在 *.local.md，不进入公开发布内容。
 
 公开规划方式：
-  - 短期可执行事项 → GitHub Issues
-  - 同一版本目标 → GitHub Milestones
+  - 短期可执行事项 → Issues
+  - 同一版本目标 → Milestones
   - 已发布能力 → README / CHANGELOG / Release Notes
 
 版本判断：
