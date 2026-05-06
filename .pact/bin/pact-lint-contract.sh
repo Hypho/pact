@@ -36,6 +36,12 @@ lint_contract_file() {
     errors+=("contains template placeholders")
   fi
 
+  local fc_count
+  fc_count="$(grep -Eo 'FC-[0-9]+' "$file" | sort -u | wc -l | tr -d '[:space:]')"
+  if [ "${fc_count:-0}" -gt "${PACT_CONTRACT_MAX_FC:-7}" ]; then
+    errors+=("too many FC entries (${fc_count}); split the feature or create an exec-plan")
+  fi
+
   if [ "${#errors[@]}" -gt 0 ]; then
     fail_file "$file" "${errors[@]}"
   fi
@@ -86,6 +92,7 @@ lint_fixtures() {
   expect_failure "missing FC" lint_contract_file ".pact/tests/fixtures/contract/missing-fc.md"
   expect_failure "missing out of scope" lint_contract_file ".pact/tests/fixtures/contract/missing-out-of-scope.md"
   expect_failure "template placeholder" lint_contract_file ".pact/tests/fixtures/contract/template-placeholder.md"
+  expect_failure "too many FC entries" lint_contract_file ".pact/tests/fixtures/contract/too-many-fc.md"
 }
 
 case "${1:-}" in
