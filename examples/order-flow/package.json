@@ -1,0 +1,9 @@
+{
+  "name": "pact-example-order-flow",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test": "node test/create-order.test.js"
+  }
+}

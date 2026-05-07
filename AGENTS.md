@@ -19,6 +19,7 @@ For the full workflow reference, read `.pact/core/workflow.md`.
 
 For each feature:
 - define intent before implementation
+- map it to Product Spine (`.pact/specs/PAD.md`) and architecture impact (`.pact/core/architecture.md`)
 - write behavior contracts before code changes
 - build against the contract
 - verify with real command output
@@ -85,10 +86,13 @@ For stale or repeated-failure diagnostics:
 bash .pact/bin/pact.sh check --stale
 ```
 
-For agent entry files, run:
+Useful checks:
 
 ```bash
 bash .pact/bin/pact.sh lint-agents --all
+bash .pact/bin/pact.sh lint-pad .pact/specs/PAD.md
+bash .pact/bin/pact.sh lint-architecture .pact/core/architecture.md
+bash .pact/bin/pact.sh lint-pid --all
 ```
 
 If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`, and the task is release-related:
@@ -137,11 +141,7 @@ For `PASS`, include runtime evidence such as `command:`, `output:`, `result:`, `
 
 ## Release Rules
 
-Do not publish a version for every small edit.
-
-Only update `VERSION`, README version history, and `CHANGELOG.md` when the change set has clear release value.
-
-Do not create tags, push releases, or modify GitHub Releases without explicit maintainer confirmation.
+Do not publish every small edit. Update `VERSION`, README version history, and `CHANGELOG.md` only for release-worthy change sets. Do not create tags, push releases, or modify GitHub Releases without explicit maintainer confirmation.
 
 ## Tool Notes
 

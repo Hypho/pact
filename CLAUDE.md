@@ -83,11 +83,14 @@ CLAUDE.md              — 当前文件
 /pact.scope     → .pact/scope/boundaries.md
                   .pact/core/constitution.md
 /pact.pid       → .pact/scope/boundaries.md
+                  .pact/specs/PAD.md（Product Spine：业务主流程 / 功能类型）
+                  .pact/core/architecture.md（Architecture Spine：模块 / 实体 / ADR 触发条件）
                   若 specs/FDG.md 已存在 → .pact/specs/FDG.md
 /pact.contract  → .pact/templates/contract.md
                   .pact/specs/[当前功能]-pid.md
                   .pact/specs/PAD.md（若存在）
 /pact.build     → .pact/core/constitution.md
+                  .pact/core/architecture.md（涉及模块、实体、状态机、权限或依赖时）
                   .pact/contracts/[当前功能].md
                   .pact/specs/[当前功能]-pid.md
                   .pact/specs/PAD.md（若存在）
@@ -102,7 +105,7 @@ CLAUDE.md              — 当前文件
 
 **按需层**（有明确需要时才读，不默认加载）
 ```
-.pact/core/architecture.md       — 涉及新模块或新依赖时
+.pact/core/architecture.md       — 涉及新模块、新实体、状态机、权限、依赖或 ADR 触发条件时
 .pact/core/workflow.md           — 需要核对完整流程、阶段输入输出或停止条件时
 .pact/knowledge/decisions/       — 遇到历史决策冲突时
 .pact/knowledge/errors/          — 调查重复失败模式时

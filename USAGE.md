@@ -124,9 +124,10 @@ Then run the PACT scope assessment before the first feature.
 ```
 
 What happens:
-- `/pact.init` creates project-level facts: constitution, PAD draft, and state.
+- `/pact.init` creates project-level facts: constitution, Product Spine / PAD draft, and state.
 - `/pact.scope` assesses whether PACT is appropriate and identifies risk boundaries.
 - Scope is strongly recommended before the first feature, but it is not a state-machine phase.
+- Fill the PAD with a product goal, core business flow, feature type definitions, core entities, and UX consistency rules before starting substantial feature work.
 
 ---
 
@@ -161,6 +162,15 @@ Expected artifacts:
 | `build` | Code changes + `state.md` moves to `build-complete` |
 | `verify` | `.pact/knowledge/[feature]-verify.md` |
 | `ship` | Archived contract + updated state |
+
+Global Spine Lite adds two lightweight global anchors without adding daily workflow steps:
+
+| Spine | File | Purpose |
+|-------|------|---------|
+| Product Spine | `.pact/specs/PAD.md` | Product goal, core business flow, entities, states, UX consistency, feature type definitions |
+| Architecture Spine | `.pact/core/architecture.md` | Module boundaries, entity ownership, state machine ownership, permission location, dependency direction, ADR triggers |
+
+During `/pact.pid`, map the feature to a PAD flow step or mark it as auxiliary, admin, or experimental with a reason. During `/pact.build`, check implementation against the relevant architecture boundaries.
 
 ---
 
@@ -235,6 +245,14 @@ To check agent entry files:
 
 ```bash
 bash .pact/bin/pact.sh lint-agents --all
+```
+
+To check Global Spine Lite artifacts:
+
+```bash
+bash .pact/bin/pact.sh lint-pad .pact/specs/PAD.md
+bash .pact/bin/pact.sh lint-architecture .pact/core/architecture.md
+bash .pact/bin/pact.sh lint-pid --all
 ```
 
 If the project adopts PACT's release layer with `VERSION` and `CHANGELOG.md`:

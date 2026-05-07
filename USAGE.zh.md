@@ -124,9 +124,10 @@ AGENTS.md
 ```
 
 结果：
-- `/pact.init` 建立项目级事实：constitution、PAD 初稿、state。
+- `/pact.init` 建立项目级事实：constitution、Product Spine / PAD 初稿、state。
 - `/pact.scope` 判断 PACT 是否适合当前项目，并识别风险边界。
 - scope 建议在第一个功能前执行，但它不是状态机阶段。
+- 在正式功能开发前，建议补齐 PAD 中的产品目标、核心业务主流程、功能类型定义、核心实体和体验一致性规则。
 
 ---
 
@@ -161,6 +162,15 @@ PASS 后发布归档该功能。
 | `build` | 代码变更 + `state.md` 进入 `build-complete` |
 | `verify` | `.pact/knowledge/[功能名]-verify.md` |
 | `ship` | 归档 contract + 更新 state |
+
+Global Spine Lite 在不增加日常流程步骤的前提下增加两个全局锚点：
+
+| 主干 | 文件 | 作用 |
+|------|------|------|
+| Product Spine | `.pact/specs/PAD.md` | 产品目标、核心业务主流程、实体、状态、体验一致性、功能类型 |
+| Architecture Spine | `.pact/core/architecture.md` | 模块边界、实体归属、状态机归属、权限判断位置、依赖方向、ADR 触发条件 |
+
+执行 `/pact.pid` 时，功能应映射到 PAD 的业务主流程 Step，或标记为辅助 / 管理 / 实验并说明理由。执行 `/pact.build` 时，对照相关 architecture 边界检查实现。
 
 ---
 
@@ -235,6 +245,14 @@ bash .pact/bin/pact.sh check --stale
 
 ```bash
 bash .pact/bin/pact.sh lint-agents --all
+```
+
+检查 Global Spine Lite 产物：
+
+```bash
+bash .pact/bin/pact.sh lint-pad .pact/specs/PAD.md
+bash .pact/bin/pact.sh lint-architecture .pact/core/architecture.md
+bash .pact/bin/pact.sh lint-pid --all
 ```
 
 如果项目采用 PACT 的 release 层，并维护 `VERSION` 与 `CHANGELOG.md`：

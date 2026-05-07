@@ -12,6 +12,8 @@ PACT is a lightweight protocol framework for building software with AI while kee
 
 It turns AI-assisted development from an open-ended chat into a staged workflow: define intent, write a behavior contract, implement against that contract, verify with real outputs, then archive what changed.
 
+PACT keeps the daily feature loop lightweight, but feature work is anchored by two global spines: the Product Spine in `PAD.md` and the Architecture Spine in `architecture.md`. A feature should explain where it fits in the core business flow and which module / entity boundaries it touches before it enters build.
+
 PACT is designed for product-minded builders, solo developers, and small teams who want AI to move faster without losing control of scope, state, and quality.
 
 It is not a code generator, an agent scheduler, or a replacement for CI/CD. It is the protocol layer that keeps human decisions and AI execution aligned.
@@ -115,6 +117,7 @@ See [examples](./examples/) for runnable completed feature flows:
 
 - [todo-feature](./examples/todo-feature/) shows the smallest useful flow with validation and storage failure handling.
 - [secure-notes](./examples/secure-notes/) shows a more realistic ownership boundary with denied cross-user access and verification evidence.
+- [order-flow](./examples/order-flow/) shows Global Spine Lite: PAD business flow, architecture boundaries, PID flow mapping, and flow evidence in verify.
 
 ---
 
@@ -209,6 +212,17 @@ your-project/
 ### File Naming Convention
 All contract / verify / exec-plan / pid-card paths are derived from the feature-name field in state.md, following rules defined in constitution.md. The startup check compares the phase declared in state.md against the corresponding files; mismatch halts execution.
 
+### Global Spine Lite
+
+PACT adds global constraints without adding daily workflow steps:
+
+- `PAD.md` is the Product Spine: product goal, core users and scenarios, core business flow, core entities and states, UX consistency rules, and feature type definitions.
+- `architecture.md` is the Architecture Spine: architecture principles, module boundaries, entity ownership, state machine ownership, permission location, write boundaries, dependency direction, and ADR triggers.
+- PID Cards map each feature to a PAD flow step or explicitly mark it as auxiliary, admin, or experimental.
+- Build checks implementation against the Architecture Spine when a feature touches modules, entities, state machines, permissions, or dependencies.
+
+This is not a PRD system or architecture governance platform. It is a lightweight global constraint layer for the existing `pid -> contract -> build -> verify -> ship` loop.
+
 ### State Source
 In v1.x, `.pact/state.md` remains the human-readable source of truth. PACT also includes a draft `.pact/schemas/state.schema.json` to define the future structured state shape, but it does not change the current runtime behavior.
 
@@ -263,6 +277,16 @@ bash .pact/bin/pact.sh lint-agents --all
 ```
 
 `pact-lint-agents.sh` checks the basic shape of agent entry files so they do not drift into long warning lists or unbounded documentation indexes.
+
+Global Spine Lite checks:
+
+```bash
+bash .pact/bin/pact.sh lint-pad <file>
+bash .pact/bin/pact.sh lint-architecture <file>
+bash .pact/bin/pact.sh lint-pid <file|--all>
+```
+
+These are lightweight structure checks. They do not grade product quality, UX quality, or architecture quality.
 
 ### Scope Assessment
 

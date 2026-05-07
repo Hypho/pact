@@ -6,4 +6,4 @@ These examples show completed PACT feature flows after `ship`.
 |---------|---------|-----|
 | [todo-feature](./todo-feature/) | Minimal happy-path feature with validation and storage failure handling. | `node test/add-todo.test.js` |
 | [secure-notes](./secure-notes/) | More realistic feature with ownership checks, denied cross-user access, explicit boundaries, and verification evidence. | `node test/secure-notes.test.js` |
-
+| [order-flow](./order-flow/) | Global Spine Lite example with PAD business flow, architecture boundaries, PID flow mapping, and flow evidence. | `node test/create-order.test.js` |
