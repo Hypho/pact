@@ -37,6 +37,9 @@ lint_pid_file() {
   grep -q '涉及模块' "$file" || errors+=("missing module impact field")
   grep -q '涉及实体' "$file" || errors+=("missing entity impact field")
   grep -q '是否需要 ADR' "$file" || errors+=("missing ADR decision field")
+  grep -q '^## 设计附件判断' "$file" || errors+=("missing 设计附件判断 section")
+  grep -q '触发项' "$file" || errors+=("missing design attachment trigger field")
+  grep -q '人工决策' "$file" || errors+=("missing design attachment decision field")
 
   if ! grep -Eq '功能类型[：:][[:space:]]*(主流程|辅助|管理|实验)' "$file"; then
     errors+=("feature type must be 主流程 / 辅助 / 管理 / 实验")
@@ -45,6 +48,23 @@ lint_pid_file() {
   if grep -Eq '功能类型[：:][[:space:]]*(辅助|管理|实验)' "$file"; then
     if ! grep -Eq '服务|暂不映射|不属于主流程|PAD 业务主流程 Step[：:][[:space:]]*S[0-9]+' "$file"; then
       errors+=("non-main feature must explain related flow step or out-of-flow rationale")
+    fi
+  fi
+
+  if grep -Eq '状态[：:][[:space:]]*需要' "$file"; then
+    local attachment missing=0
+    while IFS= read -r attachment; do
+      [ -n "$attachment" ] || continue
+      if [ ! -f "$attachment" ]; then
+        errors+=("declared design attachment does not exist: $attachment")
+        missing=1
+      elif ! bash "$ROOT/.pact/bin/pact-lint-design.sh" "$attachment" >/dev/null; then
+        errors+=("declared design attachment fails lint: $attachment")
+      fi
+    done < <(grep -Eo '\.pact/[^ )]*design/[^ )]+' "$file" | sort -u)
+
+    if [ "$missing" -eq 0 ] && ! grep -Eq '\.pact/[^ )]*design/[^ )]+' "$file"; then
+      errors+=("design attachment marked needed but no .pact/design path declared")
     fi
   fi
 
@@ -96,9 +116,11 @@ expect_failure() {
 lint_fixtures() {
   expect_success "valid PID" lint_pid_file ".pact/tests/fixtures/pid/valid-pid.md"
   expect_success "valid auxiliary PID" lint_pid_file ".pact/tests/fixtures/pid/valid-auxiliary-pid.md"
+  expect_success "valid PID with design attachment" lint_pid_file ".pact/tests/fixtures/pid/valid-pid-with-design.md"
   expect_failure "missing flow mapping" lint_pid_file ".pact/tests/fixtures/pid/missing-flow-mapping.md"
   expect_failure "invalid feature type" lint_pid_file ".pact/tests/fixtures/pid/invalid-feature-type.md"
   expect_failure "auxiliary without rationale" lint_pid_file ".pact/tests/fixtures/pid/auxiliary-without-rationale.md"
+  expect_failure "needed attachment missing path" lint_pid_file ".pact/tests/fixtures/pid/design-needed-missing-path.md"
 }
 
 case "${1:-}" in

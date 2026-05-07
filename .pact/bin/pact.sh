@@ -23,6 +23,8 @@ Commands:
   lint-architecture <file|--all|--fixtures>
                                     Lint Architecture Spine files
   lint-pid <file|--all|--fixtures>  Lint PID Cards
+  lint-design <file|--all|--fixtures>
+                                    Lint optional design attachments
   lint-agents <file|--all|--fixtures>
                                     Lint agent instruction entry files
   release-check                     Run optional git-aware release check
@@ -66,6 +68,9 @@ case "$cmd" in
     ;;
   lint-pid)
     bash "$ROOT/.pact/bin/pact-lint-pid.sh" "$@"
+    ;;
+  lint-design)
+    bash "$ROOT/.pact/bin/pact-lint-design.sh" "$@"
     ;;
   lint-agents)
     bash "$ROOT/.pact/bin/pact-lint-agents.sh" "$@"
