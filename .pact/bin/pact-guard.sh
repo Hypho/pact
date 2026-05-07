@@ -113,6 +113,7 @@ guard_contract() {
   [ "$PHASE" = "pid" ] || fail "/pact.contract blocked: 当前阶段是 $PHASE，不是 pid"
   local pid=".pact/specs/$(feature_slug)-pid.md"
   [ -f "$pid" ] || fail "/pact.contract blocked: PID Card 不存在：$pid"
+  bash "$ROOT/.pact/bin/pact-lint-pid.sh" "$pid" >/dev/null
   pass "/pact.contract allowed: PID Card exists"
 }
 

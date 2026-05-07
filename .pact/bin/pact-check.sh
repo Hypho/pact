@@ -242,6 +242,15 @@ lint_state_file ".pact/state.md" || fail ".pact/state.md 结构检查失败"
 if ! grep -q "## 稳定模式" ".pact/knowledge/patterns.md"; then
   fail ".pact/knowledge/patterns.md 缺少稳定模式章节"
 fi
+if ! grep -q "^## 核心业务主流程" ".pact/templates/PAD.md"; then
+  fail ".pact/templates/PAD.md 缺少核心业务主流程章节"
+fi
+if ! grep -q "^## 主流程映射" ".pact/templates/pid-card.md"; then
+  fail ".pact/templates/pid-card.md 缺少主流程映射章节"
+fi
+if ! grep -q "^## ADR 触发条件" ".pact/core/architecture.md"; then
+  fail ".pact/core/architecture.md 缺少 ADR 触发条件章节"
+fi
 bash .pact/hooks/check-state.sh
 bash .pact/bin/pact-state.sh validate >/dev/null
 
@@ -271,15 +280,19 @@ expect_failure "verify missing PASS verdict" env PACT_ROOT="$TMP_ROOT" bash .pac
 
 bash .pact/bin/pact-lint-contract.sh --fixtures
 bash .pact/bin/pact-lint-verify.sh --fixtures
+bash .pact/bin/pact-lint-pad.sh --fixtures
+bash .pact/bin/pact-lint-architecture.sh --fixtures
+bash .pact/bin/pact-lint-pid.sh --fixtures
 bash .pact/bin/pact-lint-agents.sh --fixtures
 bash .pact/bin/pact-guard.sh --fixtures
 bash .pact/bin/pact-state.sh --fixtures
 bash .pact/bin/pact-lint-contract.sh --all
 bash .pact/bin/pact-lint-verify.sh --all
+bash .pact/bin/pact-lint-pid.sh --all
 bash .pact/bin/pact-lint-agents.sh --all
 
 if [ "$MODE" = "--repo" ]; then
-  info "PACT 仓库自检通过：VERSION 一致、公开文档无内部路线引用、state / contract / verify / agents / guard 检查通过"
+  info "PACT 仓库自检通过：VERSION 一致、公开文档无内部路线引用、state / contract / verify / PAD / architecture / PID / agents / guard 检查通过"
 else
-  info "PACT 项目自检通过：state / contract / verify / agents / guard 检查通过"
+  info "PACT 项目自检通过：state / contract / verify / PAD / architecture / PID / agents / guard 检查通过"
 fi

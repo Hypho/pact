@@ -43,6 +43,11 @@ lint_verify_file() {
     if ! grep -Eiq '^[[:space:]]*(output|输出|command|命令|result|结果)[[:space:]]*:' "$file"; then
       errors+=("PASS verdict missing runtime evidence marker")
     fi
+    if grep -Eiq '^[[:space:]]*(flow-required|流程证据要求)[[:space:]]*:[[:space:]]*(yes|true|是)' "$file"; then
+      if ! grep -Eiq '^[[:space:]]*(flow-step|user-path|状态变化|成功后去向)[[:space:]]*:' "$file"; then
+        errors+=("PASS verdict marked flow-required but missing flow/state/destination evidence")
+      fi
+    fi
   fi
 
   if [ "${#errors[@]}" -gt 0 ]; then
@@ -96,6 +101,8 @@ lint_fixtures() {
   expect_failure "duplicate verdict" lint_verify_file ".pact/tests/fixtures/verify/duplicate-verdict.md"
   expect_failure "speculative language" lint_verify_file ".pact/tests/fixtures/verify/speculative-language.md"
   expect_failure "PASS without output" lint_verify_file ".pact/tests/fixtures/verify/pass-without-output.md"
+  expect_success "PASS with flow evidence" lint_verify_file ".pact/tests/fixtures/verify/valid-pass-flow.md"
+  expect_failure "PASS missing flow evidence" lint_verify_file ".pact/tests/fixtures/verify/pass-missing-flow-evidence.md"
 }
 
 case "${1:-}" in
