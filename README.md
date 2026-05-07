@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> A lightweight protocol framework for auditable human-AI software development | v1.11.0
+> A lightweight protocol framework for auditable human-AI software development | v1.12.0
 > 中文: [README.zh.md](./README.zh.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -347,6 +347,7 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 
 | Version | Date | Core changes |
 |---------|------|--------------|
+| v1.12.0 | 2026-05-07 | Adds Design Attachments Lite for optional product, sequence, and interaction design guidance; tightens spine checks and adoption docs |
 | v1.11.0 | 2026-05-07 | Adds Global Spine Lite with Product Spine, Architecture Spine, spine lint checks, and an order-flow example |
 | v1.10.0 | 2026-05-06 | Adds feature sizing, reusable patterns, and draft structured state / queue schemas |
 | v1.9.0 | 2026-05-05 | Adds controlled state operations, logical state consistency checks, verify failure recovery, and stale diagnostics |
@@ -356,5 +357,4 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 | v1.6.1 | 2026-04-27 | Narrows `/pact.scope` to applicability and risk-boundary assessment; makes FDG optional; clarifies lower-frequency release rules |
 | v1.6.0 | 2026-04-27 | Adds command guard for pid / contract / build / verify / ship entry checks and integrates guard fixtures into self-check |
 | v1.5.0 | 2026-04-27 | Adds contract and verify lint scripts, fixtures, and self-check integration for behavior contract and verification record structure |
-| v1.4.0 | 2026-04-27 | Adds VERSION as the file-only version source, documents layered release workflows, and adds optional git-aware release checks |
 | v1.3.3 | 2026-04-27 | Adds CHANGELOG.md as canonical release history and requires changelog coverage in repository self-checks |

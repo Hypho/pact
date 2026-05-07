@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> 面向人机协作开发的轻量协议框架 | v1.11.0
+> 面向人机协作开发的轻量协议框架 | v1.12.0
 > English: [README.md](./README.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -347,6 +347,7 @@ PACT 将功能粒度纳入协议约束。一个功能应能完成一次完整的
 
 | 版本 | 日期 | 核心变更 |
 |------|------|---------|
+| v1.12.0 | 2026-05-07 | 新增 Design Attachments Lite，用于按需补充产品方案、时序和交互设计指导；加强主干检查和采用文档 |
 | v1.11.0 | 2026-05-07 | 新增 Global Spine Lite、Product Spine / Architecture Spine、主干 lint 检查和 order-flow 示例 |
 | v1.10.0 | 2026-05-06 | 新增功能粒度、可复用工程模式，以及结构化 state / queue 草案 |
 | v1.9.0 | 2026-05-05 | 新增受控状态操作、状态逻辑一致性检查、verify 失败恢复和 stale 诊断 |
@@ -356,5 +357,4 @@ PACT 将功能粒度纳入协议约束。一个功能应能完成一次完整的
 | v1.6.1 | 2026-04-27 | 将 `/pact.scope` 收窄为适用性与风险边界评估，将 FDG 改为可选规划附件，并明确低频发版原则 |
 | v1.6.0 | 2026-04-27 | 新增 pid / contract / build / verify / ship 命令入口 guard，并将 guard fixtures 接入自检 |
 | v1.5.0 | 2026-04-27 | 新增 contract 和 verify lint 脚本、fixtures，并接入自检，用于检查行为契约和验证记录的基础结构 |
-| v1.4.0 | 2026-04-27 | 新增 VERSION 作为 file-only 版本真相源，文档化分层发布流程，并新增可选 git-aware 发布检查 |
 | v1.3.3 | 2026-04-27 | 新增 CHANGELOG.md 作为正式发布历史，并在仓库自检中要求 changelog 覆盖当前版本 |

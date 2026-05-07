@@ -13,6 +13,23 @@ This changelog follows a Keep a Changelog style:
 
 ---
 
+## v1.12.0 — 2026-05-07
+
+### Added
+- Added Design Attachments Lite, an optional design layer for feature-level product decisions, sequence diagrams, and UI interaction guidance.
+- Added `.pact/design/` and templates for `Design Brief`, `Sequence`, and `Interaction Brief` attachments.
+- Added PID design-attachment decisions so `/pact.pid` can declare when a feature needs product, sequence, or interaction detail.
+- Added `lint-design` with fixture coverage and repository / project self-check integration.
+- Added an adoption guide for Global Spine Lite and a concept guide for Design Attachments Lite.
+- Added order-flow design attachment examples covering sequence and interaction expectations.
+
+### Changed
+- `/pact.contract`, `/pact.build`, `/pact.verify`, and `/pact.ship` now consume declared design attachments without adding a mandatory workflow phase.
+- PID lint now verifies the design-attachment decision section and checks declared attachments when they are required.
+- Repository self-check now runs PAD, architecture, PID, and design checks across fixtures and installed project files.
+
+---
+
 ## v1.11.0 — 2026-05-07
 
 ### Added
