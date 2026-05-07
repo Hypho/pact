@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> A lightweight protocol framework for auditable human-AI software development | v1.10.0
+> A lightweight protocol framework for auditable human-AI software development | v1.11.0
 > 中文: [README.zh.md](./README.zh.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -344,6 +344,7 @@ Release process details are documented in [RELEASE.md](./RELEASE.md).
 
 | Version | Date | Core changes |
 |---------|------|--------------|
+| v1.11.0 | 2026-05-07 | Adds Global Spine Lite with Product Spine, Architecture Spine, spine lint checks, and an order-flow example |
 | v1.10.0 | 2026-05-06 | Adds feature sizing, reusable patterns, and draft structured state / queue schemas |
 | v1.9.0 | 2026-05-05 | Adds controlled state operations, logical state consistency checks, verify failure recovery, and stale diagnostics |
 | v1.8.0 | 2026-04-30 | Adds AGENTS entry quality linting, module-level AGENTS templates, and clearer cross-tool entry responsibilities |

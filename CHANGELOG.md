@@ -13,6 +13,22 @@ This changelog follows a Keep a Changelog style:
 
 ---
 
+## v1.11.0 — 2026-05-07
+
+### Added
+- Added Global Spine Lite, anchoring the existing feature loop to a Product Spine in `PAD.md` and an Architecture Spine in `architecture.md`.
+- Added Product Spine fields for product goal, core business flow, feature type definitions, core entities and states, and UX consistency rules.
+- Added Architecture Spine fields for architecture principles, module boundaries, entity ownership, state machine ownership, permission location, write boundaries, dependency direction, and ADR triggers.
+- Added PID fields for business-flow mapping, feature type, success destination, architecture impact, and ADR decision.
+- Added `lint-pad`, `lint-architecture`, and `lint-pid` commands with fixture coverage and self-check integration.
+- Added optional product-flow evidence checks for PASS verify records marked as requiring flow evidence.
+- Added `examples/order-flow` to demonstrate PAD business flow, architecture boundaries, PID flow mapping, archived contract, and verify flow evidence.
+
+### Changed
+- `/pact.init`, `/pact.pid`, `/pact.contract`, `/pact.build`, `/pact.verify`, `/pact.ship`, and `/pact.retro` now reference Product Spine and Architecture Spine constraints without adding a new required daily workflow step.
+- `pact-guard.sh contract` now validates PID Card structure before allowing contract generation.
+- Documentation now explains Global Spine Lite as a lightweight global constraint layer, not a PRD system or architecture governance platform.
+
 ## v1.10.0 — 2026-05-06
 
 ### Added

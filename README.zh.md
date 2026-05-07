@@ -1,5 +1,5 @@
 # PACT — Product-Aware Contract Toolkit
-> 面向人机协作开发的轻量协议框架 | v1.10.0
+> 面向人机协作开发的轻量协议框架 | v1.11.0
 > English: [README.md](./README.md)
 
 [![PACT Check](https://github.com/Hypho/pact/actions/workflows/pact-check.yml/badge.svg)](https://github.com/Hypho/pact/actions/workflows/pact-check.yml)
@@ -344,6 +344,7 @@ PACT 将功能粒度纳入协议约束。一个功能应能完成一次完整的
 
 | 版本 | 日期 | 核心变更 |
 |------|------|---------|
+| v1.11.0 | 2026-05-07 | 新增 Global Spine Lite、Product Spine / Architecture Spine、主干 lint 检查和 order-flow 示例 |
 | v1.10.0 | 2026-05-06 | 新增功能粒度、可复用工程模式，以及结构化 state / queue 草案 |
 | v1.9.0 | 2026-05-05 | 新增受控状态操作、状态逻辑一致性检查、verify 失败恢复和 stale 诊断 |
 | v1.8.0 | 2026-04-30 | 新增 AGENTS 入口质量 lint、模块级 AGENTS 模板，并明确跨工具入口职责 |
