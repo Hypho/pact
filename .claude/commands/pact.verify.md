@@ -38,7 +38,19 @@ user-path: [上游动作 -> 当前动作 -> 下游动作]
 
 无法自动化验证时，标注为人工验收项，不得用“应该 / 预期 / 理论上”替代真实输出或人工验收记录。
 
-## Step 4  运行测试套件
+## Step 4  设计附件证据
+
+若 PID / contract 引用了设计附件，verify.md 必须记录对应证据或人工验收项：
+
+```text
+design-evidence: [design brief 中方案边界 / 验收映射的真实输出或验收记录]
+sequence-evidence: [sequence 中关键调用顺序 / 状态变化的真实输出或验收记录]
+interaction-evidence: [interaction 中 UI 状态 / 反馈规则的真实输出或验收记录]
+```
+
+不适用的附件类型可写 `not applicable`，但不能省略已声明附件的验证说明。
+
+## Step 5  运行测试套件
 
 > 目的：为 FC verdict 提供基线佐证，确认对抗测试暴露的问题不是已知用例的回归。
 > 与 /pact.ship Step 2 的区别：这里只跑 L1+L2，服务于 verdict；ship 跑完整 L1+L2+L3，服务于发布回归。
@@ -49,7 +61,7 @@ user-path: [上游动作 -> 当前动作 -> 下游动作]
 
 单个 verify.md 建议控制在 200 行以内。
 
-## Step 5  输出 verdict
+## Step 6  输出 verdict
 
 verdict 行格式严格写为（启动校验依赖此精确格式，不得改写为 Markdown 标题或其他格式）：
 

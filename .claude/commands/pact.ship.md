@@ -85,6 +85,8 @@ L1 失败未修复时跳过。
 - 是否出现功能堆叠信号？→ 记录到 retro 候选或 tech-debt
 - architecture.md 模块边界 / 实体归属 / 依赖方向是否变更？→ 更新 architecture.md
 - 是否命中 ADR 触发条件？→ 记录到 `knowledge/decisions/`
+- 是否有稳定 UI / 交互模式可沉淀到 `knowledge/patterns.md`
+- 设计附件是否仍有跨功能价值？若没有，保留为本功能历史附件即可，不提升为全局规则
 - 共享契约（FDG）是否受影响？→ 更新 FDG.md
 - 是否有新的全局技术约束？→ 补充 constitution.md
 - 是否发现跨功能可复用工程模式？→ 补充 `knowledge/patterns.md`
