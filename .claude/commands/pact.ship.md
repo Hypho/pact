@@ -80,6 +80,11 @@ L1 失败未修复时跳过。
 逐条检查，有"是"项则处理后再继续：
 
 - PAD 实体定义是否变更？→ 检查已完成功能的相关契约
+- PAD 业务主流程是否被补齐或改变？→ 更新 PAD，并确认后续功能映射
+- 是否产生新的体验一致性规则？→ 更新 PAD 体验一致性规则
+- 是否出现功能堆叠信号？→ 记录到 retro 候选或 tech-debt
+- architecture.md 模块边界 / 实体归属 / 依赖方向是否变更？→ 更新 architecture.md
+- 是否命中 ADR 触发条件？→ 记录到 `knowledge/decisions/`
 - 共享契约（FDG）是否受影响？→ 更新 FDG.md
 - 是否有新的全局技术约束？→ 补充 constitution.md
 - 是否发现跨功能可复用工程模式？→ 补充 `knowledge/patterns.md`
