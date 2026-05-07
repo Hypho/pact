@@ -67,6 +67,8 @@ Before adopting, check whether your project falls within PACT's applicable scope
 
 Install details: [INSTALL.md](./INSTALL.md)
 Full usage guide: [USAGE.md](./USAGE.md)
+Global Spine Lite guide: [docs/concepts/global-spine-lite.md](./docs/concepts/global-spine-lite.md)
+Existing project adoption: [docs/migration/adopt-global-spine-lite.md](./docs/migration/adopt-global-spine-lite.md)
 
 ```bash
 # Recommended: install directly into a project from GitHub
