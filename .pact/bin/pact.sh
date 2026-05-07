@@ -19,8 +19,8 @@ Commands:
                                     Lint behavior contracts
   lint-verify <file|--all|--fixtures>
                                     Lint verify records
-  lint-pad <file|--fixtures>        Lint Product Spine / PAD files
-  lint-architecture <file|--fixtures>
+  lint-pad <file|--all|--fixtures>  Lint Product Spine / PAD files
+  lint-architecture <file|--all|--fixtures>
                                     Lint Architecture Spine files
   lint-pid <file|--all|--fixtures>  Lint PID Cards
   lint-agents <file|--all|--fixtures>

@@ -17,6 +17,16 @@ pass() {
   echo "✅ $1"
 }
 
+run_check() {
+  local label="$1"
+  shift
+  local output
+  if ! output="$("$@" 2>&1)"; then
+    fail "${label}
+${output}"
+  fi
+}
+
 STATE_FILE="${PACT_STATE_FILE:-$PACT_ROOT/.pact/state.md}"
 
 normalize_state() {
@@ -113,7 +123,7 @@ guard_contract() {
   [ "$PHASE" = "pid" ] || fail "/pact.contract blocked: 当前阶段是 $PHASE，不是 pid"
   local pid=".pact/specs/$(feature_slug)-pid.md"
   [ -f "$pid" ] || fail "/pact.contract blocked: PID Card 不存在：$pid"
-  bash "$ROOT/.pact/bin/pact-lint-pid.sh" "$pid" >/dev/null
+  run_check "/pact.contract blocked: PID Card lint failed：$pid" bash "$ROOT/.pact/bin/pact-lint-pid.sh" "$pid"
   pass "/pact.contract allowed: PID Card exists"
 }
 
@@ -122,7 +132,7 @@ guard_build() {
   [ "$PHASE" = "contract" ] || fail "/pact.build blocked: 当前阶段是 $PHASE，不是 contract"
   local contract=".pact/contracts/$(feature_slug).md"
   [ -f "$contract" ] || fail "/pact.build blocked: contract 不存在：$contract"
-  bash "$ROOT/.pact/bin/pact-lint-contract.sh" "$contract" >/dev/null
+  run_check "/pact.build blocked: contract lint failed：$contract" bash "$ROOT/.pact/bin/pact-lint-contract.sh" "$contract"
   pass "/pact.build allowed: contract exists and lint passed"
 }
 
@@ -131,7 +141,7 @@ guard_verify() {
   [ "$PHASE" = "build-complete" ] || fail "/pact.verify blocked: 当前阶段是 $PHASE，不是 build-complete"
   local contract=".pact/contracts/$(feature_slug).md"
   [ -f "$contract" ] || fail "/pact.verify blocked: contract 不存在：$contract"
-  bash "$ROOT/.pact/bin/pact-lint-contract.sh" "$contract" >/dev/null
+  run_check "/pact.verify blocked: contract lint failed：$contract" bash "$ROOT/.pact/bin/pact-lint-contract.sh" "$contract"
   pass "/pact.verify allowed: build is complete and contract lint passed"
 }
 
@@ -140,7 +150,7 @@ guard_ship() {
   [ "$PHASE" = "verify-pass" ] || fail "/pact.ship blocked: 当前阶段是 $PHASE，不是 verify-pass"
   local verify=".pact/knowledge/$(feature_slug)-verify.md"
   [ -f "$verify" ] || fail "/pact.ship blocked: verify 记录不存在：$verify"
-  bash "$ROOT/.pact/bin/pact-lint-verify.sh" "$verify" >/dev/null
+  run_check "/pact.ship blocked: verify lint failed：$verify" bash "$ROOT/.pact/bin/pact-lint-verify.sh" "$verify"
   if grep -q '^verdict = PASS$' "$verify" || grep -q 'MANUAL OVERRIDE' "$verify"; then
     pass "/pact.ship allowed: verify record passed"
     return
@@ -202,6 +212,16 @@ run_fixtures() {
   mkdir -p "$GUARD_TMP/contract-missing/.pact/specs"
   write_state "$GUARD_TMP/contract-missing" "guard-login" "pid"
   expect_failure "contract missing pid" env PACT_ROOT="$GUARD_TMP/contract-missing" bash "$ROOT/.pact/bin/pact-guard.sh" contract
+
+  mkdir -p "$GUARD_TMP/contract-ok/.pact/specs"
+  write_state "$GUARD_TMP/contract-ok" "guard-login" "pid"
+  cp "$ROOT/.pact/tests/fixtures/pid/valid-pid.md" "$GUARD_TMP/contract-ok/.pact/specs/guard-login-pid.md"
+  expect_success "contract ok" env PACT_ROOT="$GUARD_TMP/contract-ok" bash "$ROOT/.pact/bin/pact-guard.sh" contract
+
+  mkdir -p "$GUARD_TMP/contract-invalid-pid/.pact/specs"
+  write_state "$GUARD_TMP/contract-invalid-pid" "guard-login" "pid"
+  cp "$ROOT/.pact/tests/fixtures/pid/missing-flow-mapping.md" "$GUARD_TMP/contract-invalid-pid/.pact/specs/guard-login-pid.md"
+  expect_failure "contract invalid pid" env PACT_ROOT="$GUARD_TMP/contract-invalid-pid" bash "$ROOT/.pact/bin/pact-guard.sh" contract
 
   mkdir -p "$GUARD_TMP/build-ok/.pact/contracts"
   write_state "$GUARD_TMP/build-ok" "guard-login" "contract"

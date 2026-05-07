@@ -288,6 +288,8 @@ bash .pact/bin/pact-guard.sh --fixtures
 bash .pact/bin/pact-state.sh --fixtures
 bash .pact/bin/pact-lint-contract.sh --all
 bash .pact/bin/pact-lint-verify.sh --all
+bash .pact/bin/pact-lint-pad.sh --all
+bash .pact/bin/pact-lint-architecture.sh --all
 bash .pact/bin/pact-lint-pid.sh --all
 bash .pact/bin/pact-lint-agents.sh --all
 

@@ -14,6 +14,7 @@ fail_file() {
   for msg in "$@"; do
     echo "- $msg"
   done
+  echo "hint: keep PAD as the Product Spine with product goal, core business flow, feature types, entities, UX rules, and out-of-scope boundaries."
   return 1
 }
 
@@ -79,11 +80,14 @@ lint_fixtures() {
 }
 
 case "${1:-}" in
+  --all)
+    lint_pad_file ".pact/specs/PAD.md"
+    ;;
   --fixtures)
     lint_fixtures
     ;;
   "")
-    echo "Usage: bash .pact/bin/pact-lint-pad.sh <file|--fixtures>"
+    echo "Usage: bash .pact/bin/pact-lint-pad.sh <file|--all|--fixtures>"
     exit 2
     ;;
   *)

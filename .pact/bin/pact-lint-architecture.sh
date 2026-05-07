@@ -14,6 +14,7 @@ fail_file() {
   for msg in "$@"; do
     echo "- $msg"
   done
+  echo "hint: keep architecture.md as the Architecture Spine with module boundaries, entity ownership, state ownership, write boundaries, dependency direction, and ADR triggers."
   return 1
 }
 
@@ -75,11 +76,14 @@ lint_fixtures() {
 }
 
 case "${1:-}" in
+  --all)
+    lint_architecture_file ".pact/core/architecture.md"
+    ;;
   --fixtures)
     lint_fixtures
     ;;
   "")
-    echo "Usage: bash .pact/bin/pact-lint-architecture.sh <file|--fixtures>"
+    echo "Usage: bash .pact/bin/pact-lint-architecture.sh <file|--all|--fixtures>"
     exit 2
     ;;
   *)

@@ -14,6 +14,7 @@ fail_file() {
   for msg in "$@"; do
     echo "- $msg"
   done
+  echo "hint: map the feature to a PAD flow Step, set feature type to 主流程 / 辅助 / 管理 / 实验, declare success destination, and list architecture impact."
   return 1
 }
 
