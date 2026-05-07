@@ -20,6 +20,12 @@ user-path: order-form -> submit valid order -> order-detail
 状态变化: order draft -> created
 成功后去向: order-detail
 
+## 设计附件证据
+
+sequence-evidence: valid input returns created order after save; validation failure leaves store.records length at 0
+interaction-evidence: success destination is `order-detail`; validation and save failures return `order-form`
+design-evidence: not applicable
+
 ## 测试报告
 
 ```

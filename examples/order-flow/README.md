@@ -19,6 +19,8 @@ Files included:
 ```text
 .pact/specs/PAD.md
 .pact/core/architecture.md
+.pact/design/create-order-sequence.md
+.pact/design/create-order-interaction.md
 .pact/specs/create-order-pid.md
 .pact/contracts/archive/create-order.md
 .pact/knowledge/create-order-verify.md
@@ -31,6 +33,7 @@ Use this example to understand:
 - how PAD defines a core business flow
 - how a PID maps a feature to a flow step
 - how architecture.md defines a module and entity owner
+- how optional design attachments capture sequence and interaction details
 - how verify records runtime output plus flow / state evidence
 
 Run the example test:

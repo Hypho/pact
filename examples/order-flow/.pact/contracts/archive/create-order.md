@@ -29,6 +29,12 @@ NF-01：当保存失败时，系统返回 `Could not save order`，用户留在 
 - 本功能不引入支付、库存或跨模块事务。
 - 本功能不需要 ADR。
 
+## 设计附件约束
+- sequence：有效输入先校验，再调用 store.save，成功后返回 `order-detail`。
+- sequence：校验失败不调用 store.save。
+- interaction：校验失败和保存失败都留在 `order-form`。
+- interaction：保存成功进入 `order-detail`。
+
 ## 测试覆盖范围
 自动化：FC-01 ~ FC-05，NF-01
 人工验收：无

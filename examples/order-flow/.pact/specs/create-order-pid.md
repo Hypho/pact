@@ -27,6 +27,14 @@
 - 是否改变权限判断：否
 - 是否需要 ADR：否
 
+## 设计附件判断
+状态：需要多个
+触发项：多状态流转 / 新页面
+附件：
+- .pact/design/create-order-sequence.md
+- .pact/design/create-order-interaction.md
+人工决策：已确认
+
 ## 失败场景（边界与异常）
 | 场景 | 触发条件 | 用户看到 |
 |------|---------|---------|

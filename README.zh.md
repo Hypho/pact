@@ -68,6 +68,7 @@ PACT 适合产品型开发者、独立开发者和小团队：既希望借助 AI
 安装说明：[INSTALL.zh.md](./INSTALL.zh.md)
 完整使用指南：[USAGE.zh.md](./USAGE.zh.md)
 Global Spine Lite 说明：[docs/concepts/global-spine-lite.md](./docs/concepts/global-spine-lite.md)
+Design Attachments Lite 说明：[docs/concepts/design-attachments-lite.md](./docs/concepts/design-attachments-lite.md)
 既有项目采用方式：[docs/migration/adopt-global-spine-lite.md](./docs/migration/adopt-global-spine-lite.md)
 
 ```bash

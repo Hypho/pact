@@ -279,6 +279,7 @@ Release notes come from `CHANGELOG.md`.
 ## 8. Further References
 
 - Concept guide: [Global Spine Lite](./docs/concepts/global-spine-lite.md).
+- Concept guide: [Design Attachments Lite](./docs/concepts/design-attachments-lite.md).
 - Existing projects can adopt the new fields with [Adopt Global Spine Lite](./docs/migration/adopt-global-spine-lite.md).
 - For Codex, Cursor, or other tools without slash commands, use [prompt templates](./docs/adapters/prompts.md).
 - For runnable sample flows, see [examples](./examples/).

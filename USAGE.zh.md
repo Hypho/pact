@@ -279,6 +279,7 @@ PACT 不要求每次文档或规则编辑都更新版本。
 ## 8. 进一步参考
 
 - 概念说明：[Global Spine Lite](./docs/concepts/global-spine-lite.md)。
+- 概念说明：[Design Attachments Lite](./docs/concepts/design-attachments-lite.md)。
 - 既有项目采用方式：[Adopt Global Spine Lite](./docs/migration/adopt-global-spine-lite.md)。
 - Codex、Cursor 或其他不支持 slash commands 的工具，可使用 [prompt 模板](./docs/adapters/prompts.zh.md)。
 - 可运行示例流程见 [examples](./examples/)。
