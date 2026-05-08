@@ -142,16 +142,7 @@ verdict = INCONCLUSIVE
 
 Each feature should fit one complete `contract -> build -> verify -> ship` loop.
 
-Treat a feature as too large when it matches any of these signals:
-
-- spans 3+ modules
-- changes schema and also requires multiple backend/UI/permission/async updates
-- likely needs 2+ sessions to complete
-- depends on 3+ unfinished features
-- produces more than 7 FC entries in the contract
-- cannot be described as one independently verifiable user value
-
-When sizing fails, split the feature or create an exec-plan before continuing.
+Criteria for "too large" are defined in constitution.md §11a (authoritative source). When sizing fails, split the feature or create an exec-plan before continuing.
 
 ## Reusable Patterns
 
