@@ -80,12 +80,14 @@ CLAUDE.md              — 当前文件
 **命令触发层**（进入对应命令时读取）
 ```
 /pact.init      → .pact/templates/PAD.md
+                  .pact/templates/intent.md
 /pact.scope     → .pact/scope/boundaries.md
                   .pact/core/constitution.md
 /pact.pid       → .pact/scope/boundaries.md
                   .pact/specs/PAD.md（Product Spine：业务主流程 / 功能类型）
                   .pact/core/architecture.md（Architecture Spine：模块 / 实体 / ADR 触发条件）
                   若 specs/FDG.md 已存在 → .pact/specs/FDG.md
+                  若 specs/intent.md 已存在 → .pact/specs/intent.md（意图回溯检查）
 /pact.contract  → .pact/templates/contract.md
                   .pact/specs/[当前功能]-pid.md
                   .pact/specs/PAD.md（若存在）
@@ -96,11 +98,13 @@ CLAUDE.md              — 当前文件
                   .pact/specs/PAD.md（若存在）
                   .pact/contracts/archive/（跨功能一致性扫描用）
 /pact.verify    → .pact/contracts/[当前功能].md
+                  若 specs/intent.md 已存在 → .pact/specs/intent.md（意图覆盖率检查）
 /pact.ship      → .pact/core/constitution.md
 /pact.retro     → .pact/specs/PAD.md
                   .pact/specs/FDG.md（若存在）
                   .pact/knowledge/tech-debt.md
                   .pact/contracts/archive/（所有已完成契约）
+                  若 specs/intent.md 已存在 → .pact/specs/intent.md（意图记录复查）
 ```
 
 **按需层**（有明确需要时才读，不默认加载）
