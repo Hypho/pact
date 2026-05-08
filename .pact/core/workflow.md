@@ -132,7 +132,7 @@ Verdict rules, evidence requirements, and speculative language prohibition are d
 
 Each feature should fit one complete `contract -> build -> verify -> ship` loop.
 
-Criteria for "too large" are defined in constitution.md §11a (authoritative source). When sizing fails, split the feature or create an exec-plan before continuing.
+Criteria for "too large" are defined in constitution.md §12 (authoritative source). When sizing fails, split the feature or create an exec-plan before continuing.
 
 ## Reusable Patterns
 

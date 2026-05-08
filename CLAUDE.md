@@ -129,7 +129,7 @@ CLAUDE.md              — 当前文件
 
 ## 6. 开源维护规则
 
-若当前项目采用 PACT release layer 维护版本与发布记录，完整规则见 constitution.md §15。
+若当前项目采用 PACT release layer 维护版本与发布记录，完整规则见 constitution.md §17。
 
 ---
 

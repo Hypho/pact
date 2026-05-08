@@ -59,7 +59,7 @@
 
 ## 粒度评估
 状态：[通过 / 需拆分 / 需 exec-plan]
-触发项：[列出命中的 constitution.md §11a 条目]
+触发项：[列出命中的 constitution.md §12 条目]
 处理方式：[直接继续 / 拆分为多个功能 / 生成 exec-plan]
 
 ## 边界检测结果
