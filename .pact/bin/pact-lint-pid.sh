@@ -41,17 +41,17 @@ lint_pid_file() {
   grep -q '触发项' "$file" || errors+=("missing design attachment trigger field")
   grep -q '人工决策' "$file" || errors+=("missing design attachment decision field")
 
-  if ! grep -Eq '功能类型[：:][[:space:]]*(主流程|辅助|管理|实验)' "$file"; then
+  if ! grep -Eq '功能类型(：|:)[[:space:]]*(主流程|辅助|管理|实验)' "$file"; then
     errors+=("feature type must be 主流程 / 辅助 / 管理 / 实验")
   fi
 
-  if grep -Eq '功能类型[：:][[:space:]]*(辅助|管理|实验)' "$file"; then
-    if ! grep -Eq '服务|暂不映射|不属于主流程|PAD 业务主流程 Step[：:][[:space:]]*S[0-9]+' "$file"; then
+  if grep -Eq '功能类型(：|:)[[:space:]]*(辅助|管理|实验)' "$file"; then
+    if ! grep -Eq '服务|暂不映射|不属于主流程|PAD 业务主流程 Step(：|:)[[:space:]]*S[0-9]+' "$file"; then
       errors+=("non-main feature must explain related flow step or out-of-flow rationale")
     fi
   fi
 
-  if grep -Eq '状态[：:][[:space:]]*需要' "$file"; then
+  if grep -Eq '状态(：|:)[[:space:]]*需要' "$file"; then
     local attachment missing=0
     while IFS= read -r attachment; do
       [ -n "$attachment" ] || continue

@@ -39,7 +39,7 @@ For each feature:
 
 ## State Source
 
-`.pact/state.md` is the source of truth (constitution.md §10). State update commands and rules are defined in workflow.md "State Rules" section.
+`.pact/state.md` is the source of truth (constitution §10). State update commands and rules are defined in the workflow "State Rules" section.
 
 ## Files
 
@@ -74,7 +74,6 @@ bash .pact/bin/pact.sh check --stale
 Useful checks:
 
 ```bash
-bash .pact/bin/pact.sh lint-agents --all
 bash .pact/bin/pact.sh lint-pad .pact/specs/PAD.md
 bash .pact/bin/pact.sh lint-architecture .pact/core/architecture.md
 bash .pact/bin/pact.sh lint-pid --all
@@ -88,11 +87,11 @@ bash .pact/bin/pact-release-check.sh
 
 ## Guard Rules
 
-Guard commands are defined in workflow.md "Guard Mapping" section. If a guard fails, stop and report the reason instead of bypassing it.
+Guard commands are defined in the workflow "Guard Mapping" section. If a guard fails, stop and report the reason instead of bypassing it.
 
 ## Verification Rules
 
-Verdict rules and evidence requirements are defined in constitution.md §9 (authoritative source). Verify records must contain exactly one strict verdict line.
+Verdict rules and evidence requirements are defined in constitution §9 (authoritative source). Verify records must contain exactly one strict verdict line.
 
 ## Don't / Do
 
@@ -112,4 +111,4 @@ Do not publish every small edit. Update `VERSION`, README version history, and `
 
 Claude Code users can use `.claude/commands/*.md` slash commands.
 
-Codex and Cursor should follow these instructions through `AGENTS.md` and `.pact/` files rather than assuming `/pact.*` slash commands exist.
+Codex and Cursor should follow these instructions through `.pact/` files rather than assuming `/pact.*` slash commands exist.
