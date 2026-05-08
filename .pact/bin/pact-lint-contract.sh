@@ -58,7 +58,7 @@ lint_all_contracts() {
   done < <(find .pact/contracts .pact/contracts/archive -maxdepth 1 -type f -name '*.md' ! -name '.gitkeep' 2>/dev/null | sort)
 
   [ "$failed" -eq 0 ] || return 1
-  [ "$found" -eq 0 ] && echo "✅ contract lint: no contract files found"
+  if [ "$found" -eq 0 ]; then echo "✅ contract lint: no contract files found"; fi
 }
 
 expect_success() {

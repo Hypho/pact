@@ -1,47 +1,76 @@
 # PID Card — secure-notes
-Version: v1.0 | Status: final | Date: 2026-04-28
+版本：v1.0 | 状态：定稿 | 日期：2026-04-28
 
-## Who uses it?
+## 谁在使用？
 
-A signed-in notes app user.
+登录状态下的笔记应用用户。
 
-## What do they want to do?
+## 他要做什么？
 
-Create and read personal notes without exposing notes owned by another user.
+创建和查看个人笔记，不暴露其他用户的笔记内容。
 
-## Success Criteria
+## 成功标准（正常路径）
 
-- User can create a note with title and body.
-- User sees only their own notes in the list.
-- User can open a note they own.
-- Cross-user reads return a generic not-found result.
+- 用户能创建带标题和正文的笔记。
+- 用户只能看到自己的笔记列表。
+- 用户能打开自己拥有的笔记。
+- 跨用户读取返回通用的"未找到"结果。
 
-## Failure Scenarios
+## 主流程映射
 
-| Scenario | Trigger | User-visible result |
-|----------|---------|---------------------|
-| Empty title | Title is empty or whitespace | `Title is required` |
-| Cross-user read | User B requests User A's note id | `Note not found` |
-| Storage failure | Save operation fails | `Could not save note` |
+- PAD 业务主流程 Step：S1
+- 功能类型：主流程
+- 上游用户动作：登录后进入笔记应用
+- 下游用户动作：查看笔记列表或单条笔记
+- 成功后用户去向：笔记详情页
 
-## Explicitly Out of Scope
+## 架构影响
 
-- Do not implement authentication or session management.
-- Do not implement note sharing.
-- Do not implement encryption, audit logs, or retention policy.
-- Do not implement persistence beyond the in-memory example store.
+- 涉及模块：notes
+- 涉及实体：note
+- 涉及状态机：note lifecycle
+- 是否改变权限判断：是（笔记归属校验）
+- 是否需要 ADR：否
 
-## Feature Relationships
+## 设计附件判断
 
-- Depends on: signed-in user identity supplied by caller
-- Impacts: future note sharing and audit trail features
-- Shared contract: note ownership boundary
+状态：不需要
+触发项：无
+附件：
+- 无
+人工决策：无
 
-## Boundary Detection Result
+## 失败场景（边界与异常）
 
-Status: continue with documented boundary.
-Touched characteristics:
-- B-M01 complex permission: user-owned note access boundary.
-- B-H06 sensitive data: personal note content. This example demonstrates detection and contract framing only; production sensitive-data controls require specialist review.
-Human decision: acceptable for example code because data is in-memory and non-production.
+| 场景 | 触发条件 | 用户看到 |
+|------|---------|---------|
+| 标题为空 | 标题为空或仅空白 | `Title is required` |
+| 跨用户读取 | 用户 B 请求用户 A 的笔记 ID | `Note not found` |
+| 存储失败 | 保存操作失败 | `Could not save note` |
 
+## 明确不做
+
+- 不实现认证或会话管理。
+- 不实现笔记共享。
+- 不实现加密、审计日志或保留策略。
+- 不实现超出内存示例存储的持久化。
+
+## 功能关系
+
+- 依赖：调用方提供的已登录用户身份
+- 影响：未来的笔记共享和审计跟踪功能
+- 共享契约：笔记归属边界
+
+## 粒度评估
+
+状态：通过
+触发项：无
+处理方式：直接继续
+
+## 边界检测结果
+
+状态：通过
+触碰特征：
+- B-M01 复杂权限：用户拥有的笔记访问边界
+- B-H06 敏感数据：个人笔记内容。本示例仅演示检测和契约框架；生产环境敏感数据控制需要专业审查
+人工决策：示例代码可接受，因为数据在内存中且非生产环境

@@ -3,32 +3,56 @@
 
 ## 谁在使用？
 
-Todo app user.
+Todo 应用用户。
 
 ## 他要做什么？
 
-Create a new todo item with non-empty text.
+创建一个非空文本的新待办事项。
 
 ## 成功标准（正常路径）
 
-- User enters todo text and submits.
-- System creates a new todo item.
-- The new item appears in the todo list.
-- The input is cleared after successful creation.
+- 用户输入待办文本并提交。
+- 系统创建新的待办事项。
+- 新事项出现在待办列表中。
+- 提交成功后输入框清空。
+
+## 主流程映射
+
+- PAD 业务主流程 Step：S1
+- 功能类型：主流程
+- 上游用户动作：打开待办应用
+- 下游用户动作：查看待办列表
+- 成功后用户去向：待办列表页（新事项出现在顶部）
+
+## 架构影响
+
+- 涉及模块：todos
+- 涉及实体：todo
+- 涉及状态机：todo lifecycle
+- 是否改变权限判断：否
+- 是否需要 ADR：否
+
+## 设计附件判断
+
+状态：不需要
+触发项：无
+附件：
+- 无
+人工决策：无
 
 ## 失败场景（边界与异常）
 
 | 场景 | 触发条件 | 用户看到 |
 |------|---------|---------|
-| Empty input | Input is empty or whitespace only | Validation message: `Todo text is required` |
-| Long input | Input exceeds 120 characters | Validation message: `Todo text is too long` |
-| Storage failure | Save operation fails | Error message: `Could not save todo` |
+| 空输入 | 输入为空或仅空白 | 验证消息：`Todo text is required` |
+| 输入过长 | 输入超过 120 字符 | 验证消息：`Todo text is too long` |
+| 存储失败 | 保存操作失败 | 错误消息：`Could not save todo` |
 
 ## 明确不做
 
-- Do not implement edit todo.
-- Do not implement delete todo.
-- Do not add user accounts or sync.
+- 不实现编辑待办。
+- 不实现删除待办。
+- 不添加用户账户或同步功能。
 
 ## 功能关系
 
@@ -36,9 +60,14 @@ Create a new todo item with non-empty text.
 - 影响：edit-todo, delete-todo
 - 共享契约：无
 
+## 粒度评估
+
+状态：通过
+触发项：无
+处理方式：直接继续
+
 ## 边界检测结果
 
 状态：通过
 触碰特征：无
 人工决策：无
-

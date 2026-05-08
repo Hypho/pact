@@ -84,7 +84,7 @@ lint_all_pid_cards() {
   done < <(find .pact/specs -maxdepth 1 -type f -name '*-pid.md' 2>/dev/null | sort)
 
   [ "$failed" -eq 0 ] || return 1
-  [ "$found" -eq 0 ] && echo "✅ PID lint: no PID files found"
+  if [ "$found" -eq 0 ]; then echo "✅ PID lint: no PID files found"; fi
 }
 
 expect_success() {

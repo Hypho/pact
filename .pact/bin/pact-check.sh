@@ -296,7 +296,19 @@ bash .pact/bin/pact-lint-design.sh --all
 bash .pact/bin/pact-lint-agents.sh --all
 
 if [ "$MODE" = "--repo" ]; then
-  info "PACT 仓库自检通过：VERSION 一致、公开文档无内部路线引用、state / contract / verify / PAD / architecture / PID / design / agents / guard 检查通过"
+  for example_dir in examples/*/; do
+    [ -f "${example_dir}.pact/state.md" ] || continue
+    example_name="$(basename "$example_dir")"
+    example_abs="$(cd "$example_dir" && pwd)"
+    echo "--- example: $example_name ---"
+    lint_state_file "${example_dir}.pact/state.md" || fail "example $example_name: state.md 结构检查失败"
+    env PACT_ROOT="$example_abs" PACT_STATE_FILE="$example_abs/.pact/state.md" bash .pact/hooks/check-state.sh || fail "example $example_name: state 一致性检查失败"
+    env PACT_ROOT="$example_abs" bash .pact/bin/pact-lint-pid.sh --all || fail "example $example_name: PID lint 失败"
+    env PACT_ROOT="$example_abs" bash .pact/bin/pact-lint-contract.sh --all || fail "example $example_name: contract lint 失败"
+    env PACT_ROOT="$example_abs" bash .pact/bin/pact-lint-verify.sh --all || fail "example $example_name: verify lint 失败"
+    info "example $example_name 验证通过"
+  done
+  info "PACT 仓库自检通过：VERSION 一致、公开文档无内部路线引用、state / contract / verify / PAD / architecture / PID / design / agents / guard 检查通过、examples 验证通过"
 else
   info "PACT 项目自检通过：state / contract / verify / PAD / architecture / PID / design / agents / guard 检查通过"
 fi

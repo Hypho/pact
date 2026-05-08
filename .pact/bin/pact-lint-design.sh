@@ -73,7 +73,7 @@ lint_all_design_files() {
   done < <(find .pact/design -maxdepth 1 -type f -name '*.md' 2>/dev/null | sort)
 
   [ "$failed" -eq 0 ] || return 1
-  [ "$found" -eq 0 ] && echo "✅ design lint: no design attachment files found"
+  if [ "$found" -eq 0 ]; then echo "✅ design lint: no design attachment files found"; fi
 }
 
 expect_success() {

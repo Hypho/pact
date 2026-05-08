@@ -66,7 +66,7 @@ lint_all_verify_records() {
   done < <(find .pact/knowledge -maxdepth 1 -type f -name '*-verify.md' 2>/dev/null | sort)
 
   [ "$failed" -eq 0 ] || return 1
-  [ "$found" -eq 0 ] && echo "✅ verify lint: no verify files found"
+  if [ "$found" -eq 0 ]; then echo "✅ verify lint: no verify files found"; fi
 }
 
 expect_success() {
