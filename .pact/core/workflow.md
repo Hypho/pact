@@ -126,17 +126,7 @@ Do not infer that a missing artifact is acceptable because it was discussed in t
 
 ## Verification Rules
 
-Verification must use real runtime evidence.
-
-The verify record must contain exactly one strict verdict line:
-
-```text
-verdict = PASS
-verdict = FAIL
-verdict = INCONCLUSIVE
-```
-
-`PASS` requires runtime evidence such as `command:`, `output:`, or `result:`.
+Verdict rules, evidence requirements, and speculative language prohibition are defined in constitution.md §9 (authoritative source). Verify records must contain exactly one strict verdict line.
 
 ## Feature Sizing Rules
 

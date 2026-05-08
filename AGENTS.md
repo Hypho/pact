@@ -39,22 +39,7 @@ For each feature:
 
 ## State Source
 
-`.pact/state.md` is the source of truth for the active feature and phase.
-
-Before changing feature work:
-- read `.pact/state.md`
-- preserve the feature name exactly when generating file paths
-- follow the phase sequence unless the user explicitly instructs otherwise
-
-For machine-critical state updates, prefer:
-
-```bash
-bash .pact/bin/pact.sh state validate
-bash .pact/bin/pact.sh state enqueue <feature>
-bash .pact/bin/pact.sh state set-phase <phase>
-bash .pact/bin/pact.sh state complete
-bash .pact/bin/pact.sh state fail-verify
-```
+`.pact/state.md` is the source of truth (constitution.md §10). State update commands and rules are defined in workflow.md "State Rules" section.
 
 ## Files
 
@@ -103,31 +88,11 @@ bash .pact/bin/pact-release-check.sh
 
 ## Guard Rules
 
-When entering a main PACT stage, use:
-
-```bash
-bash .pact/bin/pact.sh guard pid
-bash .pact/bin/pact.sh guard contract
-bash .pact/bin/pact.sh guard build
-bash .pact/bin/pact.sh guard verify
-bash .pact/bin/pact.sh guard ship
-```
-
-If a guard fails, stop and report the reason instead of bypassing it.
+Guard commands are defined in workflow.md "Guard Mapping" section. If a guard fails, stop and report the reason instead of bypassing it.
 
 ## Verification Rules
 
-Do not claim a feature is verified without real output.
-
-Verify records must contain exactly one strict verdict line:
-
-```text
-verdict = PASS
-verdict = FAIL
-verdict = INCONCLUSIVE
-```
-
-For `PASS`, include runtime evidence such as `command:`, `output:`, `result:`, `命令:`, `输出:`, or `结果:`.
+Verdict rules and evidence requirements are defined in constitution.md §9 (authoritative source). Verify records must contain exactly one strict verdict line.
 
 ## Don't / Do
 

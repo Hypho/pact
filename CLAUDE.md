@@ -129,22 +129,7 @@ CLAUDE.md              — 当前文件
 
 ## 6. 开源维护规则
 
-若当前项目采用 PACT release layer 维护版本与发布记录，遵守以下规则：
-
-- 本地规划、未验证路线、长期构想默认写入 `*.local.md`，不进入公开发布内容。
-- 公开路线使用 Issues / Milestones 表达，不用提前承诺式 roadmap 文档。
-- `VERSION` 是唯一可编辑版本真相源。
-- `pact-check.sh` 必须保持 file-only，不依赖 git、GitHub、网络或 `gh`。
-- git-aware 发布检查只能放在可选脚本中，例如 `pact-release-check.sh`。
-- 版本发布前必须检查 VERSION、README、README.zh、CLAUDE.md、版本历史、CHANGELOG.md 一致。
-- 每次发布必须更新 `CHANGELOG.md`，README 版本历史只保留摘要。
-- `CHANGELOG.md` 采用 Keep a Changelog 风格：版本倒序、`## vX.Y.Z — YYYY-MM-DD`、只写有内容的 `Added / Changed / Deprecated / Removed / Fixed / Security` 分类。
-- changelog 条目必须描述用户或维护者可感知的变化，不倾倒 commit log，不记录无意义的内部执行步骤。
-- 不足以形成独立发布价值的修改，可以暂留本地或普通提交中积累；达到明确发布价值后再统一更新版本号。
-- `PATCH` 用于不新增完整能力的修整或补强：文档修正、版本同步、职责收窄、模板一致性、已有检查规则微调。
-- `MINOR` 用于可独立说明的新能力：新增脚本、命令、检查体系、模板族或完整可选子协议。
-- `MAJOR` 用于状态机、目录结构、命令协议等不兼容变更。
-- 创建 tag、GitHub Release、推送公开发布动作前，必须等待维护者明确确认。
+若当前项目采用 PACT release layer 维护版本与发布记录，完整规则见 constitution.md §15。
 
 ---
 
