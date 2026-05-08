@@ -233,6 +233,13 @@ if [ "$MODE" = "--repo" ]; then
   fi
 fi
 
+if command -v shellcheck >/dev/null 2>&1; then
+  shellcheck .pact/bin/*.sh .pact/hooks/*.sh scripts/*.sh || fail "shellcheck 失败"
+  info "shellcheck passed"
+else
+  echo "⏭️ shellcheck not installed, skipping"
+fi
+
 lint_state_file ".pact/state.md" || fail ".pact/state.md 结构检查失败"
 [ -f ".pact/schemas/state.schema.json" ] || fail ".pact/schemas/state.schema.json 不存在"
 [ -f ".pact/state.example.json" ] || fail ".pact/state.example.json 不存在"

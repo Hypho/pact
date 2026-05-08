@@ -7,7 +7,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 PACT_ROOT="${PACT_ROOT:-$ROOT}"
 STATE_FILE="${PACT_STATE_FILE:-$PACT_ROOT/.pact/state.md}"
 
-VALID_PHASES="待开始 pid contract build build-complete verify-pass shipped"
+# Phase values: 待开始 pid contract build build-complete verify-pass shipped
 
 fail() {
   echo "❌ $1" >&2
@@ -401,11 +401,11 @@ cmd_complete() {
   bash "$ROOT/.pact/bin/pact-lint-verify.sh" "$verify" >/dev/null
   verify_has_pass "$verify" || fail "complete 需要 verdict = PASS 或 MANUAL OVERRIDE"
 
-  local tmpdir queue_file completed_file completed_next contract_ref
+  local tmpdir queue_file completed_file contract_ref
   tmpdir="$(mktemp -d)"
   queue_file="$tmpdir/queue"
   completed_file="$tmpdir/completed"
-  completed_next="$tmpdir/completed.next"
+
   read_queue | grep -Fxv "$FEATURE" > "$queue_file" || true
 
   contract_ref=".pact/contracts/archive/${FEATURE}.md"
@@ -530,6 +530,7 @@ expect_failure() {
 run_fixtures() {
   local tmp
   tmp="$(mktemp -d)"
+  # shellcheck disable=SC2064
   trap "rm -rf '$tmp'" EXIT
 
   mkdir -p "$tmp/idle"
